@@ -27,9 +27,6 @@ export const POST = async (request) => {
     const userAccessTokenData = await userAccessTokenResponse.json();
     const userAccessToken = userAccessTokenData.access_token;
 
-    console.log(1)
-    console.log(userAccessToken)
-
     try {
       await dbConnect();
       console.log("Database connected successfully");
@@ -50,16 +47,12 @@ export const POST = async (request) => {
     }
 
     const { data } = await pageAccessTokenResponse.json();
-    console.log(2)
-    console.log(data)
     if (!data.length)
       return NextResponse.json({ error: "No pages found" }, { status: 400 });
 
     const { name: page_name, id: page_id, access_token } = data[0];
 
     const existingPage = await Page.findOne({ page_id });
-    console.log(3)
-    console.log(existingPage)
     if (existingPage)
       return NextResponse.json(
         { error: "Page already exists" },
