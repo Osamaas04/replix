@@ -70,15 +70,18 @@ export default function MessengerCard() {
   async function handleDisconnect() {
     const storedPageId = localStorage.getItem("facebookPageId");
     try {
-      await fetch("/api/disconnectFacebook", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ page_id: storedPageId })
-      });
-  
-      localStorage.removeItem("facebookPageId");
-      setConnection({ pageId: null, isConnected: false });
-      toast("Successfully disconnected Facebook page");
+
+      if(connection.isConnected) {
+        await fetch("/api/disconnectFacebook", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ page_id: storedPageId })
+        });
+    
+        localStorage.removeItem("facebookPageId");
+        setConnection({ pageId: null, isConnected: false });
+        toast("Successfully disconnected Facebook page");
+      }
     } catch (error) {
       toast.error("Failed to disconnect");
     }
