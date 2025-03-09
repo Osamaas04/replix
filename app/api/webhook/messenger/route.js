@@ -1,30 +1,18 @@
-// pages/api/webhook.js
-export default function handler(req, res) {
-  console.log(0)
-  if (req.method === 'GET') {
-    const VERIFY_TOKEN = 'mySuperSecureVerifyToken123';
-    const mode = req.query['hub.mode'];
-    const token = req.query['hub.verify_token'];
-    const challenge = req.query['hub.challenge'];
+export async function GET(req) {
+  try {
+    const VERIFY_TOKEN = "my_secret_verify_token_456"; // Must match what you set in Facebook Developer Console
 
-    console.log(1)
+    const url = new URL(req.url);
+    const mode = url.searchParams.get("hub.mode");
+    const token = url.searchParams.get("hub.verify_token");
+    const challenge = url.searchParams.get("hub.challenge");
 
-    if (mode && token) {
-      if (token === VERIFY_TOKEN) {
-        console.log(2)
-        return res.status(200).send(challenge);
-      } else {
-        console.log(3)
-        return res.status(403).send('Error, invalid token');
-      }
+    if (mode === "subscribe" && token === VERIFY_TOKEN) {
+      return new Response(challenge, { status: 200 }); // ✅ Success: Facebook webhook is verified
+    } else {
+      return new Response("Forbidden", { status: 403 }); // ❌ Incorrect token
     }
-    console.log(4)
-    return res.status(400).send('Missing hub.mode or hub.verify_token');
-    
-  } else if (req.method === 'POST') {
-    console.log(5)
-    const data = req.body;
-    console.log(6)
-    return res.status(200).send('Event received');
+  } catch (error) {
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
   }
 }
