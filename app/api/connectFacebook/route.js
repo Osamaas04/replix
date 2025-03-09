@@ -30,7 +30,13 @@ export const POST = async (request) => {
     console.log(1)
     console.log(userAccessToken)
 
-    await dbConnect();
+    try {
+      await dbConnect();
+      console.log("Database connected successfully");
+    } catch (error) {
+      console.error("Error connecting to the database", error);
+      return NextResponse.json({ error: "Database connection failed" }, { status: 500 });
+    }
 
     const pageAccessTokenResponse = await fetch(
       `https://graph.facebook.com/v18.0/me/accounts?access_token=${userAccessToken}`
