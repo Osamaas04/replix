@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 export async function POST(request) {
     try {
       const { page_id } = await request.json(); // Match parameter name from client
