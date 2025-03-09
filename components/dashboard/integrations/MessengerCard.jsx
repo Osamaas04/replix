@@ -10,7 +10,10 @@ export default function MessengerCard() {
   const router = useRouter();
   const code = searchParams.get("code");
 
-  const [connection, setConnection] = useState({ pageId: null, isConnected: false });
+  const [connection, setConnection] = useState({
+    pageId: null,
+    isConnected: false,
+  });
 
   useEffect(() => {
     const storedPageId = localStorage.getItem("facebookPageId");
@@ -74,7 +77,9 @@ export default function MessengerCard() {
       handleDisconnect();
     } else {
       const clientId = process.env.NEXT_PUBLIC_FACEBOOK_APP_ID;
-      const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
+      const redirectUri =
+        process.env.NEXT_PUBLIC_REDIRECT_URI ||
+        `https://${process.env.VERCEL_URL}/dashboard?menu=Integrations`;
       const scopes =
         "pages_manage_metadata,pages_read_engagement,pages_show_list,pages_messaging,instagram_basic,instagram_manage_comments,instagram_manage_insights";
 
@@ -103,7 +108,10 @@ export default function MessengerCard() {
       </div>
 
       <div className="flex justify-end items-center">
-        <Switch checked={connection.isConnected} onCheckedChange={handleToggle} />
+        <Switch
+          checked={connection.isConnected}
+          onCheckedChange={handleToggle}
+        />
       </div>
     </div>
   );
