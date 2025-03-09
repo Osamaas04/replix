@@ -13,7 +13,7 @@ export const POST = async (request) => {
       );
 
     const userAccessTokenResponse = await fetch(
-      `https://graph.facebook.com/v18.0/oauth/access_token?client_id=${process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}&redirect_uri=https://replix-livid.vercel.app/dashboard?menu=Integrations&client_secret=${process.env.FACEBOOK_APP_SECRET}&code=${code}`
+      `https://graph.facebook.com/v18.0/oauth/access_token?client_id=${process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&client_secret=${process.env.FACEBOOK_APP_SECRET}&code=${code}`
     );
 
 
