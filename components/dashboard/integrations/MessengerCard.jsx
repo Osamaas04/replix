@@ -83,7 +83,7 @@ export default function MessengerCard() {
         "pages_manage_metadata,pages_read_engagement,pages_show_list,pages_messaging,instagram_basic,instagram_manage_comments,instagram_manage_insights";
 
       router.push(
-        `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes}`
+        `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=https://replix-livid.vercel.app/dashboard?menu=Integrations&scope=${scopes}`
       );
     }
   }
