@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { dbConnect } from "@/lib/mongo";
 
 export async function POST(request) {
     try {
@@ -14,9 +15,8 @@ export async function POST(request) {
       const client = await dbConnect();
       const db = client.db();
   
-      // Convert to number if you store page_id as number
       const result = await db.collection("pages").deleteOne({ 
-        page_id // or String(page_id) depending on storage
+        page_id
       });
   
       if (result.deletedCount === 0) {
