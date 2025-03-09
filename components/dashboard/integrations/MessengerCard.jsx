@@ -30,13 +30,13 @@ export default function MessengerCard() {
 
   async function checkConnection(pageId) {
     try {
-      const res = await fetch("/api/checkToken", {
+      const response = await fetch("/api/checkToken", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ page_id: pageId }),
       });
 
-      const data = await res.json();
+      const data = await response.json();
       if (data.isConnected) {
         setConnection({ pageId, isConnected: true });
       } else {
@@ -49,13 +49,13 @@ export default function MessengerCard() {
 
   async function connectFacebook(code) {
     try {
-      const res = await fetch("/api/connectFacebook", {
+      const response = await fetch("/api/connectFacebook", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code }),
       });
 
-      const data = await res.json();
+      const data = await response.json();
       if (!data.page_id) throw new Error("No page ID returned");
 
       localStorage.setItem("facebookPageId", data.page_id);
@@ -67,9 +67,20 @@ export default function MessengerCard() {
     }
   }
 
-  function handleDisconnect() {
-    localStorage.removeItem("facebookPageId");
-    setConnection({ pageId: null, isConnected: false });
+  async function handleDisconnect() {
+    const storedPageId = localStorage.getItem("facebookPageId")
+    try {
+      const response = fetch("/api/disconnectFacebook", {
+        method: "POST",
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify({storedPageId})
+      })
+
+      localStorage.removeItem("facebookPageId");
+      setConnection({ pageId: null, isConnected: false });
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   function handleToggle() {
@@ -77,8 +88,7 @@ export default function MessengerCard() {
       handleDisconnect();
     } else {
       const clientId = process.env.NEXT_PUBLIC_FACEBOOK_APP_ID;
-      const redirectUri =
-        process.env.NEXT_PUBLIC_REDIRECT_URI
+      const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
       const scopes =
         "pages_manage_metadata,pages_read_engagement,pages_show_list,pages_messaging,instagram_basic,instagram_manage_comments,instagram_manage_insights";
 
