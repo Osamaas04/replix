@@ -2,7 +2,7 @@
 export default function handler(req, res) {
   console.log(0)
   if (req.method === 'GET') {
-    const VERIFY_TOKEN = 'osamaalasmar';
+    const VERIFY_TOKEN = 'mySuperSecureVerifyToken123';
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
