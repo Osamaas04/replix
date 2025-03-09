@@ -12,14 +12,10 @@ export const POST = async (request) => {
         { status: 400 }
       );
 
-      const startTime = Date.now();
-
     const userAccessTokenResponse = await fetch(
       `https://graph.facebook.com/v18.0/oauth/access_token?client_id=${process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}&redirect_uri=https://replix-livid.vercel.app/dashboard?menu=Integrations&client_secret=${process.env.FACEBOOK_APP_SECRET}&code=${code}`
     );
 
-    const endTime = Date.now();
-console.log("Facebook request duration:", endTime - startTime, "ms");
 
     if (!userAccessTokenResponse.ok) {
       return NextResponse.json(
@@ -30,6 +26,9 @@ console.log("Facebook request duration:", endTime - startTime, "ms");
 
     const userAccessTokenData = await userAccessTokenResponse.json();
     const userAccessToken = userAccessTokenData.access_token;
+
+    console.log(1)
+    console.log(userAccessToken)
 
     await dbConnect();
 
@@ -45,12 +44,16 @@ console.log("Facebook request duration:", endTime - startTime, "ms");
     }
 
     const { data } = await pageAccessTokenResponse.json();
+    console.log(2)
+    console.log(data)
     if (!data.length)
       return NextResponse.json({ error: "No pages found" }, { status: 400 });
 
     const { name: page_name, id: page_id, access_token } = data[0];
 
     const existingPage = await Page.findOne({ page_id });
+    console.log(3)
+    console.log(existingPage)
     if (existingPage)
       return NextResponse.json(
         { error: "Page already exists" },
