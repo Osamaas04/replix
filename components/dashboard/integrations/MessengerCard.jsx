@@ -78,8 +78,7 @@ export default function MessengerCard() {
     } else {
       const clientId = process.env.NEXT_PUBLIC_FACEBOOK_APP_ID;
       const redirectUri =
-        process.env.NEXT_PUBLIC_REDIRECT_URI ||
-        `https://${process.env.VERCEL_URL}/dashboard?menu=Integrations`;
+        process.env.NEXT_PUBLIC_REDIRECT_URI
       const scopes =
         "pages_manage_metadata,pages_read_engagement,pages_show_list,pages_messaging,instagram_basic,instagram_manage_comments,instagram_manage_insights";
 
