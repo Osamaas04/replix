@@ -12,9 +12,14 @@ export const POST = async (request) => {
         { status: 400 }
       );
 
+      const startTime = Date.now();
+
     const userAccessTokenResponse = await fetch(
       `https://graph.facebook.com/v18.0/oauth/access_token?client_id=${process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}&redirect_uri=https://replix-livid.vercel.app/dashboard?menu=Integrations&client_secret=${process.env.FACEBOOK_APP_SECRET}&code=${code}`
     );
+
+    const endTime = Date.now();
+console.log("Facebook request duration:", endTime - startTime, "ms");
 
     if (!userAccessTokenResponse.ok) {
       return NextResponse.json(
