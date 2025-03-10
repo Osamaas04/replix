@@ -4,9 +4,14 @@ import InstagramAutomate from "../automations/InstagramAutomate";
 import MessengerAutomate from "../automations/MessengerAutomate";
 import WhatsappAutomate from "../automations/WhatsappAutomate";
 import XAutomate from "../automations/XAutomate";
-import { Play, Pause, ArrowDownUp } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import EmptyWorkflow from "./EmptyWorkflow";
 import { useState, useMemo } from "react";
+
+// Define STORAGE_KEYS to avoid undefined errors
+const STORAGE_KEYS = {
+  PAGE_ID: "facebookPageId",
+};
 
 export default function Automations() {
   const [isActivated, setIsActivated] = useState(false);
@@ -24,33 +29,31 @@ export default function Automations() {
       [automationName]: newStatus,
     }));
 
-    const page_id = localStorage.getItem(STORAGE_KEYS.PAGE_ID) // Use the correct key here
+    const page_id = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
     if (!page_id) {
-      throw new Error("Page ID not found");
+      console.error("Page ID not found in localStorage");
+      return;
     }
 
     try {
       const response = await fetch("/api/isActive", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ page_id, isActive: newStatus }), // Send the new status
+        body: JSON.stringify({ page_id, isActive: newStatus }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update status");
+        console.error("Failed to update automation status");
+        return;
       }
-
-      const data = await response.json();
-      setIsActivated(data.isActive); // Update activation status
     } catch (error) {
-      console.error(error);
-      throw new Error("Failed - please try again");
+      console.error("Error updating automation:", error);
     }
   }
 
-  // Filter automations based on the current activation status
+  // Memoized filtered list to avoid unnecessary re-renders
   const filteredAutomations = useMemo(() => {
-    return Object.entries(automations).filter(([ , status]) => status === isActivated);
+    return Object.entries(automations).filter(([_, status]) => status === isActivated);
   }, [automations, isActivated]);
 
   return (
@@ -66,7 +69,9 @@ export default function Automations() {
         <div className="flex justify-between w-[60rem]">
           <div className="flex gap-4">
             <button
-              className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${!isActivated && "bg-primary/80 text-secondary"}`}
+              className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${
+                !isActivated && "bg-primary/80 text-secondary"
+              }`}
               onClick={() => setIsActivated(false)}
             >
               <li className="flex items-center gap-2">
@@ -74,7 +79,9 @@ export default function Automations() {
               </li>
             </button>
             <button
-              className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${isActivated && "bg-primary/80 text-secondary"}`}
+              className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${
+                isActivated && "bg-primary/80 text-secondary"
+              }`}
               onClick={() => setIsActivated(true)}
             >
               <li className="flex items-center gap-2">
