@@ -1,34 +1,45 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Switch } from "../ui/switch";
 import { toast } from "sonner";
 
+// Constants for localStorage keys and validation period
+const STORAGE_KEYS = {
+  PAGE_ID: "facebookPageId",
+  LAST_VALIDATED: "fbLastValidated"
+};
+const VALIDATION_INTERVAL = 3600000; // 1 hour
+
 export default function MessengerCard() {
-  const searchParams = useSearchParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const code = searchParams.get("code");
 
-  const [connection, setConnection] = useState({
-    pageId: null,
-    isConnected: false,
-  });
+  // Optimistic initial state from localStorage
+  const [connection, setConnection] = useState(() => ({
+    pageId: typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEYS.PAGE_ID) : null,
+    isConnected: typeof window !== 'undefined' ? Boolean(localStorage.getItem(STORAGE_KEYS.PAGE_ID)) : false
+  }));
 
-  useEffect(() => {
-    const storedPageId = localStorage.getItem("facebookPageId");
-    if (storedPageId) checkConnection(storedPageId);
+  // Memoized auth configuration
+  const authConfig = useMemo(() => ({
+    clientId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
+    redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URI,
+    scopes: [
+      "pages_manage_metadata",
+      "pages_read_engagement",
+      "pages_show_list",
+      "pages_messaging",
+      "instagram_basic",
+      "instagram_manage_comments",
+      "instagram_manage_insights"
+    ].join(",")
+  }), []);
 
-    if (code) connectFacebook(code);
-
-    if (code) {
-      const params = new URLSearchParams(searchParams.toString());
-      params.delete("code");
-      router.replace(`${window.location.pathname}?${params.toString()}`);
-    }
-  }, []);
-
-  async function checkConnection(pageId) {
+  // Connection validation logic
+  const checkConnection = useCallback(async (pageId) => {
     try {
       const response = await fetch("/api/checkToken", {
         method: "POST",
@@ -37,70 +48,103 @@ export default function MessengerCard() {
       });
 
       const data = await response.json();
-      if (data.isConnected) {
-        setConnection({ pageId, isConnected: true });
-      } else {
+      
+      if (!data.isConnected) {
+        localStorage.removeItem(STORAGE_KEYS.PAGE_ID);
         setConnection({ pageId: null, isConnected: false });
+        toast.warning("Connection expired - please reconnect");
       }
-    } catch {
-      setConnection({ pageId: null, isConnected: false });
+      
+      localStorage.setItem(STORAGE_KEYS.LAST_VALIDATED, Date.now());
+    } catch (error) {
+      console.error("Validation error:", error);
     }
-  }
+  }, []);
 
-  async function connectFacebook(code) {
+  // Background validation effect
+  useEffect(() => {
+    const validateConnection = async () => {
+      const storedPageId = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
+      const lastValidated = localStorage.getItem(STORAGE_KEYS.LAST_VALIDATED);
+
+      if (storedPageId && (!lastValidated || Date.now() - lastValidated > VALIDATION_INTERVAL)) {
+        await checkConnection(storedPageId);
+      }
+    };
+
+    validateConnection();
+  }, [checkConnection]);
+
+  // OAuth callback handler
+  useEffect(() => {
+    const handleOAuthCallback = async () => {
+      if (code) {
+        try {
+          const response = await fetch("/api/connectFacebook", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code }),
+          });
+
+          const data = await response.json();
+          
+          if (data.page_id) {
+            localStorage.setItem(STORAGE_KEYS.PAGE_ID, data.page_id);
+            localStorage.setItem(STORAGE_KEYS.LAST_VALIDATED, Date.now());
+            setConnection({ pageId: data.page_id, isConnected: true });
+            toast.success("Facebook page connected successfully!");
+          }
+
+          // Cleanup URL params
+          const params = new URLSearchParams(searchParams.toString());
+          params.delete("code");
+          router.replace(`${window.location.pathname}?${params.toString()}`);
+        } catch (error) {
+          toast.error("Failed to connect Facebook page");
+          handleDisconnect();
+        }
+      }
+    };
+
+    handleOAuthCallback();
+  }, [code, router, searchParams]);
+
+  // Disconnect handler
+  const handleDisconnect = useCallback(async () => {
     try {
-      const response = await fetch("/api/connectFacebook", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code }),
-      });
-
-      const data = await response.json();
-      if (!data.page_id) throw new Error("No page ID returned");
-
-      localStorage.setItem("facebookPageId", data.page_id);
-      setConnection({ pageId: data.page_id, isConnected: true });
-
-      toast("Facebook page connected successfully!");
-    } catch {
-      handleDisconnect();
-    }
-  }
-
-  async function handleDisconnect() {
-    const storedPageId = localStorage.getItem("facebookPageId");
-    try {
-
-      if(connection.isConnected) {
+      const pageId = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
+      if (pageId) {
         await fetch("/api/disconnectFacebook", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ page_id: storedPageId })
+          body: JSON.stringify({ page_id: pageId }),
         });
-    
-        localStorage.removeItem("facebookPageId");
-        setConnection({ pageId: null, isConnected: false });
-        toast("Successfully disconnected Facebook page");
       }
+      
+      localStorage.removeItem(STORAGE_KEYS.PAGE_ID);
+      localStorage.removeItem(STORAGE_KEYS.LAST_VALIDATED);
+      setConnection({ pageId: null, isConnected: false });
+      toast.success("Successfully disconnected Facebook page");
     } catch (error) {
-      toast.error("Failed to disconnect");
+      toast.error("Disconnection failed - please try again");
+      setConnection(prev => ({ ...prev, isConnected: true })); // Rollback UI state
     }
-  }
+  }, []);
 
-  function handleToggle() {
+  // Toggle handler with optimistic updates
+  const handleToggle = useCallback(() => {
     if (connection.isConnected) {
+      setConnection({ pageId: null, isConnected: false });
       handleDisconnect();
     } else {
-      const clientId = process.env.NEXT_PUBLIC_FACEBOOK_APP_ID;
-      const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
-      const scopes =
-        "pages_manage_metadata,pages_read_engagement,pages_show_list,pages_messaging,instagram_basic,instagram_manage_comments,instagram_manage_insights";
-
       router.push(
-        `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}?menu=Integrations&scope=${scopes}`
+        `https://www.facebook.com/v18.0/dialog/oauth?` +
+        `client_id=${authConfig.clientId}&` +
+        `redirect_uri=${encodeURIComponent(authConfig.redirectUri)}?menu=Integrations&` +
+        `scope=${encodeURIComponent(authConfig.scopes)}`
       );
     }
-  }
+  }, [connection.isConnected, handleDisconnect, authConfig, router]);
 
   return (
     <div className="bg-white rounded-md p-8 grid gap-8 w-[25rem]">

@@ -13,6 +13,10 @@ const pageSchema = new Schema({
     required: true,
     type: String,
   },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export const Page = mongoose.models.Page || mongoose.model("Page", pageSchema);
