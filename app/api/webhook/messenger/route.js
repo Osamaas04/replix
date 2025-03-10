@@ -36,23 +36,23 @@ export async function POST(request) {
         const recipientId = event.recipient.id;
         const timestamp = event.timestamp;
         
-        const redisKey = `message:${message.mid}`;
-
-        await redis.hset(redisKey, {
+        const messageData = {
           message_id: message.mid,
           sender_id: senderId,
           recipient_id: recipientId,
           text: message.text,
           sent_time: new Date(timestamp).toISOString(),
           page_access_token: await getPageAccessTokenFromDB(recipientId),
-        });
+        };
 
-        await redis.expire(redisKey, 86400);
-
-        const storedMessage = await redis.hgetall(redisKey);
-        console.log(`✅ Stored message: ${redisKey}`, storedMessage);
+        await redis.rpush('message_queue', JSON.stringify(messageData));
       }
     }
+
+    // Retrieve and log all messages in the queue
+    const queueLength = await redis.llen('message_queue');
+    const allMessages = await redis.lrange('message_queue', 0, queueLength - 1);
+    console.log("📬 Full Message Queue:", allMessages.map(msg => JSON.parse(msg)));
 
     return NextResponse.json(
       { message: "EVENT_RECEIVED_AND_STORED" }, 
@@ -78,5 +78,3 @@ async function getPageAccessTokenFromDB(page_id) {
     throw new Error(`Failed to get access token: ${error.message}`);
   }
 }
-
-//hi
