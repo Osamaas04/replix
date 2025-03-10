@@ -5,25 +5,22 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { Switch } from "../ui/switch";
 import { toast } from "sonner";
 
-// Constants for localStorage keys and validation period
 const STORAGE_KEYS = {
   PAGE_ID: "facebookPageId",
   LAST_VALIDATED: "fbLastValidated"
 };
-const VALIDATION_INTERVAL = 3600000; // 1 hour
+const VALIDATION_INTERVAL = 3600000;
 
 export default function MessengerCard() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
 
-  // Optimistic initial state from localStorage
   const [connection, setConnection] = useState(() => ({
     pageId: typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEYS.PAGE_ID) : null,
     isConnected: typeof window !== 'undefined' ? Boolean(localStorage.getItem(STORAGE_KEYS.PAGE_ID)) : false
   }));
 
-  // Memoized auth configuration
   const authConfig = useMemo(() => ({
     clientId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
     redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URI,
@@ -38,7 +35,6 @@ export default function MessengerCard() {
     ].join(",")
   }), []);
 
-  // Connection validation logic
   const checkConnection = useCallback(async (pageId) => {
     try {
       const response = await fetch("/api/checkToken", {
@@ -61,7 +57,6 @@ export default function MessengerCard() {
     }
   }, []);
 
-  // Background validation effect
   useEffect(() => {
     const validateConnection = async () => {
       const storedPageId = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
@@ -75,7 +70,6 @@ export default function MessengerCard() {
     validateConnection();
   }, [checkConnection]);
 
-  // OAuth callback handler
   useEffect(() => {
     const handleOAuthCallback = async () => {
       if (code) {
@@ -95,7 +89,6 @@ export default function MessengerCard() {
             toast.success("Facebook page connected successfully!");
           }
 
-          // Cleanup URL params
           const params = new URLSearchParams(searchParams.toString());
           params.delete("code");
           router.replace(`${window.location.pathname}?${params.toString()}`);
@@ -109,7 +102,7 @@ export default function MessengerCard() {
     handleOAuthCallback();
   }, [code, router, searchParams]);
 
-  // Disconnect handler
+
   const handleDisconnect = useCallback(async () => {
     try {
       const pageId = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
@@ -127,11 +120,10 @@ export default function MessengerCard() {
       toast.success("Successfully disconnected Facebook page");
     } catch (error) {
       toast.error("Disconnection failed - please try again");
-      setConnection(prev => ({ ...prev, isConnected: true })); // Rollback UI state
+      setConnection(prev => ({ ...prev, isConnected: true })); 
     }
   }, []);
 
-  // Toggle handler with optimistic updates
   const handleToggle = useCallback(() => {
     if (connection.isConnected) {
       setConnection({ pageId: null, isConnected: false });
