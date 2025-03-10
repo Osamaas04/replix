@@ -31,12 +31,8 @@ export async function POST(request) {
       throw new Error("Invalid webhook payload: Missing 'entry' array");
     }
 
-    // Connect to the database once
     await dbConnect();
-
-    // Cache page access tokens to avoid redundant DB calls
     const pageAccessTokens = {};
-
     const messagesToStore = [];
 
     for (const entry of entries) {
@@ -46,22 +42,30 @@ export async function POST(request) {
         const recipientId = event.recipient?.id;
         const timestamp = event.timestamp;
 
-        if (!senderId || !recipientId) {
-          console.warn("⚠️ Skipping event due to missing sender or recipient:", event);
+        if (!senderId || !recipientId || !message?.mid) {
+          console.warn("⚠️ Skipping event due to missing data:", event);
           continue;
         }
 
-        // Get page access token (cache if possible)
+        // Check if message already exists in Redis
+        const messageExists = await redis.lrange("message_queue", 0, -1).then(messages =>
+          messages.some(msg => JSON.parse(msg).message_id === message.mid)
+        );
+
+        if (messageExists) {
+          console.log(`⏩ Skipping duplicate message: ${message.mid}`);
+          continue;
+        }
+
         if (!pageAccessTokens[recipientId]) {
           pageAccessTokens[recipientId] = await getPageAccessTokenFromDB(recipientId);
         }
 
-        // Build message data object
         const messageData = {
-          message_id: message?.mid || "N/A",
+          message_id: message.mid,
           sender_id: senderId,
           recipient_id: recipientId,
-          text: message?.text || "[Non-text message]",
+          text: message.text || "[Non-text message]",
           sent_time: new Date(timestamp).toISOString(),
           page_access_token: pageAccessTokens[recipientId],
         };
@@ -70,18 +74,17 @@ export async function POST(request) {
       }
     }
 
-    // Push all messages to Redis in one call (batch insert)
+    // Store only unique messages
     if (messagesToStore.length > 0) {
       await redis.rpush("message_queue", ...messagesToStore);
     }
 
-    // Retrieve and log the last 10 messages from Redis for debugging
+    // Retrieve the latest messages
     const queueLength = await redis.llen("message_queue");
     const messagesToLog = await redis.lrange("message_queue", Math.max(0, queueLength - 10), queueLength - 1);
 
     try {
-      const parsedMessages = messagesToLog.map(msg => (typeof msg === "string" ? JSON.parse(msg) : msg));
-      console.log("📬 Last 10 Messages in Queue:", parsedMessages);
+      console.log("📬 Last Messages in Queue:", messagesToLog.map(msg => JSON.parse(msg)));
     } catch (error) {
       console.error("❌ Error parsing messages from Redis:", error, messagesToLog);
     }
