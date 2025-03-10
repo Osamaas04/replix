@@ -6,21 +6,38 @@ import WhatsappAutomate from "../automations/WhatsappAutomate";
 import XAutomate from "../automations/XAutomate";
 import { Play, Pause } from "lucide-react";
 import EmptyWorkflow from "./EmptyWorkflow";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
-// Define STORAGE_KEYS to avoid undefined errors
 const STORAGE_KEYS = {
   PAGE_ID: "facebookPageId",
+  AUTOMATION_STATUSES: "automationStatuses"
 };
 
 export default function Automations() {
   const [isActivated, setIsActivated] = useState(false);
-  const [automations, setAutomations] = useState({
-    messenger: false,
-    instagram: false,
-    whatsapp: false,
-    x: false,
+  
+  // Initialize state from localStorage
+  const [automations, setAutomations] = useState(() => {
+    if (typeof window === "undefined") return {
+      messenger: false,
+      instagram: false,
+      whatsapp: false,
+      x: false,
+    };
+    
+    const saved = localStorage.getItem(STORAGE_KEYS.AUTOMATION_STATUSES);
+    return saved ? JSON.parse(saved) : {
+      messenger: false,
+      instagram: false,
+      whatsapp: false,
+      x: false,
+    };
   });
+
+  // Save to localStorage whenever automations change
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.AUTOMATION_STATUSES, JSON.stringify(automations));
+  }, [automations]);
 
   // Handle status change for automation
   async function handleStatusChange(automationName, newStatus) {
