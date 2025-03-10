@@ -6,7 +6,7 @@ import WhatsappAutomate from "../automations/WhatsappAutomate";
 import XAutomate from "../automations/XAutomate";
 import { Play, Pause, ArrowDownUp } from "lucide-react";
 import EmptyWorkflow from "./EmptyWorkflow";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 export default function Automations() {
   const [isActivated, setIsActivated] = useState(false);
@@ -17,16 +17,41 @@ export default function Automations() {
     x: false,
   });
 
-  const handleStatusChange = (automationName, newStatus) => {
+  // Handle status change for automation
+  async function handleStatusChange(automationName, newStatus) {
     setAutomations((prev) => ({
       ...prev,
       [automationName]: newStatus,
     }));
-  };
 
-  const filteredAutomations = Object.entries(automations).filter(
-    ([, status]) => status === isActivated
-  );
+    const page_id = localStorage.getItem(STORAGE_KEYS.PAGE_ID) // Use the correct key here
+    if (!page_id) {
+      throw new Error("Page ID not found");
+    }
+
+    try {
+      const response = await fetch("/api/isActive", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ page_id, isActive: newStatus }), // Send the new status
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update status");
+      }
+
+      const data = await response.json();
+      setIsActivated(data.isActive); // Update activation status
+    } catch (error) {
+      console.error(error);
+      throw new Error("Failed - please try again");
+    }
+  }
+
+  // Filter automations based on the current activation status
+  const filteredAutomations = useMemo(() => {
+    return Object.entries(automations).filter(([ , status]) => status === isActivated);
+  }, [automations, isActivated]);
 
   return (
     <div>
@@ -41,9 +66,7 @@ export default function Automations() {
         <div className="flex justify-between w-[60rem]">
           <div className="flex gap-4">
             <button
-              className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${
-                !isActivated && "bg-primary/80 text-secondary"
-              }`}
+              className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${!isActivated && "bg-primary/80 text-secondary"}`}
               onClick={() => setIsActivated(false)}
             >
               <li className="flex items-center gap-2">
@@ -51,9 +74,7 @@ export default function Automations() {
               </li>
             </button>
             <button
-              className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${
-                isActivated && "bg-primary/80 text-secondary"
-              }`}
+              className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${isActivated && "bg-primary/80 text-secondary"}`}
               onClick={() => setIsActivated(true)}
             >
               <li className="flex items-center gap-2">
@@ -61,10 +82,6 @@ export default function Automations() {
               </li>
             </button>
           </div>
-
-          {/* <button className="hover:bg-primary/10 px-2 py-1 rounded-md flex items-center gap-2">
-            <ArrowDownUp size={18} /> Sort
-          </button> */}
         </div>
 
         <div className="flex flex-col items-center gap-8 border border-primary/10 rounded-md w-[60rem] min-h-[20rem]">

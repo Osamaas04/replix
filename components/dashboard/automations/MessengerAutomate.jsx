@@ -1,7 +1,6 @@
 import { Play, Pause } from "lucide-react";
 
 export default function MessengerAutomate({ status, onStatusChange }) {
-  const isActivated = status === true; // Convert string-based status to boolean
 
   return (
     <div className="flex border-b border-primary/10 px-8 py-4 w-[60rem] mx-auto justify-between">
@@ -20,9 +19,9 @@ export default function MessengerAutomate({ status, onStatusChange }) {
 
       <button
         className="border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md"
-        onClick={() => onStatusChange(!isActivated)} // Toggle boolean
+        onClick={() => onStatusChange(!status)} // Toggle boolean
       >
-        {isActivated ? <><Pause size={18} /> Pause</> : <><Play size={18} /> Activate</>}
+        {status ? <><Pause size={18} /> Pause</> : <><Play size={18} /> Activate</>}
       </button>
     </div>
   );

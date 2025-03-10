@@ -107,11 +107,17 @@ export default function MessengerCard() {
     try {
       const pageId = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
       if (pageId) {
-        await fetch("/api/disconnectFacebook", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ page_id: pageId }),
-        });
+        throw new Error("page id not founr")
+      }
+
+      const response = await fetch("/api/disconnectFacebook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ page_id: pageId }),
+      });
+
+      if(!response.ok) {
+        throw new Error("Disconnection failed - please try again")
       }
       
       localStorage.removeItem(STORAGE_KEYS.PAGE_ID);
