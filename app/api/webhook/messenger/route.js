@@ -36,7 +36,6 @@ export async function POST(request) {
         const recipientId = event.recipient.id;
         const timestamp = event.timestamp;
 
-        // Push message to Redis queue
         await redis.lpush("message_queue", JSON.stringify({
           message_id: message.mid,
           sender_id: senderId,
@@ -46,24 +45,16 @@ export async function POST(request) {
           page_access_token: await getPageAccessTokenFromDB(recipientId),
         }));
 
-        console.log(`✅ Message added to queue: ${message.mid}`);
-
-        const queueMessages = await redis.lrange("message_queue", 0, -1);
-        console.log("📜 Full Queue:", queueMessages);
       }
     }
 
     return NextResponse.json(
-      { message: "EVENT_RECEIVED_AND_QUEUED" }, 
+      { message: "Message has been queued successfully" }, 
       { status: 200 }
     );
 
   } catch (error) {
-    console.error("❌ Webhook processing error:", error);
-    return NextResponse.json(
-      { error: error.message }, 
-      { status: 500 }
-    );
+    throw new Error(`Failed to queue the message: ${error.message}`);
   }
 }
 
