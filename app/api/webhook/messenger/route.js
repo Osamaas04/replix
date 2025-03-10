@@ -29,19 +29,12 @@ export async function POST(request) {
 
     for (const entry of entries) {
       const messagingEvents = entry.messaging;
-
+      
       for (const event of messagingEvents) {
         const message = event.message;
         const senderId = event.sender.id;
         const recipientId = event.recipient.id;
         const timestamp = event.timestamp;
-
-        const page = await getPageDetailsFromDB(recipientId);
-        
-        if (!page || !page.isActive) {
-          console.log(`Skipping message from ${senderId} because page ${recipientId} is inactive.`);
-          continue;
-        }
 
         await redis.lpush("message_queue", JSON.stringify({
           message_id: message.mid,
@@ -49,8 +42,9 @@ export async function POST(request) {
           recipient_id: recipientId,
           text: message.text,
           sent_time: new Date(timestamp).toISOString(),
-          page_access_token: page.access_token,
+          page_access_token: await getPageAccessTokenFromDB(recipientId),
         }));
+
       }
     }
 
@@ -60,22 +54,17 @@ export async function POST(request) {
     );
 
   } catch (error) {
-    console.error(`Failed to queue the message: ${error.message}`);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    throw new Error(`Failed to queue the message: ${error.message}`);
   }
 }
 
-async function getPageDetailsFromDB(page_id) {
+async function getPageAccessTokenFromDB(page_id) {
   try {
     await dbConnect();
     const page = await Page.findOne({ page_id });
-    if (!page) return null;
-    return page;
+    if (!page) throw new Error("Page not found");
+    return page.access_token;
   } catch (error) {
-    console.error(`Failed to get page details: ${error.message}`);
-    return null;
+    throw new Error(`Failed to get access token: ${error.message}`);
   }
 }
