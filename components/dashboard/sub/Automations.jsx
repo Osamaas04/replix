@@ -16,7 +16,6 @@ const STORAGE_KEYS = {
 export default function Automations() {
   const [isActivated, setIsActivated] = useState(false);
   
-  // Initialize state from localStorage
   const [automations, setAutomations] = useState(() => {
     if (typeof window === "undefined") return {
       messenger: false,
@@ -34,12 +33,10 @@ export default function Automations() {
     };
   });
 
-  // Save to localStorage whenever automations change
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.AUTOMATION_STATUSES, JSON.stringify(automations));
   }, [automations]);
 
-  // Handle status change for automation
   async function handleStatusChange(automationName, newStatus) {
     setAutomations((prev) => ({
       ...prev,
@@ -68,7 +65,6 @@ export default function Automations() {
     }
   }
 
-  // Memoized filtered list to avoid unnecessary re-renders
   const filteredAutomations = useMemo(() => {
     return Object.entries(automations).filter(([_, status]) => status === isActivated);
   }, [automations, isActivated]);
