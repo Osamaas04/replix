@@ -27,8 +27,7 @@ export async function POST(request) {
     const body = await request.json();
     const entries = body.entry;
 
-    console.log(process.env.KV_REST_API_URL)
-    console.log(process.env.KV_REST_API_TOKEN)
+    await dbConnect();
 
     for (const entry of entries) {
       const messagingEvents = entry.messaging;
@@ -39,15 +38,29 @@ export async function POST(request) {
         const recipientId = event.recipient.id;
         const timestamp = event.timestamp;
 
+        // Fetch page details
+        const page = await Page.findOne({ page_id: recipientId });
+
+        // If page doesn't exist or is inactive, skip processing
+        if (!page) {
+          console.warn(`Page ${recipientId} not found. Ignoring message from ${senderId}.`);
+          continue;
+        }
+
+        if (!page.isActive) {
+          console.log(`Skipping message from ${senderId} because page ${recipientId} is inactive.`);
+          continue;
+        }
+
+        // Push message to Redis queue
         await redis.lpush("message_queue", JSON.stringify({
-          message_id: message.mid,
+          message_id: message?.mid || null,
           sender_id: senderId,
           recipient_id: recipientId,
-          text: message.text,
+          text: message?.text || "",
           sent_time: new Date(timestamp).toISOString(),
-          page_access_token: await getPageAccessTokenFromDB(recipientId),
+          page_access_token: page.access_token,
         }));
-
       }
     }
 
@@ -57,17 +70,10 @@ export async function POST(request) {
     );
 
   } catch (error) {
-    throw new Error(`Failed to queue the message: ${error.message}`);
-  }
-}
-
-async function getPageAccessTokenFromDB(page_id) {
-  try {
-    await dbConnect();
-    const page = await Page.findOne({ page_id });
-    if (!page) throw new Error("Page not found");
-    return page.access_token;
-  } catch (error) {
-    throw new Error(`Failed to get access token: ${error.message}`);
+    console.error(`Failed to queue the message: ${error.message}`);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
