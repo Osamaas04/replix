@@ -27,6 +27,9 @@ export async function POST(request) {
     const body = await request.json();
     const entries = body.entry;
 
+    console.log(process.env.KV_REST_API_URL)
+    console.log(process.env.KV_REST_API_TOKEN)
+
     for (const entry of entries) {
       const messagingEvents = entry.messaging;
       
