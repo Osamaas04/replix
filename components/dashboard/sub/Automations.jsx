@@ -13,6 +13,8 @@ const STORAGE_KEYS = {
   AUTOMATION_STATUSES: "automationStatuses"
 };
 
+const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
+
 export default function Automations() {
   const [isActivated, setIsActivated] = useState(false);
   
@@ -50,7 +52,7 @@ export default function Automations() {
     }
 
     try {
-      const response = await fetch("/api/isActive", {
+      const response = await fetch(`${API_GATEWAY}/isActive`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ page_id, isActive: newStatus }),

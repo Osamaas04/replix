@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { Switch } from "../ui/switch";
 import { toast } from "sonner";
 
+const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
 const STORAGE_KEYS = {
   PAGE_ID: "facebookPageId",
   LAST_VALIDATED: "fbLastValidated"
@@ -17,40 +18,49 @@ export default function MessengerCard() {
   const code = searchParams.get("code");
 
   const [connection, setConnection] = useState(() => ({
-    pageId: typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEYS.PAGE_ID) : null,
-    isConnected: typeof window !== 'undefined' ? Boolean(localStorage.getItem(STORAGE_KEYS.PAGE_ID)) : false
+    pageId:
+      typeof window !== "undefined"
+        ? localStorage.getItem(STORAGE_KEYS.PAGE_ID)
+        : null,
+    isConnected:
+      typeof window !== "undefined"
+        ? Boolean(localStorage.getItem(STORAGE_KEYS.PAGE_ID))
+        : false
   }));
 
-  const authConfig = useMemo(() => ({
-    clientId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
-    redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URI,
-    scopes: [
-      "pages_manage_metadata",
-      "pages_read_engagement",
-      "pages_show_list",
-      "pages_messaging",
-      "instagram_basic",
-      "instagram_manage_comments",
-      "instagram_manage_insights"
-    ].join(",")
-  }), []);
+  const authConfig = useMemo(
+    () => ({
+      clientId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
+      redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URI,
+      scopes: [
+        "pages_manage_metadata",
+        "pages_read_engagement",
+        "pages_show_list",
+        "pages_messaging",
+        "instagram_basic",
+        "instagram_manage_comments",
+        "instagram_manage_insights"
+      ].join(",")
+    }),
+    []
+  );
 
   const checkConnection = useCallback(async (pageId) => {
     try {
-      const response = await fetch("/api/checkToken", {
+      const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ page_id: pageId }),
+        body: JSON.stringify({ page_id: pageId })
       });
 
       const data = await response.json();
-      
+
       if (!data.isConnected) {
         localStorage.removeItem(STORAGE_KEYS.PAGE_ID);
         setConnection({ pageId: null, isConnected: false });
         toast.warning("Connection expired - please reconnect");
       }
-      
+
       localStorage.setItem(STORAGE_KEYS.LAST_VALIDATED, Date.now());
     } catch (error) {
       console.error("Validation error:", error);
@@ -74,14 +84,14 @@ export default function MessengerCard() {
     const handleOAuthCallback = async () => {
       if (code) {
         try {
-          const response = await fetch("/api/connectFacebook", {
+          const response = await fetch(`${API_GATEWAY}/connectFacebook`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ code }),
+            body: JSON.stringify({ code })
           });
 
           const data = await response.json();
-          
+
           if (data.page_id) {
             localStorage.setItem(STORAGE_KEYS.PAGE_ID, data.page_id);
             localStorage.setItem(STORAGE_KEYS.LAST_VALIDATED, Date.now());
@@ -89,6 +99,7 @@ export default function MessengerCard() {
             toast.success("Facebook page connected successfully!");
           }
 
+          // Remove the 'code' query parameter
           const params = new URLSearchParams(searchParams.toString());
           params.delete("code");
           router.replace(`${window.location.pathname}?${params.toString()}`);
@@ -102,31 +113,30 @@ export default function MessengerCard() {
     handleOAuthCallback();
   }, [code, router, searchParams]);
 
-
   const handleDisconnect = useCallback(async () => {
     try {
       const pageId = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
-      if (pageId) {
-        throw new Error("page id not founr")
+      if (!pageId) {
+        throw new Error("Page ID not found");
       }
 
-      const response = await fetch("/api/disconnectFacebook", {
+      const response = await fetch(`${API_GATEWAY}/disconnectFacebook`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ page_id: pageId }),
+        body: JSON.stringify({ page_id: pageId })
       });
 
-      if(!response.ok) {
-        throw new Error("Disconnection failed - please try again")
+      if (!response.ok) {
+        throw new Error("Disconnection failed - please try again");
       }
-      
+
       localStorage.removeItem(STORAGE_KEYS.PAGE_ID);
       localStorage.removeItem(STORAGE_KEYS.LAST_VALIDATED);
       setConnection({ pageId: null, isConnected: false });
       toast.success("Successfully disconnected Facebook page");
     } catch (error) {
       toast.error("Disconnection failed - please try again");
-      setConnection(prev => ({ ...prev, isConnected: true })); 
+      setConnection((prev) => ({ ...prev, isConnected: true }));
     }
   }, []);
 
@@ -137,9 +147,9 @@ export default function MessengerCard() {
     } else {
       router.push(
         `https://www.facebook.com/v18.0/dialog/oauth?` +
-        `client_id=${authConfig.clientId}&` +
-        `redirect_uri=${encodeURIComponent(authConfig.redirectUri)}?menu=Integrations&` +
-        `scope=${encodeURIComponent(authConfig.scopes)}`
+          `client_id=${authConfig.clientId}&` +
+          `redirect_uri=${encodeURIComponent(authConfig.redirectUri)}&` +
+          `scope=${encodeURIComponent(authConfig.scopes)}`
       );
     }
   }, [connection.isConnected, handleDisconnect, authConfig, router]);
@@ -163,10 +173,7 @@ export default function MessengerCard() {
       </div>
 
       <div className="flex justify-end items-center">
-        <Switch
-          checked={connection.isConnected}
-          onCheckedChange={handleToggle}
-        />
+        <Switch checked={connection.isConnected} onCheckedChange={handleToggle} />
       </div>
     </div>
   );
