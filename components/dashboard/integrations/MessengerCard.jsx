@@ -148,7 +148,7 @@ export default function MessengerCard() {
       router.push(
         `https://www.facebook.com/v18.0/dialog/oauth?` +
           `client_id=${authConfig.clientId}&` +
-          `redirect_uri=${encodeURIComponent(authConfig.redirectUri)}&` +
+          `redirect_uri=${encodeURIComponent(authConfig.redirectUri)}?menu=Integrations&` +
           `scope=${encodeURIComponent(authConfig.scopes)}`
       );
     }
