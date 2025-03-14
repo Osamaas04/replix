@@ -15,6 +15,13 @@ const STORAGE_KEYS = {
 
 const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
 
+const PLATFROMNAMES = {
+  messenger: "Messenger",
+  instagram: "Instagram",
+  whatsapp: "WhatsApp",
+  x: "X",
+};
+
 export default function Automations() {
   const [isActivated, setIsActivated] = useState(false);
   
@@ -44,20 +51,24 @@ export default function Automations() {
       ...prev,
       [automationName]: newStatus,
     }));
-
+  
     const page_id = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
     if (!page_id) {
       console.error("Page ID not found in localStorage");
       return;
     }
-
+  
     try {
       const response = await fetch(`${API_GATEWAY}/isActive`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ page_id, isActive: newStatus }),
+        body: JSON.stringify({
+          page_id,
+          isActive: newStatus,
+          platform: PLATFROMNAMES[automationName],
+        }),
       });
-
+  
       if (!response.ok) {
         console.error("Failed to update automation status");
         return;
@@ -66,6 +77,7 @@ export default function Automations() {
       console.error("Error updating automation:", error);
     }
   }
+  
 
   const filteredAutomations = useMemo(() => {
     return Object.entries(automations).filter(([_, status]) => status === isActivated);
