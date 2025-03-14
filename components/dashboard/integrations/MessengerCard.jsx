@@ -43,6 +43,7 @@ export default function MessengerCard() {
         "instagram_manage_messages",
         "whatsapp_business_management",
         "whatsapp_business_messaging",
+        "business_management",
       ].join(",")
     }),
     []
