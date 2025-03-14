@@ -7,7 +7,8 @@ import { toast } from "sonner";
 const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
 const STORAGE_KEYS = {
   INSTAGRAM_ID: "instagramBusinessId",
-  LAST_VALIDATED: "igLastValidated"
+  LAST_VALIDATED: "igLastValidated",
+  FACEBOOK_PAGE_ID: "facebookPageId"
 };
 const VALIDATION_INTERVAL = 3600000;
 
@@ -76,7 +77,6 @@ export default function InstagramCard() {
       });
 
       const data = await response.json();
-      console.log(data)
 
       if (!response.ok || !data.instagramId) {
         throw new Error("Instagram connection failed - please try again");
