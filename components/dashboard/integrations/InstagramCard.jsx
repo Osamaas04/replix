@@ -83,7 +83,7 @@ export default function InstagramCard() {
       }
 
       localStorage.setItem(STORAGE_KEYS.INSTAGRAM_ID, data.instagramId);
-      setConnection((prev) => ({ ...prev, instagramId: data.instagramId }));
+      setConnection({ instagramId: data.instagramId, isConnected: true });
 
       toast.success("Successfully connected Instagram");
     } catch (error) {
