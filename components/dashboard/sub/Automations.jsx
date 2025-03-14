@@ -10,7 +10,8 @@ import { useState, useMemo, useEffect } from "react";
 
 const STORAGE_KEYS = {
   PAGE_ID: "facebookPageId",
-  AUTOMATION_STATUSES: "automationStatuses"
+  AUTOMATION_STATUSES: "automationStatuses",
+  INSTAGRAM_ID: "instagramBusinessId"
 };
 
 const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
@@ -57,6 +58,13 @@ export default function Automations() {
       console.error("Page ID not found in localStorage");
       return;
     }
+
+    const instagram_id = localStorage.getItem(STORAGE_KEYS.INSTAGRAM_ID)
+
+    if (!instagram_id) {
+      console.error("Instagram ID not found in localStorage");
+      return;
+    }
   
     try {
       const response = await fetch(`${API_GATEWAY}/isActive`, {
@@ -64,6 +72,7 @@ export default function Automations() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           page_id,
+          instagram_id,
           isActive: newStatus,
           platform: PLATFROMNAMES[automationName],
         }),
