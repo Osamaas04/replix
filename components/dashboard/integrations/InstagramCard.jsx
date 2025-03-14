@@ -61,6 +61,36 @@ export default function InstagramCard() {
     validateConnection();
   }, [checkConnection]);
 
+  const connectInstagram = useCallback(async () => {
+    try {
+      const facebookPageId = localStorage.getItem(STORAGE_KEYS.FACEBOOK_PAGE_ID);
+      if (!facebookPageId) {
+        throw new Error("Facebook Page ID not found");
+      }
+
+      const response = await fetch(`${API_GATEWAY}/connectInstagram`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ page_id: facebookPageId })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.instagramId) {
+        throw new Error("Instagram connection failed - please try again");
+      }
+
+      localStorage.setItem(STORAGE_KEYS.INSTAGRAM_ID, data.instagramId);
+      setConnection((prev) => ({ ...prev, instagramId: data.instagramId }));
+
+      toast.success("Successfully connected Instagram");
+    } catch (error) {
+      toast.error("Instagram connection failed - please try again");
+      setConnection((prev) => ({ ...prev, instagramId: null }));
+    }
+  }, []);
+
+
   const handleDisconnect = useCallback(async () => {
     try {
       const instagramId = localStorage.getItem(STORAGE_KEYS.INSTAGRAM_ID);
@@ -93,7 +123,7 @@ export default function InstagramCard() {
       setConnection({ instagramId: null, isConnected: false });
       handleDisconnect();
     } else {
-      toast.error("Reconnection feature is not implemented");
+      connectInstagram();
     }
   }, [connection.isConnected, handleDisconnect]);
 
