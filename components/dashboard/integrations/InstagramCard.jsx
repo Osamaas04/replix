@@ -49,6 +49,7 @@ export default function InstagramCard() {
     const validateConnection = async () => {
       const storedInstagramId = localStorage.getItem(STORAGE_KEYS.INSTAGRAM_ID);
       const lastValidated = localStorage.getItem(STORAGE_KEYS.LAST_VALIDATED);
+      
 
       if (
         storedInstagramId &&
@@ -75,6 +76,7 @@ export default function InstagramCard() {
       });
 
       const data = await response.json();
+      console.log(data)
 
       if (!response.ok || !data.instagramId) {
         throw new Error("Instagram connection failed - please try again");
