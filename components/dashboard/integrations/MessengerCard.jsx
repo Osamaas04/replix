@@ -40,7 +40,9 @@ export default function MessengerCard() {
         "instagram_basic",
         "instagram_manage_comments",
         "instagram_manage_insights",
-        "instagram_manage_messages"
+        "instagram_manage_messages",
+        "whatsapp_business_management",
+        "whatsapp_business_messaging",
       ].join(",")
     }),
     []
