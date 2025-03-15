@@ -150,7 +150,7 @@ export default function MessengerCard() {
       handleDisconnect();
     } else {
       router.push(
-        `https://www.facebook.com/v18.0/dialog/oauth?` +
+        `https://www.facebook.com/v22.0/dialog/oauth?` +
           `client_id=${authConfig.clientId}&` +
           `redirect_uri=${encodeURIComponent(authConfig.redirectUri)}?menu=Integrations&` +
           `scope=${encodeURIComponent(authConfig.scopes)}`
