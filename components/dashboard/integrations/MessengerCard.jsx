@@ -8,7 +8,7 @@ import { toast } from "sonner";
 const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
 const STORAGE_KEYS = {
   PAGE_ID: "facebookPageId",
-  LAST_VALIDATED: "fbLastValidated"
+  LAST_VALIDATED: "fbLastValidated",
 };
 const VALIDATION_INTERVAL = 3600000;
 
@@ -25,7 +25,7 @@ export default function MessengerCard() {
     isConnected:
       typeof window !== "undefined"
         ? Boolean(localStorage.getItem(STORAGE_KEYS.PAGE_ID))
-        : false
+        : false,
   }));
 
   const authConfig = useMemo(
@@ -44,7 +44,10 @@ export default function MessengerCard() {
         "whatsapp_business_management",
         "whatsapp_business_messaging",
         "business_management",
-      ].join(",")
+        "pages_manage_engagement",
+        "pages_read_user_content",
+        "public_profile",
+      ].join(","),
     }),
     []
   );
@@ -54,7 +57,7 @@ export default function MessengerCard() {
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ page_id: pageId })
+        body: JSON.stringify({ page_id: pageId }),
       });
 
       const data = await response.json();
@@ -76,7 +79,10 @@ export default function MessengerCard() {
       const storedPageId = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
       const lastValidated = localStorage.getItem(STORAGE_KEYS.LAST_VALIDATED);
 
-      if (storedPageId && (!lastValidated || Date.now() - lastValidated > VALIDATION_INTERVAL)) {
+      if (
+        storedPageId &&
+        (!lastValidated || Date.now() - lastValidated > VALIDATION_INTERVAL)
+      ) {
         await checkConnection(storedPageId);
       }
     };
@@ -91,7 +97,7 @@ export default function MessengerCard() {
           const response = await fetch(`${API_GATEWAY}/connectFacebook`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ code })
+            body: JSON.stringify({ code }),
           });
 
           const data = await response.json();
@@ -127,7 +133,7 @@ export default function MessengerCard() {
       const response = await fetch(`${API_GATEWAY}/disconnectFacebook`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ page_id: pageId })
+        body: JSON.stringify({ page_id: pageId }),
       });
 
       if (!response.ok) {
@@ -152,7 +158,9 @@ export default function MessengerCard() {
       router.push(
         `https://www.facebook.com/v22.0/dialog/oauth?` +
           `client_id=${authConfig.clientId}&` +
-          `redirect_uri=${encodeURIComponent(authConfig.redirectUri)}?menu=Integrations&` +
+          `redirect_uri=${encodeURIComponent(
+            authConfig.redirectUri
+          )}?menu=Integrations&` +
           `scope=${encodeURIComponent(authConfig.scopes)}`
       );
     }
@@ -177,7 +185,10 @@ export default function MessengerCard() {
       </div>
 
       <div className="flex justify-end items-center">
-        <Switch checked={connection.isConnected} onCheckedChange={handleToggle} />
+        <Switch
+          checked={connection.isConnected}
+          onCheckedChange={handleToggle}
+        />
       </div>
     </div>
   );
