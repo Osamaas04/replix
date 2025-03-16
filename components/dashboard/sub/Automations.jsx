@@ -11,7 +11,8 @@ import { useState, useMemo, useEffect } from "react";
 const STORAGE_KEYS = {
   PAGE_ID: "facebookPageId",
   AUTOMATION_STATUSES: "automationStatuses",
-  INSTAGRAM_ID: "instagramBusinessId"
+  INSTAGRAM_ID: "instagramBusinessId",
+  WHATSAPP_ID: "whatsappBusinessId"
 };
 
 const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
@@ -62,6 +63,13 @@ export default function Automations() {
     const instagram_id = localStorage.getItem(STORAGE_KEYS.INSTAGRAM_ID)
 
     if (!instagram_id) {
+      console.error("Instagram ID not found in localStorage");
+      return;
+    }
+
+    const whatsapp_id = localStorage.getItem(STORAGE_KEYS.WHATSAPP_ID)
+
+    if (!whatsapp_id) {
       console.error("Instagram ID not found in localStorage");
       return;
     }
