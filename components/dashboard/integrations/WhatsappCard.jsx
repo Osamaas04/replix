@@ -69,7 +69,7 @@ export default function WhatsappCard() {
         throw new Error("Facebook Page ID not found");
       }
 
-      const response = await fetch(`${API_GATEWAY}/connectWhatsApp`, {
+      const response = await fetch(`${API_GATEWAY}/connectWhatsapp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ page_id: facebookPageId })
@@ -95,7 +95,7 @@ export default function WhatsappCard() {
       const whatsappId = localStorage.getItem(STORAGE_KEYS.WHATSAPP_ID);
       if (!whatsappId) throw new Error("WhatsApp ID not found");
 
-      const response = await fetch(`${API_GATEWAY}/disconnectWhatsApp`, {
+      const response = await fetch(`${API_GATEWAY}/disconnectWhatsapp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ whatsapp_business_account_id: whatsappId })
