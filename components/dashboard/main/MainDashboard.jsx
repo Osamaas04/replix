@@ -17,7 +17,7 @@ function DashboardContent() {
   const menuItem = searchParams.get("menu") || "Home";
 
   const handleMenuChange = (menu) => {
-    const newUrl = `${pathname}?menu=${menu}`;
+    const newUrl = `${pathname}/${menu}`;
     router.replace(newUrl);
   };
 

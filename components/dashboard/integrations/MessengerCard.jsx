@@ -191,7 +191,7 @@ export default function MessengerCard() {
           `client_id=${authConfig.clientId}&` +
           `redirect_uri=${encodeURIComponent(
             authConfig.redirectUri
-          )}?menu=Integrations&` +
+          )}/Integrations&` +
           `scope=${encodeURIComponent(authConfig.scopes)}`
       );
     }
