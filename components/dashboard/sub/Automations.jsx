@@ -81,6 +81,7 @@ export default function Automations() {
         body: JSON.stringify({
           page_id,
           instagram_id,
+          whatsapp_id,
           isActive: newStatus,
           platform: PLATFROMNAMES[automationName],
         }),
