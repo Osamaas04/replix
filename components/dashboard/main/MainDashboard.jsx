@@ -17,7 +17,7 @@ function DashboardContent() {
   const menuItem = searchParams.get("menu") || "Home";
 
   const handleMenuChange = (menu) => {
-    const newUrl = `${pathname}/${menu}`;
+    const newUrl = `${pathname}?menu=${menu}`;
     router.replace(newUrl);
   };
 
@@ -66,10 +66,10 @@ function DashboardContent() {
   );
 }
 
-export default function MainDashboard() {
-  return (
-    <Suspense fallback={<div>Loading Dashboard...</div>}>
-      <DashboardContent />
-    </Suspense>
-  );
-}
+// export default function MainDashboard() {
+//   return (
+//     <Suspense fallback={<div>Loading Dashboard...</div>}>
+//       <DashboardContent />
+//     </Suspense>
+//   );
+// }
