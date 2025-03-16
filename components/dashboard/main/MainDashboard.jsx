@@ -66,10 +66,10 @@ function DashboardContent() {
   );
 }
 
-// export default function MainDashboard() {
-//   return (
-//     <Suspense fallback={<div>Loading Dashboard...</div>}>
-//       <DashboardContent />
-//     </Suspense>
-//   );
-// }
+export default function MainDashboard() {
+  return (
+    <Suspense fallback={<div>Loading Dashboard...</div>}>
+      <DashboardContent />
+    </Suspense>
+  );
+}
