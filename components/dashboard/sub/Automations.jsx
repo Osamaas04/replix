@@ -73,6 +73,8 @@ export default function Automations() {
       console.error("Instagram ID not found in localStorage");
       return;
     }
+
+    console.log(whatsapp_id)
   
     try {
       const response = await fetch(`${API_GATEWAY}/isActive`, {
