@@ -5,7 +5,7 @@ import React, { forwardRef, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "./animated-beam";
 import { Sparkles } from "lucide-react";
-import MessengerIcon from "@/public/assets/messenger-icon.svg";
+import MessengerIcon from "@/public/assets/messenger-icon.png";
 import Image from "next/image";
 
 const Circle = forwardRef(({ className, children }, ref) => {
