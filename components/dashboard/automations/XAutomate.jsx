@@ -19,8 +19,9 @@ export default function XAutomate({ status, onStatusChange }) {
       </div>
 
       <button
-        className="border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md"
+        className="border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md text-primary/50"
         onClick={() => onStatusChange(!isActivated)}
+        disabled
       >
         {isActivated ? <><Pause size={18} /> Pause</> : <><Play size={18} /> Activate</>}
       </button>
