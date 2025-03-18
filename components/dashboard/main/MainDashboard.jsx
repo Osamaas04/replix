@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Unplug, Zap, House, Newspaper, BotMessageSquare } from "lucide-react";
+import { Unplug, Zap, House, Newspaper, BotMessageSquare, PanelRightOpen, Menu } from "lucide-react";
 import SocialCards from "@/components/dashboard/sub/SocialCard";
 import Automations from "../sub/Automations";
 import Logo from "@/public/assets/chatlogo-dark.webp";
@@ -22,16 +22,27 @@ function DashboardContent() {
   };
 
   return (
-    <div className="bg-secondary h-screen">
-      <div className="flex">
-        <aside className="bg-primary/5 flex flex-col justify-between w-[16rem] h-screen border-r border-primary/10 px-4 py-4">
+    <div className="bg-secondary">
+      <div className="grid md:flex sm:justify-normal">
+
+        <button className="block md:hidden px-4 py-4">
+          <Menu />
+        </button>
+
+        <aside className="hidden bg-primary/5 md:flex md:flex-col justify-between w-[16rem] h-screen border-r border-primary/10 px-4 py-4">
           <div className="grid items-baseline">
             <div className="flex items-center justify-between">
               <Link href="/dashboard" className="flex space-x-3 items-center">
                 <Image src={Logo} alt="Replix logo" width={22} height={22} />
                 <p className="text-primary text-xl font-semibold">Replix</p>
               </Link>
+              <div>
+              <button className="flex">
+                <PanelRightOpen size={18}/>
+              </button>
             </div>
+            </div>
+            
           </div>
 
           <div className="border-t border-primary/10 py-8 grid items-end font-raleway text-primary">

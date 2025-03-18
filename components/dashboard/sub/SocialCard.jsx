@@ -13,7 +13,7 @@ export default function SocialCards() {
             Enhance your Replix experience by connecting your apps.
           </h3>
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid lg:grid-cols-2 gap-4">
           <MessengerCard />
           <InstagramCard />
           <WhatsappCard />
