@@ -4,7 +4,7 @@ export default function XAutomate({ status, onStatusChange }) {
     const isActivated = status === true; // Using boolean status for clarity
 
   return (
-    <div className="flex px-8 py-4 w-[60rem] justify-between">
+    <div className="flex px-8 py-4 justify-between">
       <div className="flex items-center gap-4">
         <svg
           role="img"

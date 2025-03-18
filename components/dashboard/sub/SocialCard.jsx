@@ -6,7 +6,7 @@ import XCard from "../integrations/XCard";
 export default function SocialCards() {
   return (
     <div>
-      <div className="grid gap-4 p-16">
+      <div className="grid gap-4 p-14">
         <div className="grid gap-2">
           <h1 className="text-primary text-3xl font-semibold">Integrations</h1>
           <h3 className="text-primary/70">

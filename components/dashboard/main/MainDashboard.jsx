@@ -23,13 +23,13 @@ function DashboardContent() {
 
   return (
     <div className="bg-secondary">
-      <div className="grid md:flex sm:justify-normal">
+      <div className="grid lg:flex sm:justify-normal">
 
-        <button className="block md:hidden px-4 py-4">
+        <button className="block lg:hidden px-4 py-4">
           <Menu />
         </button>
 
-        <aside className="hidden bg-primary/5 md:flex md:flex-col justify-between w-[16rem] h-screen border-r border-primary/10 px-4 py-4">
+        <aside className="hidden bg-primary/5 lg:flex lg:flex-col justify-between w-[16rem] h-screen border-r border-primary/10 px-4 py-4">
           <div className="grid items-baseline">
             <div className="flex items-center justify-between">
               <Link href="/dashboard" className="flex space-x-3 items-center">

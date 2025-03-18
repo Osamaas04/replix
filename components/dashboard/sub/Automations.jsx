@@ -120,8 +120,8 @@ export default function Automations() {
   }, [automations, isActivated]);
 
   return (
-    <div>
-      <div className="grid gap-4 p-16">
+    <div className="h-screen">
+      <div className="grid gap-4 p-14">
         <div className="grid gap-2">
           <h1 className="text-primary text-3xl font-semibold">
             Automated Workflows
@@ -129,7 +129,7 @@ export default function Automations() {
           <h3 className="text-primary/70">Automate your workflows with AI.</h3>
         </div>
 
-        <div className="flex justify-between w-[60rem]">
+        <div className="flex justify-between">
           <div className="flex gap-4">
             <button
               className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${
@@ -154,7 +154,7 @@ export default function Automations() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-8 border border-primary/10 rounded-md w-[60rem] min-h-[20rem]">
+        <div className="flex flex-col items-center gap-8 border border-primary/10 rounded-md w-[70vw] min-h-[20rem]">
           {filteredAutomations.length === 0 ? (
             <EmptyWorkflow
               icon={isActivated ? Play : Pause}
