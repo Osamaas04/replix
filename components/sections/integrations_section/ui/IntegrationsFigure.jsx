@@ -5,15 +5,14 @@ import React, { forwardRef, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedBeam } from "./animated-beam";
 import { Sparkles } from "lucide-react";
-import MessengerIcon from "@/public/assets/messenger-icon.png";
-import Image from "next/image";
+import MessengerIcon from "@/public/assets/messenger-icon.svg";
 
 const Circle = forwardRef(({ className, children }, ref) => {
   return (
     <div
       ref={ref}
       className={cn(
-        "z-10 flex size-12 items-center justify-center rounded-full border-2 border-border bg-secondary p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
+        "z-10 flex size-12 items-center justify-center rounded-full border-2 bg-secondary p-3 shadow-[0_0_20px_-12px_rgba(0,0,0,0.8)]",
         className
       )}
     >
@@ -49,8 +48,8 @@ export function IntegrationsFigure({ className }) {
           <Circle ref={div3Ref}>
             <Icons.whatsapp />
           </Circle>
-          <Circle ref={div4Ref} className="p-[0.6rem]">
-          <Image src={MessengerIcon} alt="messenger icon" className="!w-8" />
+          <Circle ref={div4Ref} className="p-[0.6rem] rounded-full">
+            <Icons.messenger />
           </Circle>
           <Circle ref={div5Ref}>
             <Icons.instagram />
@@ -102,6 +101,8 @@ const Icons = {
     <svg
       role="img"
       viewBox="0 0 24 24"
+      width="24"
+      height="24"
       fill="#000000"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -113,6 +114,8 @@ const Icons = {
     <svg
       role="img"
       viewBox="0 0 24 24"
+      width="24"
+      height="24"
       fill="#000000"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -124,6 +127,8 @@ const Icons = {
     <svg
       role="img"
       viewBox="0 0 24 24"
+      width="24"
+      height="24"
       fill="#000000"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -135,14 +140,24 @@ const Icons = {
   messenger: () => (
     <svg
       role="img"
-      viewBox="0 0 24 24"
+      viewBox="-2.5 -1.5 28 28"
+      width="24"
+      height="24"
       fill="none"
-      strokeWidth="1.5"
+      strokeWidth="1.9"
       stroke="#000000"
       xmlns="http://www.w3.org/2000/svg"
     >
       <title>Messenger</title>
-      <path d="M.001 11.639C.001 4.949 5.241 0 12.001 0S24 4.95 24 11.639c0 6.689-5.24 11.638-12 11.638-1.21 0-2.38-.16-3.47-.46a.96.96 0 00-.64.05l-2.39 1.05a.96.96 0 01-1.35-.85l-.07-2.14a.97.97 0 00-.32-.68A11.39 11.389 0 01.002 11.64zm8.32-2.19l-3.52 5.6c-.35.53.32 1.139.82.75l3.79-2.87c.26-.2.6-.2.87 0l2.8 2.1c.84.63 2.04.4 2.6-.48l3.52-5.6c.35-.53-.32-1.13-.82-.75l-3.79 2.87c-.25.2-.6.2-.86 0l-2.8-2.1a1.8 1.8 0 00-2.61.48z" />
+      <path
+        d="M.001 11.639C.001 4.949 5.241 0 12.001 0S24 4.95 24 11.639c0 6.689-5.24 11.638-12 11.638-1.21 0-2.38-.16-3.47-.46a.96.96 0 00-.64.05l-2.39 1.05a.96.96 0 01-1.35-.85l-.07-2.14a.97.97 0 00-.32-.68A11.39 11.389 0 01.002 11.64Z"
+        stroke="#000000"
+      />
+      <path
+        d="M8.32 9.449l-3.52 5.6c-.35.53.32 1.139.82.75l3.79-2.87c.26-.2.6-.2.87 0l2.8 2.1c.84.63 2.04.4 2.6-.48l3.52-5.6c.35-.53-.32-1.13-.82-.75l-3.79 2.87c-.25.2-.6.2-.86 0l-2.8-2.1a1.8 1.8 0 00-2.61.48Z"
+        fill="#000000"
+        strokeWidth="0.1"
+      />
     </svg>
   ),
   user: () => (
