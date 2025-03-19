@@ -1,7 +1,10 @@
 import { Play, Pause } from "lucide-react";
 
 export default function InstagramAutomate({ status, onStatusChange }) {
-  const isActivated = status === true; // Convert status to boolean
+  const isActivated = status === true; 
+
+  const instaId = localStorage.getItem(instagramBusinessId)
+  console.log(instaId)
 
   return (
     <div className="flex border-b border-primary/10 px-8 py-4 justify-between">
@@ -20,7 +23,7 @@ export default function InstagramAutomate({ status, onStatusChange }) {
 
       <button
         className="border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary"
-        onClick={() => onStatusChange(!isActivated)} // Toggle status
+        onClick={() => onStatusChange(!isActivated)} 
       >
         {isActivated ? <><Pause size={18} /> Pause</> : <><Play size={18} /> Activate</>}
       </button>
