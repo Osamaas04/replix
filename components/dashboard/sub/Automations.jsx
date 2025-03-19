@@ -169,7 +169,7 @@ export default function Automations() {
           </div>
         </div>
 
-        <div className="bg-white flex flex-col items-center gap-8 border border-secondary/70 rounded-md w-[70vw] min-h-[20rem]">
+        <div className="bg-secondary flex flex-col items-center gap-8 border border-secondary/70 rounded-md w-[70vw] min-h-[20rem]">
           {filteredAutomations.length === 0 ? (
             <EmptyWorkflow
               icon={isActivated ? Play : Pause}

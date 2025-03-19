@@ -77,7 +77,7 @@ const reviews = [
 const ReviewCard = ({ img, body, margin, blur, unBlur }) => {
   return (
     <figure
-      className={`relative h-full w-60 cursor-pointer overflow-hidden rounded-xl p-4 transition-all duration-300 ease-in-out backdrop-blur-md hover:backdrop-blur-none bg-white/10 hover:bg-white/20 border border-white/10 ${margin} ${blur} hover:${unBlur}`}
+      className={`relative h-full w-60 cursor-pointer overflow-hidden rounded-xl p-4 transition-all duration-300 ease-in-out backdrop-blur-md hover:backdrop-blur-none bg-secondary/10 hover:bg-secondary/20 border border-white/10 ${margin} ${blur} hover:${unBlur}`}
     >
       <div className="flex flex-row items-center gap-2">
         <img className="rounded-full" width="32" height="32" alt="" src={img} />

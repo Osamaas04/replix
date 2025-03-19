@@ -16,7 +16,7 @@ export default {
 		  background: "var(--background)",
 		  foreground: "var(--foreground)",
 		  primary: "#000000",
-		  secondary: "#f3f3f3",
+		  secondary: "#fcfcfc",
 		  accent: "#000401",
 		},
 		borderRadius: {

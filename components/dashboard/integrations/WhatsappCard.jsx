@@ -122,7 +122,7 @@ export default function WhatsappCard() {
   }, [connection.isConnected, handleDisconnect, connectWhatsApp]);
 
   return (
-    <div className="bg-white rounded-md p-8 grid gap-8  lg:w-[19rem] xl:w-[25rem]">
+    <div className="bg-secondary rounded-md p-8 grid gap-8  lg:w-[19rem] xl:w-[25rem]">
       <div className="grid gap-2">
         <div className="flex items-center gap-4">
           <svg
