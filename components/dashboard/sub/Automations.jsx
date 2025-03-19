@@ -9,12 +9,11 @@ import EmptyWorkflow from "./EmptyWorkflow";
 import { useState, useMemo, useEffect } from "react";
 import { toast } from "sonner";
 
-
 const STORAGE_KEYS = {
   PAGE_ID: "facebookPageId",
   AUTOMATION_STATUSES: "automationStatuses",
   INSTAGRAM_ID: "instagramBusinessId",
-  WHATSAPP_ID: "whatsappBusinessId"
+  WHATSAPP_ID: "whatsappBusinessId",
 };
 
 const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
@@ -28,41 +27,47 @@ const PLATFORM_NAMES = {
 
 export default function Automations() {
   const [isActivated, setIsActivated] = useState(false);
-  
+
   const [automations, setAutomations] = useState(() => {
-    if (typeof window === "undefined") return {
-      messenger: false,
-      instagram: false,
-      whatsapp: false,
-      x: false,
-    };
-    
+    if (typeof window === "undefined")
+      return {
+        messenger: false,
+        instagram: false,
+        whatsapp: false,
+        x: false,
+      };
+
     const saved = localStorage.getItem(STORAGE_KEYS.AUTOMATION_STATUSES);
-    return saved ? JSON.parse(saved) : {
-      messenger: false,
-      instagram: false,
-      whatsapp: false,
-      x: false,
-    };
+    return saved
+      ? JSON.parse(saved)
+      : {
+          messenger: false,
+          instagram: false,
+          whatsapp: false,
+          x: false,
+        };
   });
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEYS.AUTOMATION_STATUSES, JSON.stringify(automations));
+    localStorage.setItem(
+      STORAGE_KEYS.AUTOMATION_STATUSES,
+      JSON.stringify(automations)
+    );
   }, [automations]);
 
   async function handleStatusChange(automationName, newStatus) {
     const previousState = automations[automationName];
-  
+
     // Optimistically update the state
     setAutomations((prev) => ({
       ...prev,
       [automationName]: newStatus,
     }));
-  
+
     try {
       const platform = PLATFORM_NAMES[automationName];
       let body = { platform, isActive: newStatus };
-  
+
       // Retrieve and validate required ID based on platform
       switch (automationName) {
         case "messenger":
@@ -83,40 +88,50 @@ export default function Automations() {
         default:
           throw new Error("Unsupported platform");
       }
-  
+
       const response = await fetch(`${API_GATEWAY}/isActive`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Failed to update status");
       }
-  
+
       const data = await response.json();
       if (data.isActive !== newStatus) {
         throw new Error("Server response mismatch");
       }
-  
+
       // Platform-specific success message
       toast.success(
-        `${PLATFORM_NAMES[automationName]} ${newStatus ? "Activated" : "Deactivated"}`
+        `${PLATFORM_NAMES[automationName]} ${
+          newStatus ? "Activated" : "Deactivated"
+        }`
       );
     } catch (error) {
-      
       setAutomations((prev) => ({
         ...prev,
         [automationName]: previousState,
       }));
-      toast.error(`Failed to update status: ${error.message}`);
+      if (error.message === "Page ID not found") {
+        toast.error(`Kindly Integrate Messenger First`);
+      } else if (error.message === "Instagram ID not found") {
+        toast.error(`Kindly Integrate Instagram First`);
+      } else if (error.message === "WhatsApp ID not found") {
+        toast.error(`Kindly Integrate WhatsApp First`);
+      } else {
+        toast.error(`Failed to update status: ${error.message}`);
+      }
     }
   }
-  
 
   const filteredAutomations = useMemo(() => {
-    return Object.entries(automations).filter(([_, status]) => status === isActivated);
+    return Object.entries(automations).filter(
+      ([_, status]) => status === isActivated
+    );
   }, [automations, isActivated]);
 
   return (
