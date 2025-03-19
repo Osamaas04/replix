@@ -67,17 +67,17 @@ export default function Automations() {
       switch (automationName) {
         case "messenger":
           const page_id = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
-          if (!page_id) throw new Error("Page ID not found");
+          if (!page_id) toast.error(`Kindly Integrate Messenger First`);
           body.page_id = page_id;
           break;
         case "instagram":
           const instagram_id = localStorage.getItem(STORAGE_KEYS.INSTAGRAM_ID);
-          if (!instagram_id) throw new Error("Instagram ID not found");
+          if (!instagram_id) toast.error(`Kindly Integrate Instagram First`);
           body.instagram_id = instagram_id;
           break;
         case "whatsapp":
           const whatsapp_id = localStorage.getItem(STORAGE_KEYS.WHATSAPP_ID);
-          if (!whatsapp_id) throw new Error("WhatsApp ID not found");
+          if (!whatsapp_id) toast.error(`Kindly Integrate WhatsApp First`);
           body.whatsapp_id = whatsapp_id;
           break;
         default:
@@ -105,15 +105,6 @@ export default function Automations() {
         `${PLATFORM_NAMES[automationName]} ${newStatus ? "Activated" : "Deactivated"}`
       );
     } catch (error) {
-      if(!page_id) {
-        toast.error(`Kindly Integrate Messenger First`);
-      }
-      if(!instagram_id) {
-        toast.error(`Kindly Integrate Instagram First`);
-      }
-      if(!whatsapp_id) {
-        toast.error(`Kindly Integrate WhatsApp First`);
-      }
       setAutomations((prev) => ({
         ...prev,
         [automationName]: previousState,
