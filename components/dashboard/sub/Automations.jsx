@@ -105,7 +105,15 @@ export default function Automations() {
         `${PLATFORM_NAMES[automationName]} ${newStatus ? "Activated" : "Deactivated"}`
       );
     } catch (error) {
-      // Revert to previous state on error
+      if(!page_id) {
+        toast.error(`Kindly Integrate Messenger First`);
+      }
+      if(!instagram_id) {
+        toast.error(`Kindly Integrate Instagram First`);
+      }
+      if(!whatsapp_id) {
+        toast.error(`Kindly Integrate WhatsApp First`);
+      }
       setAutomations((prev) => ({
         ...prev,
         [automationName]: previousState,
