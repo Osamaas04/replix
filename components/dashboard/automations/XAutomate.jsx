@@ -19,7 +19,7 @@ export default function XAutomate({ status, onStatusChange }) {
       </div>
 
       <button
-        className="border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md text-primary/50 cursor-not-allowed"
+        className="border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md text-primary/50"
         onClick={() => onStatusChange(!isActivated)}
         disabled
       >

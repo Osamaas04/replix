@@ -4,10 +4,20 @@ import { Suspense } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Unplug, Zap, House, Newspaper, BotMessageSquare, PanelRightOpen, Menu } from "lucide-react";
+import {
+  Unplug,
+  Zap,
+  House,
+  Newspaper,
+  BotMessageSquare,
+  UserRound,
+  Menu,
+  Settings,
+  ChartPie,
+} from "lucide-react";
 import SocialCards from "@/components/dashboard/sub/SocialCard";
 import Automations from "../sub/Automations";
-import Logo from "@/public/assets/chatlogo-dark.webp";
+import Logo from "@/public/assets/chatlogo.webp";
 
 function DashboardContent() {
   const router = useRouter();
@@ -22,50 +32,57 @@ function DashboardContent() {
   };
 
   return (
-    <div className="bg-secondary">
+    <div className="bg-primary">
       <div className="grid lg:flex sm:justify-normal">
-
         <button className="block lg:hidden px-4 py-4">
-          <Menu />
+          <Menu color="white"/>
         </button>
 
-        <aside className="hidden bg-primary/5 lg:flex lg:flex-col justify-between w-[16rem] h-screen border-r border-primary/10 px-4 py-4">
+        <aside className="hidden bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4">
           <div className="grid items-baseline">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between px-3">
               <Link href="/dashboard" className="flex space-x-3 items-center">
                 <Image src={Logo} alt="Replix logo" width={22} height={22} />
-                <p className="text-primary text-xl font-semibold">Replix</p>
+                <p className="text-secondary text-xl font-semibold">Replix</p>
               </Link>
-              <div>
+              {/* <div>
               <button className="flex">
-                <PanelRightOpen size={18}/>
+                <ChevronsUpDown size={18}/>
               </button>
+            </div> */}
             </div>
-            </div>
-            
           </div>
 
-          <div className="border-t border-primary/10 py-8 grid items-end font-raleway text-primary">
-            <ol className="grid gap-2">
+          <div className="border-t border-primary/10 my-auto grid items-end font-raleway text-secondary">
+            <ol className="grid gap-3">
               {[
                 { name: "Home", icon: <House size={18} /> },
+                { name: "Analytics", icon: <ChartPie size={18} /> },
+                { hr: true },
                 { name: "Automations", icon: <Zap size={18} /> },
                 { name: "Integrations", icon: <Unplug size={18} /> },
                 { name: "Train AI", icon: <BotMessageSquare size={18} /> },
+                { hr: true },
                 { name: "Docs", icon: <Newspaper size={18} /> },
-              ].map(({ name, icon }) => (
-                <button
-                  key={name}
-                  className={`hover:bg-primary/10 rounded-md px-3 py-1 ${
-                    menuItem === name ? "bg-primary/10" : ""
-                  }`}
-                  onClick={() => handleMenuChange(name)}
-                >
-                  <li className="flex gap-4 items-center">
-                    {icon} <span>{name}</span>
-                  </li>
-                </button>
-              ))}
+                { name: "Human Agent", icon: <UserRound size={18} /> },
+                { name: "Account", icon: <Settings size={18} /> },
+              ].map((item, index) =>
+                item.hr ? (
+                  <hr key={index} className="text-secondary/70"/>
+                ) : (
+                  <button
+                    key={item.name}
+                    className={`hover:bg-secondary/10 rounded-md px-3 py-1 ${
+                      menuItem === item.name ? "bg-secondary/10" : ""
+                    }`}
+                    onClick={() => handleMenuChange(item.name)}
+                  >
+                    <li className="flex gap-4 items-center">
+                      {item.icon} <span>{item.name}</span>
+                    </li>
+                  </button>
+                )
+              )}
             </ol>
           </div>
         </aside>

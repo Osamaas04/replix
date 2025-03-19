@@ -138,17 +138,17 @@ export default function Automations() {
     <div className="h-screen">
       <div className="grid gap-4 p-14">
         <div className="grid gap-2">
-          <h1 className="text-primary text-3xl font-semibold">
+          <h1 className="text-secondary text-3xl font-semibold">
             Automated Workflows
           </h1>
-          <h3 className="text-primary/70">Automate your workflows with AI.</h3>
+          <h3 className="text-secondary/70">Automate your workflows with AI.</h3>
         </div>
 
         <div className="flex justify-between">
           <div className="flex gap-4">
             <button
-              className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${
-                !isActivated && "bg-primary/80 text-secondary"
+              className={`border border-secondary/70 px-2 py-1 rounded-md text-secondary bg-primary hover:text-primary hover:bg-secondary ${
+                !isActivated && "bg-secondary !text-primary"
               }`}
               onClick={() => setIsActivated(false)}
             >
@@ -157,8 +157,8 @@ export default function Automations() {
               </li>
             </button>
             <button
-              className={`border border-primary/10 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary ${
-                isActivated && "bg-primary/80 text-secondary"
+              className={`border border-secondary/70 px-2 py-1 rounded-md text-secondary bg-primary hover:text-primary hover:bg-secondary ${
+                isActivated && "bg-secondary !text-primary"
               }`}
               onClick={() => setIsActivated(true)}
             >
@@ -169,7 +169,7 @@ export default function Automations() {
           </div>
         </div>
 
-        <div className="bg-white flex flex-col items-center gap-8 border border-primary/10 rounded-md w-[70vw] min-h-[20rem]">
+        <div className="bg-white flex flex-col items-center gap-8 border border-secondary/70 rounded-md w-[70vw] min-h-[20rem]">
           {filteredAutomations.length === 0 ? (
             <EmptyWorkflow
               icon={isActivated ? Play : Pause}

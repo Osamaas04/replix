@@ -8,8 +8,8 @@ export default function SocialCards() {
     <div>
       <div className="grid gap-4 p-14">
         <div className="grid gap-2">
-          <h1 className="text-primary text-3xl font-semibold">Integrations</h1>
-          <h3 className="text-primary/70">
+          <h1 className="text-secondary text-3xl font-semibold">Integrations</h1>
+          <h3 className="text-secondary/70">
             Enhance your Replix experience by connecting your apps.
           </h3>
         </div>
