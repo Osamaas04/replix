@@ -1,9 +1,15 @@
 import { Play, Pause } from "lucide-react";
 
+const STORAGE_KEYS = {
+  INSTAGRAM_ID: "instagramBusinessId",
+  LAST_VALIDATED: "igLastValidated",
+  FACEBOOK_PAGE_ID: "facebookPageId"
+};
+
 export default function InstagramAutomate({ status, onStatusChange }) {
   const isActivated = status === true; 
 
-  const instaId = localStorage.getItem(instagramBusinessId)
+  const instaId = localStorage.getItem(STORAGE_KEYS.INSTAGRAM_ID)
   console.log(instaId)
 
   return (
