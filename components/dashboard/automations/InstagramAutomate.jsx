@@ -25,7 +25,7 @@ export default function InstagramAutomate({ status, onStatusChange }) {
       </div>
 
       <button
-        className="border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary"
+        className={`border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md ${instaId && "hover:bg-primary/80 hover:text-secondary"}`}
         onClick={() => onStatusChange(!isActivated)}
         disabled={!instaId}
       >
