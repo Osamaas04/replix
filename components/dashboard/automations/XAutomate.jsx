@@ -4,7 +4,7 @@ export default function XAutomate({ status, onStatusChange }) {
     const isActivated = status === true; // Using boolean status for clarity
 
   return (
-    <div className="flex px-8 py-4 justify-between">
+    <div className="flex px-4 [@media(min-width:390px)]:px-8 py-4 justify-between">
       <div className="flex items-center gap-4">
         <svg
           role="img"
@@ -19,7 +19,7 @@ export default function XAutomate({ status, onStatusChange }) {
       </div>
 
       <button
-        className="border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md text-primary/50"
+        className="border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md text-primary/50 cursor-not-allowed"
         onClick={() => onStatusChange(!isActivated)}
         disabled
       >

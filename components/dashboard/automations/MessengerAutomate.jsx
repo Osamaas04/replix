@@ -2,7 +2,7 @@ import { Play, Pause } from "lucide-react";
 
 export default function MessengerAutomate({ status, onStatusChange }) {
   return (
-    <div className="flex border-b border-primary/10 px-8 py-4 mx-auto justify-between w-[inherit]">
+    <div className="flex border-b border-primary/10 px-4 [@media(min-width:390px)]:px-8 py-4 mx-auto justify-between w-[inherit]">
       <div className="flex items-center gap-4">
       <svg
             role="img"

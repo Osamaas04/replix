@@ -4,7 +4,7 @@ export default function WhatsappAutomate({ status, onStatusChange }) {
   const isActivated = status === true; // Convert string-based status to boolean
 
   return (
-    <div className="flex border-b border-primary/10 px-8 py-4 justify-between">
+    <div className="flex border-b border-primary/10 px-4 [@media(min-width:390px)]:px-8 py-4 justify-between">
       <div className="flex items-center gap-4">
         <svg
           role="img"
