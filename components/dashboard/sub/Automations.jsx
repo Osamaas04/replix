@@ -136,7 +136,7 @@ export default function Automations() {
 
   return (
     <div className="h-screen">
-      <div className="grid gap-4 p-14">
+      <div className="grid gap-4 p-4 sm:p-14">
         <div className="grid gap-2">
           <h1 className="text-secondary text-3xl font-semibold">
             Automated Workflows
