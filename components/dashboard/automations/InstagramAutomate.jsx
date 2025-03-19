@@ -2,15 +2,12 @@ import { Play, Pause } from "lucide-react";
 
 const STORAGE_KEYS = {
   INSTAGRAM_ID: "instagramBusinessId",
-  LAST_VALIDATED: "igLastValidated",
-  FACEBOOK_PAGE_ID: "facebookPageId"
 };
 
 export default function InstagramAutomate({ status, onStatusChange }) {
   const isActivated = status === true; 
 
   const instaId = localStorage.getItem(STORAGE_KEYS.INSTAGRAM_ID)
-  console.log(instaId)
 
   return (
     <div className="flex border-b border-primary/10 px-8 py-4 justify-between">
@@ -29,7 +26,8 @@ export default function InstagramAutomate({ status, onStatusChange }) {
 
       <button
         className="border border-primary/10 flex items-center gap-2 px-2 py-1 rounded-md hover:bg-primary/80 hover:text-secondary"
-        onClick={() => onStatusChange(!isActivated)} 
+        onClick={() => onStatusChange(!isActivated)}
+        disabled={!instaId}
       >
         {isActivated ? <><Pause size={18} /> Pause</> : <><Play size={18} /> Activate</>}
       </button>
