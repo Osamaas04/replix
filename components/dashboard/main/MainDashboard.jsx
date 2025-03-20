@@ -38,7 +38,7 @@ function DashboardContent() {
           <Menu color="white"/>
         </button>
 
-        <aside className="hidden bg-primary lg:flex lg:flex-col w-[16rem] justify-between pb-12 h-screen border-r border-secondary/70 px-4 pt-4">
+        <aside className="hidden bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4">
           <div className="grid items-baseline">
             <div className="flex items-center justify-between px-3">
               <Link href="/dashboard" className="flex space-x-3 items-center">
@@ -53,7 +53,7 @@ function DashboardContent() {
             </div>
           </div>
 
-          <div className="border-t border-primary/10 grid items-end font-raleway text-secondary">
+          <div className="border-t border-primary/10 my-auto grid items-end font-raleway text-secondary">
             <ol className="grid gap-2">
               {[
                 { name: "Home", icon: <House size={18} /> },

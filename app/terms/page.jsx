@@ -7,7 +7,7 @@ export default function Terms() {
       <div>
         <Header shouldAnimate={false} />
       </div>
-      <div className="font-raleway text-secondary grid items-center mx-auto gap-8 container w-full max-w-5xl py-8 md:py-10 lg:py-10">
+      <div className="font-raleway text-secondary grid items-center mx-auto gap-8 container w-full max-w-5xl px-8 py-8 md:py-10">
         <div className="flex flex-col gap-2">
           <h1 className="font-semibold text-3xl md:text-4xl font-heading">
             Terms of Use
