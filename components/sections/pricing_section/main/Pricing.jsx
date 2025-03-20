@@ -19,7 +19,7 @@ export default function Pricing() {
       price: "$59",
       description: "Advanced AI features for professionals.",
       features: [
-        "5 social media account integrations",
+        "4 social media account integrations",
         "Advanced analytics dashboard",
         "Priority email support",
         "AI-powered automation",

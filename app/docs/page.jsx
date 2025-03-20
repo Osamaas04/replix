@@ -80,10 +80,10 @@ export default function Privacy() {
           </div>
         </div>
         <div className="grid lg:grid-cols-2 gap-4">
-          <DocsCard href="/docs/messenger" icon={MessengerIcon} title="Setting Up Messenger" description="Integrate Messenger and learn what Replix can do with messages" hover="hover:bg-secondary/70 "/>
-          <DocsCard href="/docs/instagram" icon={InstagramIcon} title="Setting Up Instagram" description="Integrate Instagram and learn what Replix can do with your profissional account" hover="hover:bg-secondary/70 "/>
-          <DocsCard href="/docs/whatsapp" icon={WhatsappIcon} title="Setting Up WhatsApp" description="Integrate WhatsApp and learn what Replix can do with your business account" hover="hover:bg-secondary/70 "/>
-          <DocsCard href="/docs/trigger" icon={ZapIcon} title="Trigger Workflow" description="Learn the basics of triggered workflows and how you can active automate messages" hover="hover:bg-secondary/70 "/>
+          <DocsCard href="/docs/setting-up-messenger" icon={MessengerIcon} title="Setting Up Messenger" description="Integrate Messenger and learn what Replix can do with messages" hover="hover:bg-secondary/70 "/>
+          <DocsCard href="/docs/setting-up-instagram" icon={InstagramIcon} title="Setting Up Instagram" description="Integrate Instagram and learn what Replix can do with your profissional account" hover="hover:bg-secondary/70 "/>
+          <DocsCard href="/docs/setting-up-whatsapp" icon={WhatsappIcon} title="Setting Up WhatsApp" description="Integrate WhatsApp and learn what Replix can do with your business account" hover="hover:bg-secondary/70 "/>
+          <DocsCard href="/docs/trigger-workflows" icon={ZapIcon} title="Trigger Workflow" description="Learn the basics of triggered workflows and how you can active automated messages" hover="hover:bg-secondary/70 "/>
         </div>
       </div>
       <div>
