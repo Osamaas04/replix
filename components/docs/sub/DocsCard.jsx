@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-export default function DocsCard({ href, icon, title, description, hover }) {
+export default function DocsCard({ href, icon, title, description, hover, disabled }) {
   return (
     <Link href={href}>
       <div
-        className={`bg-secondary border border-secondary/70 p-8 rounded-md text-primary grid gap-8 transition-all duration-300 ${hover}`}
+        className={`bg-secondary border border-secondary/70 p-8 rounded-md text-primary grid gap-8 transition-all duration-300 ${hover} ${disabled}`}
       >
         <div>{icon}</div>
 
