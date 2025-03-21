@@ -1,17 +1,11 @@
 import Link from "next/link";
 import Header from "@/components/elements/Header";
-import {
-  UsersRound,
-  Plug,
-  Facebook,
-  UserRoundCog,
-  Key,
-  BookCheck,
-} from "lucide-react";
+import { UsersRound, Plug, Link2, Key } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 import Footer from "@/components/elements/Footer";
 
-export default function MessengerDoc() {
+export default function WhatsappDoc() {
   return (
     <div className="bg-primary grid gap-24 overflow-hidden">
       <div>
@@ -23,66 +17,66 @@ export default function MessengerDoc() {
             <Link href="/docs" className="text-secondary/70">
               Docs
             </Link>
-            <span className="font-semibold"> / Setting Up Messenger</span>
+            <span className="font-semibold"> / Setting Up WhatsApp</span>
           </div>
 
           <div>
             <h1 className="font-semibold text-3xl md:text-4xl font-heading">
-              Setting Up Messenger
+              Setting Up WhatsApp
             </h1>
           </div>
 
           <div className="border-l border-secondary/70 pl-8 italic grid gap-2">
             <h1 className="font-semibold">Pre-Requirements</h1>
-            <div className="inline">{" "}
-              <Facebook size={22} className="inline"/>
-              <p className="inline">{" "}
-                You have a Facebook Page (Messenger requires a business page,
-                not a personal account).
-              </p>
-            </div>
             <div className="inline">
-              <Key size={22} className="inline"/>{" "}
-              <p className="inline">You have Admin or Editor access to the Facebook Page.</p>
-            </div>
-            <div className="inline">
-              <UserRoundCog size={22} className="inline"/>{" "}
+              {" "}
+              <FaWhatsapp size={22} className="inline" />
               <p className="inline">
-                You have a Facebook Business Manager account (recommended for
-                managing permissions and access).
+                {" "}
+                You have an WhatsApp Profissional Account (not a personal account).
               </p>
             </div>
             <div className="inline">
-              <BookCheck size={22} className="inline"/>{" "}
-              <p className="inline">Your Facebook Page is published and has Messenger enabled.</p>
+              <Key size={22} className="inline" />{" "}
+              <p className="inline">
+                You have Admin or Editor access to the linked Facebook Page.
+              </p>
+            </div>
+            <div className="inline">
+              <Link2 size={22} className="inline" />{" "}
+              <p className="inline">
+                Your WhatsApp account is linked to a Facebook Page.
+              </p>
             </div>
             <h1 className="font-semibold">Who can use this feature?</h1>
             <div className="inline">
-              <UsersRound size={22} className="inline"/>{" "}
+              <UsersRound size={22} className="inline" />{" "}
               <p className="inline">
-                Either you are Starter or Pro user you have full access to these
+                Only Pro users have full access to these
                 integration tool
               </p>
             </div>
             <div className="inline">
-              <Plug size={22} className="inline"/>{" "}
-              <p className="inline">Users who have connected their Facebook Page to Replix</p>
+              <Plug size={22} className="inline" />{" "}
+              <p className="inline">
+                Users who have connected their WhatsApp to Replix
+              </p>
             </div>
           </div>
 
           <div>
             <p>
-              A Messenger integration with Replix means you can seamlessly
-              manage customer inquiries, automate responses, and escalate
-              complex cases to human agents-all from a unified dashboard. In
-              this guide, you'll find instructions on how to set up Messenger
-              with Replix and how you can maximize your experience.
+              An WhatsApp integration with Replix allows you to efficiently
+              manage customer interactions, automate responses, and escalate
+              complex inquiries to human agents—all from a single dashboard.
+              This guide will walk you through setting up WhatsApp with Replix
+              and making the most of its features.
             </p>
           </div>
 
           <div className="grid gap-2">
             <h1 className="font-semibold text-xl md:text-2xl">
-              Connecting your Facebook Page
+              Connecting your WhatsApp Business Acoount
             </h1>
             <hr />
           </div>
@@ -93,10 +87,7 @@ export default function MessengerDoc() {
               <code className="bg-secondary/10 p-[0.2rem] rounded-md">
                 Integrations
               </code>{" "}
-              section in your dashboard. On this page, you’ll be able to toggle
-              Messenger integration on and off. Once you click on the toggle,
-              follow the prompts to authorize our platform to access your
-              Messenger account.
+              section in your dashboard. Toggle the WhatsApp integration ON.
             </p>
             <p className="italic">
               Don't worry, your privacy and security are our top priority. We do
@@ -111,32 +102,38 @@ export default function MessengerDoc() {
 
           <div className="grid gap-2">
             <h1 className="font-semibold text-xl md:text-2xl">
-              Utilizing Messenger Tools
+              Utilizing WhatsApp Tools
             </h1>
             <hr />
           </div>
 
           <div className="grid gap-8">
             <h1 className="font-semibold text-lg md:text-xl">
-              Messenger Tools
+              WhatsApp Tools
             </h1>
             <h3 className="font-semibold text-sm md:text-md">
-              Our Messenger integration allows you to:
+              Our WhatsApp integration allows you to:
             </h3>
             <ol className="list-disc pl-8">
-              <li>Automatically respond to customer inquiries using AI.</li>
-              <li>Escalate complex queries to human agents when needed.</li>
+              <li>AI-Powered Replies: Instantly respond to DMs using AI</li>
               <li>
-                Track and manage customer conversations from multiple platforms
-                in one place.
+                Escalation System: If AI confidence is low, human agents take
+                over.
+              </li>
+              <li>
+                Centralized Inbox: Manage all social media conversations from
+                one dashboard.
               </li>
             </ol>
 
             <h3 className="font-semibold text-sm md:text-md">
-              AI-Powered Customer Support, Always On
+              Automation with WhatsApp
             </h3>
             <ol className="list-disc pl-8">
-              <li>Provide instant responses to frequently asked questions.</li>
+              <li>
+                Triggered Workflows: Example – If someone asks about pricing,
+                send a predefined response.
+              </li>
               <li>
                 Detect when a message requires human intervention and escalate
                 it accordingly.
@@ -155,7 +152,12 @@ export default function MessengerDoc() {
                 workflows, and empower your team to resolve inquiries faster and
                 more efficiently.
               </p>
-              <Link href="/dashboard" className="bg-secondary text-primary w-fit rounded-md px-8 py-2 hover:bg-secondary/90">Unlock Your Potential Now</Link>
+              <Link
+                href="/dashboard"
+                className="bg-secondary text-primary w-fit rounded-md px-8 py-2 hover:bg-secondary/90"
+              >
+                Unlock Your Potential Now
+              </Link>
             </div>
           </div>
         </div>
