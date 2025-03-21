@@ -1,4 +1,4 @@
-import DocsCard from "@/components/docs/sub/DocsCard";
+import DocsCard from "@/components/dashboard/sub/docs/sub/DocsCard";
 import Footer from "@/components/elements/Footer";
 import Header from "@/components/elements/Header";
 import { Zap, BotMessageSquare } from "lucide-react";
