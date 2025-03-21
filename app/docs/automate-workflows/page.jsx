@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Header from "@/components/elements/Header";
-import { UsersRound, Plug, Instagram, Link2, Key } from "lucide-react";
 import Image from "next/image";
 import Footer from "@/components/elements/Footer";
 
