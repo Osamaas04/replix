@@ -83,7 +83,7 @@ export default function Privacy() {
           <DocsCard href="/docs/setting-up-messenger" icon={MessengerIcon} title="Setting Up Messenger" description="Integrate Messenger and learn what Replix can do with messages" hover="hover:bg-secondary/70 "/>
           <DocsCard href="/docs/setting-up-instagram" icon={InstagramIcon} title="Setting Up Instagram" description="Integrate Instagram and learn what Replix can do with your profissional account" hover="hover:bg-secondary/70 "/>
           <DocsCard href="/docs/setting-up-whatsapp" icon={WhatsappIcon} title="Setting Up WhatsApp" description="Integrate WhatsApp and learn what Replix can do with your business account" hover="hover:bg-secondary/70 "/>
-          <DocsCard href="/docs/trigger-workflows" icon={ZapIcon} title="Trigger Workflow" description="Learn the basics of triggered workflows and how you can active automated messages" hover="hover:bg-secondary/70 "/>
+          <DocsCard href="/docs/automate-workflows" icon={ZapIcon} title="Automate Workflow" description="Learn the basics of automated workflows and how you can active automated messages" hover="hover:bg-secondary/70 "/>
         </div>
       </div>
       <div>

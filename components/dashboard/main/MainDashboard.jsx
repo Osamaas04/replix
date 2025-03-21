@@ -55,34 +55,47 @@ function DashboardContent() {
 
           <div className="border-t border-primary/10 my-auto grid items-end font-raleway text-secondary">
             <ol className="grid gap-2">
-              {[
-                { name: "Home", icon: <House size={18} /> },
-                { name: "Analytics", icon: <ChartPie size={18} /> },
-                { hr: true },
-                { name: "Automations", icon: <Zap size={18} /> },
-                { name: "Integrations", icon: <Unplug size={18} /> },
-                { name: "Train AI", icon: <BotMessageSquare size={18} /> },
-                { hr: true },
-                { name: "Docs", icon: <Newspaper size={18} /> },
-                { name: "Human Agent", icon: <UserRound size={18} /> },
-                { name: "Account", icon: <Settings size={18} /> },
-              ].map((item, index) =>
-                item.hr ? (
-                  <hr key={index} className="text-secondary/70"/>
-                ) : (
-                  <button
-                    key={item.name}
-                    className={`hover:bg-secondary/10 rounded-md px-3 py-1 ${
-                      menuItem === item.name ? "bg-secondary/10" : ""
-                    }`}
-                    onClick={() => handleMenuChange(item.name)}
-                  >
-                    <li className="flex gap-4 items-center">
-                      {item.icon} <span>{item.name}</span>
-                    </li>
-                  </button>
-                )
-              )}
+            {[
+  { name: "Home", icon: <House size={18} /> },
+  { name: "Analytics", icon: <ChartPie size={18} /> },
+  { hr: true },
+  { name: "Automations", icon: <Zap size={18} /> },
+  { name: "Integrations", icon: <Unplug size={18} /> },
+  { name: "Train AI", icon: <BotMessageSquare size={18} /> },
+  { hr: true },
+  // Docs item changed to a Link
+  { name: "Docs", icon: <Newspaper size={18} />, link: "/docs" },
+  { name: "Human Agent", icon: <UserRound size={18} /> },
+  { name: "Account", icon: <Settings size={18} /> },
+].map((item, index) =>
+  item.hr ? (
+    <hr key={index} className="text-secondary/70" />
+  ) : item.link ? (
+    // If there's a link property, use the Link component instead of a button
+    <Link
+      key={item.name}
+      href={item.link}
+      className={`hover:bg-secondary/10 rounded-md px-3 py-1`}
+    >
+      <li className="flex gap-4 items-center">
+        {item.icon} <span>{item.name}</span>
+      </li>
+    </Link>
+  ) : (
+    <button
+      key={item.name}
+      className={`hover:bg-secondary/10 rounded-md px-3 py-1 ${
+        menuItem === item.name ? "bg-secondary/10" : ""
+      }`}
+      onClick={() => handleMenuChange(item.name)}
+    >
+      <li className="flex gap-4 items-center">
+        {item.icon} <span>{item.name}</span>
+      </li>
+    </button>
+  )
+)}
+
             </ol>
           </div>
         </aside>
