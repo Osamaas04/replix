@@ -1,6 +1,6 @@
 import React from "react";
-import { Card } from "../ui/card";
-import { CardContent } from "../ui/card";
+import { Card } from "../../../dashboard/sub/analytics/ui/card";
+import { CardContent } from "../../../dashboard/sub/analytics/ui/card";
 import {
   Carousel,
   CarouselContent,

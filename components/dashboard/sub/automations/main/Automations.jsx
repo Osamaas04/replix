@@ -1,11 +1,11 @@
 "use client";
 
-import InstagramAutomate from "../automations/InstagramAutomate";
-import MessengerAutomate from "../automations/MessengerAutomate";
-import WhatsappAutomate from "../automations/WhatsappAutomate";
-import XAutomate from "../automations/XAutomate";
+import InstagramAutomate from "../sub/InstagramAutomate";
+import MessengerAutomate from "../sub/MessengerAutomate";
+import WhatsappAutomate from "../sub/WhatsappAutomate";
+import XAutomate from "../sub/XAutomate";
 import { Play, Pause } from "lucide-react";
-import EmptyWorkflow from "./EmptyWorkflow";
+import EmptyWorkflow from "../sub/EmptyWorkflow";
 import { useState, useMemo, useEffect } from "react";
 import { toast } from "sonner";
 
@@ -136,7 +136,7 @@ export default function Automations() {
 
   return (
     <div className="h-screen">
-      <div className="grid gap-4 px-4 py-12 lg:p-14">
+      <div className="grid gap-4 px-4 py-12 lg:py-14 lg:pr-14 lg:pl-[19.5rem]">
         <div className="grid gap-2">
           <h1 className="text-secondary text-3xl font-semibold">
             Automated Workflows
@@ -169,7 +169,7 @@ export default function Automations() {
           </div>
         </div>
 
-        <div className="bg-secondary flex flex-col items-center gap-8 border border-secondary/70 rounded-md w-auto lg:w-[70vw] min-h-[20rem]">
+        <div className="bg-secondary flex flex-col items-center gap-8 border border-secondary/70 rounded-md w-auto lg:w-[68vw] min-h-[20rem]">
           {filteredAutomations.length === 0 ? (
             <EmptyWorkflow
               icon={isActivated ? Play : Pause}

@@ -1,12 +1,12 @@
-import InstagramCard from "../integrations/InstagramCard";
-import MessengerCard from "../integrations/MessengerCard";
-import WhatsappCard from "../integrations/WhatsappCard";
-import XCard from "../integrations/XCard";
+import InstagramCard from "../sub/InstagramCard";
+import MessengerCard from "../sub/MessengerCard";
+import WhatsappCard from "../sub/WhatsappCard";
+import XCard from "../sub/XCard";
 
 export default function SocialCards() {
   return (
     <div>
-      <div className="grid gap-4 px-4 py-12 lg:p-14 w-auto">
+      <div className="grid gap-4 px-4 py-12 lg:py-14 lg:pr-14 lg:pl-[19.5rem] w-auto">
         <div className="grid gap-2">
           <h1 className="text-secondary text-3xl font-semibold">Integrations</h1>
           <h3 className="text-secondary/70">

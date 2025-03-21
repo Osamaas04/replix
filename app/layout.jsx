@@ -1,6 +1,6 @@
 import { Raleway, Lato } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/dashboard/ui/sonner";
+import { Toaster } from "@/components/dashboard/sub/integrations/ui/sonner";
 
 const raleway = Raleway({
   variable: "--font-raleway", 
