@@ -58,7 +58,6 @@ export function EscalationRate({classes}) {
               gridType="circle"
               radialLines={false}
               stroke="none"
-              
               polarRadius={[86, 74]}
             />
             <RadialBar dataKey="visitors" background />

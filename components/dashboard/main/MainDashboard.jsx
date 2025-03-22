@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +14,7 @@ import {
   Menu,
   Settings,
   ChartPie,
+  X
 } from "lucide-react";
 import SocialCards from "@/components/dashboard/sub/integrations/main/SocialCard";
 import Automations from "../sub/automations/main/Automations";
@@ -21,6 +22,12 @@ import Logo from "@/public/assets/chatlogo.webp";
 import Analytics from "../sub/analytics/main/Analytics";
 
 function DashboardContent() {
+  const [isDisplayed, setIsDisplayed] = useState(false)
+
+  function handleClick() {
+    setIsDisplayed(prev => (!prev))
+  }
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -35,23 +42,23 @@ function DashboardContent() {
   return (
     <div className="bg-primary h-screen">
       <div className="bg-primary grid lg:flex sm:justify-normal overflow-hidden">
-        <button className="block lg:hidden px-4 py-4">
+        <button className={`block lg:hidden px-4 py-4 ${isDisplayed && "hidden"}`} onClick={handleClick}>
           <Menu color="white" />
         </button>
 
         <div>
-          <aside className="hidden fixed bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4">
+          <aside className={`fixed bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4 ${isDisplayed ? "inline-grid z-10" : "hidden"}`}>
             <div className="grid items-baseline">
               <div className="flex items-center justify-between px-3">
                 <Link href="/dashboard" className="flex space-x-3 items-center">
                   <Image src={Logo} alt="Replix logo" width={22} height={22} />
                   <p className="text-secondary text-xl font-semibold">Replix</p>
                 </Link>
-                {/* <div>
-              <button className="flex">
-                <ChevronsUpDown size={18}/>
+                <div>
+              <button className="flex" onClick={handleClick}>
+                <X color="white"/>
               </button>
-            </div> */}
+            </div>
               </div>
             </div>
 
