@@ -14,7 +14,7 @@ import {
   Menu,
   Settings,
   ChartPie,
-  X
+  X,
 } from "lucide-react";
 import SocialCards from "@/components/dashboard/sub/integrations/main/SocialCard";
 import Automations from "../sub/automations/main/Automations";
@@ -22,10 +22,10 @@ import Logo from "@/public/assets/chatlogo.webp";
 import Analytics from "../sub/analytics/main/Analytics";
 
 function DashboardContent() {
-  const [isDisplayed, setIsDisplayed] = useState(false)
+  const [isDisplayed, setIsDisplayed] = useState(false);
 
   function handleClick() {
-    setIsDisplayed(prev => (!prev))
+    setIsDisplayed((prev) => !prev);
   }
 
   const router = useRouter();
@@ -40,14 +40,29 @@ function DashboardContent() {
   };
 
   return (
-    <div className={`bg-primary h-screen ${isDisplayed && "overflow-y-hidden"}`}>
+    <div
+      className={`bg-primary h-screen ${isDisplayed && "overflow-y-hidden"}`}
+    >
       <div className="bg-primary grid lg:flex sm:justify-normal overflow-hidden">
-        <button className={`block lg:hidden px-4 py-4 ${isDisplayed && "hidden"}`} onClick={handleClick}>
+        <button
+          className={`block lg:hidden px-4 py-4 ${isDisplayed && "hidden"}`}
+          onClick={handleClick}
+        >
           <Menu color="white" />
         </button>
 
         <div>
-          <aside className={`fixed bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4 ${isDisplayed ? "inline-grid z-10" : "hidden"}`}>
+          <aside
+            className={`
+              fixed bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4 
+              transition-all duration-200 ease-in-out transform
+              ${
+                isDisplayed
+                  ? "translate-x-0 opacity-100 pointer-events-auto inline-grid z-10"
+                  : "-translate-x-full opacity-0 pointer-events-none"
+              }
+            `}
+          >
             <div className="grid items-baseline">
               <div className="flex items-center justify-between px-3">
                 <Link href="/dashboard" className="flex space-x-3 items-center">
@@ -55,10 +70,10 @@ function DashboardContent() {
                   <p className="text-secondary text-xl font-semibold">Replix</p>
                 </Link>
                 <div>
-              <button className="flex" onClick={handleClick}>
-                <X color="white"/>
-              </button>
-            </div>
+                  <button className="flex" onClick={handleClick}>
+                    <X color="white" />
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -110,9 +125,11 @@ function DashboardContent() {
             </div>
           </aside>
 
-          {menuItem === "Integrations" && <SocialCards />}
-          {menuItem === "Automations" && <Automations />}
-          {menuItem === "Analytics" && <Analytics />}
+          <div className={`${isDisplayed && "mt-[56px]"} `}>
+            {menuItem === "Integrations" && <SocialCards />}
+            {menuItem === "Automations" && <Automations />}
+            {menuItem === "Analytics" && <Analytics />}
+          </div>
         </div>
       </div>
     </div>
