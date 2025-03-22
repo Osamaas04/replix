@@ -87,8 +87,8 @@ export default function InstagramCard() {
 
       toast.success("Successfully connected Instagram");
     } catch (error) {
-      toast.error("Instagram connection failed - please try again");
       setConnection((prev) => ({ ...prev, instagramId: null }));
+      toast.error(`Instagram connection failed: ${error.message}`);
     }
   }, []);
 

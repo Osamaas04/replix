@@ -85,8 +85,8 @@ export default function WhatsappCard() {
       setConnection({ whatsappId: data.whatsappId, isConnected: true });
       toast.success("Successfully connected WhatsApp");
     } catch (error) {
-      toast.error("WhatsApp connection failed - please try again");
       setConnection((prev) => ({ ...prev, whatsappId: null }));
+      toast.error(`WhatsApp connection failed: ${error.message}`);
     }
   }, []);
 
