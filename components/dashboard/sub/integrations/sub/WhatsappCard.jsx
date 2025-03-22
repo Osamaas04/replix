@@ -86,7 +86,11 @@ export default function WhatsappCard() {
       toast.success("Successfully connected WhatsApp");
     } catch (error) {
       setConnection((prev) => ({ ...prev, whatsappId: null }));
-      toast.error(`WhatsApp connection failed: ${error.message}`);
+      if(error.message === "Facebook Page ID not found"){
+        toast.error(`Kindly Integrate Messenger First`);
+      } else {
+        toast.error(`Failed to integrate WhatsApp: ${error.message}`);
+      }
     }
   }, []);
 

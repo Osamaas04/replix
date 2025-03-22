@@ -88,7 +88,11 @@ export default function InstagramCard() {
       toast.success("Successfully connected Instagram");
     } catch (error) {
       setConnection((prev) => ({ ...prev, instagramId: null }));
-      toast.error(`Instagram connection failed: ${error.message}`);
+      if(error.message === "Facebook Page ID not found"){
+        toast.error(`Kindly Integrate Messenger First`);
+      } else {
+        toast.error(`Failed to integrate Instagram: ${error.message}`);
+      }
     }
   }, []);
 
