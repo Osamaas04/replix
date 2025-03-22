@@ -40,7 +40,7 @@ function DashboardContent() {
   };
 
   return (
-    <div className="bg-primary h-screen">
+    <div className={`bg-primary h-screen ${isDisplayed && "overflow-y-hidden"}`}>
       <div className="bg-primary grid lg:flex sm:justify-normal overflow-hidden">
         <button className={`block lg:hidden px-4 py-4 ${isDisplayed && "hidden"}`} onClick={handleClick}>
           <Menu color="white" />
