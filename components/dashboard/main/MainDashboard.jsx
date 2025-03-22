@@ -53,16 +53,7 @@ function DashboardContent() {
 
         <div>
           <aside
-            className={`
-              fixed bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4 
-              transition-all duration-200 ease-in-out transform
-              ${
-                isDisplayed
-                  ? "translate-x-0 opacity-100 pointer-events-auto inline-grid z-10"
-                  : "-translate-x-full opacity-0 pointer-events-none"
-              }
-            `}
-          >
+            className={`fixed bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4 ${isDisplayed ? "inline-grid z-10" : "hidden"}`}>
             <div className="grid items-baseline">
               <div className="flex items-center justify-between px-3">
                 <Link href="/dashboard" className="flex space-x-3 items-center">
@@ -70,7 +61,7 @@ function DashboardContent() {
                   <p className="text-secondary text-xl font-semibold">Replix</p>
                 </Link>
                 <div>
-                  <button className="flex" onClick={handleClick}>
+                  <button className="flex lg:hidden" onClick={handleClick}>
                     <X color="white" />
                   </button>
                 </div>
@@ -125,10 +116,12 @@ function DashboardContent() {
             </div>
           </aside>
 
-          <div className={`${isDisplayed && "mt-[56px]"} `}>
-            {menuItem === "Integrations" && <SocialCards />}
-            {menuItem === "Automations" && <Automations />}
-            {menuItem === "Analytics" && <Analytics />}
+          <div className={`${isDisplayed && "mt-[56px]"} `} >
+
+
+          {menuItem === "Integrations" && <SocialCards />}
+          {menuItem === "Automations" && <Automations />}
+          {menuItem === "Analytics" && <Analytics />}
           </div>
         </div>
       </div>
