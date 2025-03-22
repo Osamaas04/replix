@@ -116,11 +116,11 @@ const chartConfig = {
   },
   desktop: {
     label: "Desktop",
-    color: "hsl(var(--chart-1))",
+    color: "#FFA500",
   },
   mobile: {
     label: "Mobile",
-    color: "hsl(var(--chart-2))",
+    color: "#FF6A13 ",
   },
 }
 
@@ -139,7 +139,7 @@ export function QueryVolume() {
     <Card className="lg:w-[68vw]">
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-          <CardTitle>Bar Chart - Interactive</CardTitle>
+          <CardTitle>Query Volume</CardTitle>
           <CardDescription>
             Showing total visitors for the last 3 months
           </CardDescription>

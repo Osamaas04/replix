@@ -20,7 +20,7 @@ import {
 import { ChartContainer } from "../ui/chart"
 
 const chartData = [
-  { browser: "safari", visitors: 1260, fill: "var(--color-safari)" },
+  { browser: "safari", visitors: 1260, fill: "#FFA500" },
 ]
 
 const chartConfig = {
@@ -29,7 +29,7 @@ const chartConfig = {
   },
   safari: {
     label: "Safari",
-    color: "hsl(var(--chart-2))",
+    color: "#FF6A13",
   },
 }
 
@@ -40,7 +40,7 @@ export function EscalationRate({classes}) {
           classes
         )}>
       <CardHeader className="items-center pb-0">
-        <CardTitle>Radial Chart - Shape</CardTitle>
+        <CardTitle>Escalation Rate</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
@@ -58,7 +58,7 @@ export function EscalationRate({classes}) {
               gridType="circle"
               radialLines={false}
               stroke="none"
-              className="first:fill-muted last:fill-background"
+              
               polarRadius={[86, 74]}
             />
             <RadialBar dataKey="visitors" background />

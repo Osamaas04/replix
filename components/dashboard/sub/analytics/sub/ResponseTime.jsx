@@ -29,11 +29,11 @@ const chartData = [
 const chartConfig = {
   desktop: {
     label: "Desktop",
-    color: "hsl(var(--chart-1))",
+    color: "#FFA500",
   },
   mobile: {
     label: "Mobile",
-    color: "hsl(var(--chart-2))",
+    color: "#FF6A13",
   },
 };
 
@@ -41,7 +41,7 @@ export function ResponseTime() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Area Chart - Stacked</CardTitle>
+        <CardTitle>Average Response Time</CardTitle>
         <CardDescription>
           Showing total visitors for the last 6 months
         </CardDescription>
