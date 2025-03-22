@@ -2,7 +2,7 @@ import { Switch } from "../ui/switch";
 
 export default function XCard() {
   return (
-    <div className="bg-secondary rounded-md p-8 grid gap-8  lg:w-[19rem] xl:w-[25rem]">
+    <div className="bg-secondary/90 rounded-md p-8 grid gap-8  lg:w-[19rem] xl:w-[25rem]">
       <div className="grid gap-2">
         <div className="flex items-center gap-4">
           <svg
