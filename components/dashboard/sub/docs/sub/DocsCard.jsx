@@ -4,13 +4,13 @@ export default function DocsCard({ href, icon, title, description, hover, disabl
   return (
     <Link href={href}>
       <div
-        className={`bg-secondary border border-secondary/70 p-8 rounded-md text-primary grid gap-8 transition-all duration-300 ${hover} ${disabled}`}
+        className={`bg-primary border border-secondary/70 p-8 rounded-md text-secondary grid gap-8 transition-all duration-300 ${hover} ${disabled}`}
       >
         <div>{icon}</div>
 
         <div className="grid gap-2">
           <h1 className="font-semibold">{title}</h1>
-          <p className="text-primary/60">{description}</p>
+          <p className="text-secondary/70">{description}</p>
         </div>
       </div>
     </Link>
