@@ -55,10 +55,10 @@ export function ResolvedCases() {
                         textAnchor="middle"
                         dominantBaseline="middle"
                       >
-                        <tspan x={viewBox.cx} y={viewBox.cy} className="fill-foreground text-3xl font-bold">
+                        <tspan x={viewBox.cx} y={viewBox.cy} className="fill-secondary text-3xl font-bold">
                           {totalVisitors.toLocaleString()}
                         </tspan>
-                        <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 24} className="fill-muted-foreground">
+                        <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 24} className="fill-secondary">
                           Visitors
                         </tspan>
                       </text>
