@@ -1,7 +1,6 @@
-import Link from "next/link";
 import Feature from "./Feature";
 
-export default function PricingCards({ title, price, description, features }) {
+export default function PricingCards({ title, price, description, features, href }) {
   return (
     <div className="bg-primary/30 backdrop-blur-md rounded-md border border-secondary/70 w-[20rem] p-8 shadow-[inset_-30px_30px_40px_0_rgba(255,204,0,0.1)]">
       <div className="text-secondary font-raleway grid gap-8">
@@ -20,9 +19,9 @@ export default function PricingCards({ title, price, description, features }) {
           ))}
         </div>
         <div className="grid justify-center">
-          <Link href="#" className="bg-secondary text-primary rounded-md border border-secondary/20 px-12 py-2">
+          <a href={href} className="bg-secondary text-primary rounded-md border border-secondary/20 px-12 py-2">
             Purchase
-          </Link>
+          </a>
         </div>
       </div>
     </div>

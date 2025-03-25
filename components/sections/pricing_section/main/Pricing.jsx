@@ -13,6 +13,7 @@ export default function Pricing() {
         "Email support",
         "AI-generated insights",
       ],
+      href:"#"
     },
     {
       title: "Pro AI",
@@ -24,6 +25,7 @@ export default function Pricing() {
         "Priority email support",
         "AI-powered automation",
       ],
+      href:"#"
     },
     {
       title: "Enterprise AI",
@@ -35,6 +37,7 @@ export default function Pricing() {
         "24/7 dedicated support",
         "AI-powered workflow automation",
       ],
+      href:"#"
     },
   ];
 
@@ -49,6 +52,7 @@ export default function Pricing() {
             price={plan.price}
             description={plan.description}
             features={plan.features}
+            href={plan.href}
           />
         ))}
       </div>
