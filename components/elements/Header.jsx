@@ -39,7 +39,7 @@ export default function Header({ shouldAnimate }) {
       >
         <Link
           href="/sign-up"
-          className="text-secondary bg-transparent border-2 border-solid border-secondary rounded-3xl px-4 py-2 transition-all duration-500 hover:bg-secondary hover:text-primary"
+          className="text-secondary bg-transparent border-2 border-solid border-secondary/70 rounded-3xl px-4 py-2 transition-all duration-500 hover:bg-secondary hover:text-primary"
           aria-label="Join the beta"
         >
           Get started

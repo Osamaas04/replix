@@ -19,7 +19,7 @@ export default function SubHeadline() {
 
           <Link
             href="/sign-up"
-            className="inline-block w-fit text-primary bg-secondary border-2 border-secondary 
+            className="inline-block w-fit text-primary bg-secondary border-2 border-secondary/70 
              shadow-[0_0_15px_theme(colors.secondary/60%)] rounded-3xl px-6 py-3 text-sm sm:text-base
              transition-all duration-500 ease-in-out 
              hover:text-secondary hover:bg-transparent hover:shadow-[0_0_25px_theme(colors.secondary/80%)]"
