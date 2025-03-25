@@ -3,7 +3,7 @@ import Statistics from "../sub/Statistics";
 
 export default function Results() {
   return (
-    <div className="bg-primary">
+    <div className="bg-primary" id="results">
       <div className="grid justify-center gap-16">
         <Headline />
         <div className="grid sm:grid-cols-2 md:flex gap-32 justify-center">

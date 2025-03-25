@@ -56,7 +56,7 @@ export default function ChatsAnimation() {
   }, [isVisible, elapsedTime, milestonesReached]);
 
   return (
-    <div ref={sectionRef} className="font-raleway" id="chats">
+    <div ref={sectionRef} className="font-raleway" >
       <div className="flex justify-center items-center">
         <ChatsBackground />
         <div className="flex flex-col bg-primary/30 backdrop-blur-md w-full max-w-[30rem] h-full max-h-[30rem] py-8 absolute z-10 rounded-md border border-secondary/70 shadow-[inset_-30px_30px_40px_0_rgba(255,204,0,0.1)] space-y-4 px-8">

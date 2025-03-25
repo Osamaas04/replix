@@ -17,8 +17,12 @@ export default function Home() {
       <NavBar />
       <HeroSection />
       <div className="grid gap-0">
-        <Dashboard />
+      <Dashboard />
+        <section id="chats">
         <Chats />
+        </section>
+        
+        
       </div>
       <Integrations />
       <Results />

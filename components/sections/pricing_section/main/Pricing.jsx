@@ -39,7 +39,7 @@ export default function Pricing() {
   ];
 
   return (
-    <div className="bg-primary grid justify-center overflow-hidden">
+    <div className="bg-primary grid justify-center overflow-hidden" id="pricing">
         <Headline />
       <div className="grid md:grid-cols-2 lg:flex justify-center gap-8 p-8">
         {pricingPlans.map((plan, index) => (
