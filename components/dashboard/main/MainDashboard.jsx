@@ -68,7 +68,7 @@ function DashboardContent() {
               </div>
             </div>
 
-            <div className="border-t border-primary/10 my-auto [@media(max-height:500px)]:mt-16 [@media(max-height:500px)]:mb-0 grid items-end font-raleway text-secondary">
+            <div className="border-t border-primary/10 mt-auto [@media(max-height:500px)]:mt-16 [@media(max-height:500px)]:mb-0 grid items-end font-raleway text-secondary">
               <ol className="grid gap-2">
                 {[
                   { name: "Home", icon: <House size={18} /> },
@@ -92,6 +92,7 @@ function DashboardContent() {
                     <Link
                       key={item.name}
                       href={item.link}
+                      target="_blank"
                       className={`hover:bg-secondary/10 rounded-md px-3 py-1`}
                     >
                       <li className="flex gap-4 items-center">
