@@ -35,7 +35,10 @@ export default function UploadHandler() {
                     title={isActivated ? "Upload validations data to enhance the AI" : "Upload fine tuning data to train the AI"}
                     isValidation={isActivated}
                 />
-
+            </div>
+            <div className="flex justify-between text-secondary text-sm">
+                <p>Supported Formats: JSONL</p>
+                <p>Maximum Size: Unlimited</p>
             </div>
         </div>
 

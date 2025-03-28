@@ -12,7 +12,7 @@ export default function Analytics() {
           <h1 className="text-secondary text-3xl font-semibold">Analytics</h1>
           <h3 className="text-secondary/70">
             Track, Monitor, and Improve AI-Powered Customer Support for Better
-            Engagement and Efficiency
+            Engagement and Efficiency.
           </h3>
         </div>
         <div className="grid gap-4 w-auto lg:w-[68vw]">

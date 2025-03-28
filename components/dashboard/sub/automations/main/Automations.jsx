@@ -141,7 +141,7 @@ export default function Automations() {
           <h1 className="text-secondary text-3xl font-semibold">
             Automated Workflows
           </h1>
-          <h3 className="text-secondary/70">Automate your workflows with AI.</h3>
+          <h3 className="text-secondary/70">Activate or Pause Your Workflows Based on Your Needs.</h3>
         </div>
 
         <div className="flex justify-between">

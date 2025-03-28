@@ -21,6 +21,7 @@ import Automations from "../sub/automations/main/Automations";
 import Logo from "@/public/assets/chatlogo.webp";
 import Analytics from "../sub/analytics/main/Analytics";
 import TrainAi from "../sub/train-ai/main/TrainAi";
+import Home from "../sub/home/main/Home";
 
 function DashboardContent() {
   const [isDisplayed, setIsDisplayed] = useState(false);
@@ -120,10 +121,10 @@ function DashboardContent() {
 
           <div className={`${isDisplayed && "mt-[56px]"} `} >
 
-
-          {menuItem === "Integrations" && <SocialCards />}
-          {menuItem === "Automations" && <Automations />}
+          {menuItem === "Home" && <Home />}
           {menuItem === "Analytics" && <Analytics />}
+          {menuItem === "Automations" && <Automations />}
+          {menuItem === "Integrations" && <SocialCards />}
           {menuItem=== "Train AI" && <TrainAi />}
           </div>
         </div>
