@@ -1,3 +1,7 @@
+import DocsTask from "../sub/DocsTask";
+import GuidesCards from "../sub/GuidesCards";
+
+
 export default function Home() {
   return (
     <div>
@@ -5,10 +9,13 @@ export default function Home() {
         <div className="grid gap-2">
           <h1 className="text-secondary text-3xl font-semibold">Home</h1>
           <h3 className="text-secondary/70">
-          You’re almost There! Finish These Tasks to Get The Best Experience.
+            You’re almost There! Finish These Tasks to Get The Best Experience.
           </h3>
         </div>
-        
+        <div className="grid gap-8">
+          <GuidesCards />
+          <DocsTask />
+        </div>
       </div>
     </div>
   );

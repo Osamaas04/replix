@@ -10,7 +10,7 @@ import {
   House,
   Newspaper,
   BotMessageSquare,
-  UserRound,
+  UserRoundCog,
   Menu,
   Settings,
   ChartPie,
@@ -85,7 +85,7 @@ function DashboardContent() {
                     icon: <Newspaper size={18} />,
                     link: "/docs",
                   },
-                  { name: "Human Agent", icon: <UserRound size={18} /> },
+                  { name: "Human Agent", icon: <UserRoundCog size={18} /> },
                   { name: "Account", icon: <Settings size={18} /> },
                 ].map((item, index) =>
                   item.hr ? (

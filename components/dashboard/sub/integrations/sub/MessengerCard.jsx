@@ -198,7 +198,7 @@ export default function MessengerCard() {
   }, [connection.isConnected, handleDisconnect, authConfig, router]);
 
   return (
-    <div className="bg-primary text-secondary border border-secondary/70 rounded-md p-8 grid gap-8  lg:w-[19rem] xl:w-[25rem]">
+    <div className="bg-primary text-secondary border border-secondary/70 rounded-md p-8 grid gap-8 lg:w-[19rem] xl:w-[25rem]">
       <div className="grid gap-2">
         <div className="flex items-center gap-4">
           <svg
