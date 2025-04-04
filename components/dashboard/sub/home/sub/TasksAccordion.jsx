@@ -22,7 +22,7 @@ export function TasksAccordion() {
         </AccordionTrigger>
         <AccordionContent className="grid gap-8">
           <h3 className="text-sm text-secondary/70 ">
-            Complete the necessary steps to unlock the next one.
+            Complete the necessary steps to get to the next one.
           </h3>
           <div className="grid gap-8">
             <ol className="grid gap-4">
@@ -92,7 +92,7 @@ export function TasksAccordion() {
         </AccordionTrigger>
         <AccordionContent className="grid gap-8">
           <h3 className="text-sm text-secondary/70 ">
-            Complete the necessary steps to unlock the next one.
+            Complete the necessary steps to get to the next one.
           </h3>
           <div className="grid gap-8">
             <ol className="grid gap-4">
