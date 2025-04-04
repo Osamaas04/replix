@@ -62,7 +62,7 @@ export default function DocsTask() {
               </div>
               <div>
                 <p className="font-semibold">Connect Messenger</p>
-                <p className="text-sm">Learn how to integrate Messenger for automated responses.</p>
+                <p className="text-xs w-[14vw] text-secondary/70">Learn how to integrate Messenger for automated responses.</p>
               </div>
             </div>
             <div className="flex gap-4 items-center">
@@ -71,7 +71,7 @@ export default function DocsTask() {
               </div>
               <div>
                 <p className="font-semibold">Link Instagram</p>
-                <p className="text-sm">Set up Instagram messaging for seamless customer support.</p>
+                <p className="text-xs w-[14vw] text-secondary/70">Set up Instagram messaging for seamless customer support.</p>
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function DocsTask() {
               </div>
               <div>
                 <p className="font-semibold">Start AI-Powered Messaging</p>
-                <p className="text-sm">Activate AI responses for connected platforms.</p>
+                <p className="text-xs w-[14vw] text-secondary/70">Activate AI responses for connected platforms.</p>
               </div>
             </div>
             <div className="flex gap-4 items-center">
@@ -92,7 +92,7 @@ export default function DocsTask() {
               </div>
               <div>
                 <p className="font-semibold">Pause AI Responses</p>
-                <p className="text-sm">Temporarily disable AI messaging when needed.</p>
+                <p className="text-xs w-[14vw] text-secondary/70">Temporarily disable AI messaging when needed.</p>
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function DocsTask() {
               </div>
               <div>
                 <p className="font-semibold">Train AI with Fine-Tune Data</p>
-                <p className="text-sm">Improve AI responses by uploading fine-tune data.</p>
+                <p className="text-xs w-[14vw] text-secondary/70">Improve AI responses by uploading fine-tune data.</p>
               </div>
             </div>
             <div className="flex gap-4 items-center">
@@ -113,12 +113,12 @@ export default function DocsTask() {
               </div>
               <div>
                 <p className="font-semibold">Assign Human Agents</p>
-                <p className="text-sm">Set up human agents for handling complex queries.</p>
+                <p className="text-xs w-[14vw] text-secondary/70">Set up human agents for handling complex queries.</p>
               </div>
             </div>
           </div>
         </div>
-        <Link href="/docs" target="_blank" className="border border-secondary/70 px-2 py-1 rounded-md text-primary bg-secondary w-fit mx-auto">
+        <Link href="/docs" target="_blank" className="border border-secondary/70 px-2 py-1 rounded-md text-primary bg-secondary hover:text-secondary hover:bg-primary w-fit mx-auto transition-all duration-300">
           Learn More
         </Link>
       </div>
