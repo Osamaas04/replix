@@ -47,7 +47,7 @@ const UserRoundCogIcon = () => (
 
 export default function DocsTask() {
   return (
-    <div className="grid gap-12 text-secondary">
+    <div className="grid gap-12 text-secondary w-auto lg:w-[68vw]">
       <div className="grid gap-8">
         <hr className="border-secondary/70" />
         <h1 className="font-semibold text-2xl">Learn how to...</h1>
