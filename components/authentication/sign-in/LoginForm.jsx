@@ -1,10 +1,19 @@
 import Link from "next/link";
 
+const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/account";
+
+async function handleRegister() {
+  const response = await fetch(`${API_GATEWAY}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ }),
+  });
+}
+
 export default function LoginForm() {
     return(
         <div className="space-y-4">
           <form
-            action=""
             className="grid gap-2 text-secondary mx-auto max-w-[22rem]"
           >
             <input
