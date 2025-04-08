@@ -58,7 +58,6 @@ export default function Automations() {
   async function handleStatusChange(automationName, newStatus) {
     const previousState = automations[automationName];
 
-    // Optimistically update the state
     setAutomations((prev) => ({
       ...prev,
       [automationName]: newStatus,
@@ -68,7 +67,6 @@ export default function Automations() {
       const platform = PLATFORM_NAMES[automationName];
       let body = { platform, isActive: newStatus };
 
-      // Retrieve and validate required ID based on platform
       switch (automationName) {
         case "messenger":
           const page_id = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
@@ -105,7 +103,6 @@ export default function Automations() {
         throw new Error("Server response mismatch");
       }
 
-      // Platform-specific success message
       toast.success(
         `${PLATFORM_NAMES[automationName]} ${
           newStatus ? "Activated" : "Deactivated"
