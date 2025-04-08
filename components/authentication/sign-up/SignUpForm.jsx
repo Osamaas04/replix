@@ -5,7 +5,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { LoaderCircle } from "lucide-react";
 
-const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
+const API_GATEWAY = "https://api-gateway-livid.vercel.app/api";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -36,7 +36,7 @@ async function handleRegister(values, setLoading) {
   formData.append("confirmPassword", values.rePassword);
 
   try {
-    const response = await fetch("http://replix.runasp.net/account/register", {
+    const response = await fetch(`${API_GATEWAY}/account/register`, {
       method: "POST",
       body: formData,
     });
@@ -46,7 +46,7 @@ async function handleRegister(values, setLoading) {
       toast.error(`Failed to register. Error: ${data.message || 'Please try again.'}`);
     } else {
       const data = await response.json();
-      const createUserIdResponse = await fetch(`${API_GATEWAY}/createUserId`, {
+      const createUserIdResponse = await fetch(`${API_GATEWAY}/social/createUserId`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
