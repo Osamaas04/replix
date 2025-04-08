@@ -161,10 +161,10 @@ export default function MessengerCard() {
         throw new Error("Page ID not found");
       }
 
-      const response = await fetch(`${API_GATEWAY}/disconnectFacebook`, {
+      const response = await fetch(`${API_GATEWAY}/disconnectSocials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ page_id: pageId }),
+        body: JSON.stringify({ platform: "facebook",id: pageId }),
       });
 
       if (!response.ok) {

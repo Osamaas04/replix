@@ -104,10 +104,10 @@ export default function WhatsappCard() {
       const whatsappId = localStorage.getItem(STORAGE_KEYS.WHATSAPP_ID);
       if (!whatsappId) throw new Error("WhatsApp ID not found");
 
-      const response = await fetch(`${API_GATEWAY}/disconnectWhatsapp`, {
+      const response = await fetch(`${API_GATEWAY}/disconnectSocials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ whatsapp_business_account_id: whatsappId }),
+        body: JSON.stringify({ platform: "whatsapp", id: whatsappId }),
       });
 
       if (!response.ok) throw new Error("Disconnection failed");

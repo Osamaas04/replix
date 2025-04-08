@@ -107,10 +107,10 @@ export default function InstagramCard() {
         throw new Error("Instagram ID not found");
       }
 
-      const response = await fetch(`${API_GATEWAY}/disconnectInstagram`, {
+      const response = await fetch(`${API_GATEWAY}/disconnectSocials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ instagram_id: instagramId }),
+        body: JSON.stringify({ platform: "instagram", id: instagramId }),
       });
 
       if (!response.ok) {
