@@ -5,6 +5,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { LoaderCircle } from "lucide-react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 const API_GATEWAY = "https://api-gateway-livid.vercel.app/api";
 
@@ -19,14 +20,17 @@ const validationSchema = Yup.object({
     .matches(/[a-z]/, "Password must contain at least one lowercase letter")
     .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
     .matches(/[0-9]/, "Password must contain at least one number")
-    .matches(/[^a-zA-Z0-9]/, "Password must contain at least one special character")
+    .matches(
+      /[^a-zA-Z0-9]/,
+      "Password must contain at least one special character"
+    )
     .required("Password is required"),
   rePassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Re-password is required"),
 });
 
-async function handleRegister(values, setLoading) {
+async function handleRegister(values, setLoading, router) {
   setLoading(true);
 
   const formData = new FormData();
@@ -45,34 +49,37 @@ async function handleRegister(values, setLoading) {
     const data = await response.json();
 
     if (!response.ok) {
-      toast.error(`Failed to register. Error: ${data.message || "Please try again."}`);
+      toast.error(
+        `Failed to register. Error: ${data.message || "Please try again."}`
+      );
       return;
     }
 
-    // ✅ Store the token in cookies (expires in 1 day for example)
     Cookies.set("token", data.token, {
       expires: 1,
       secure: true,
       sameSite: "Strict",
     });
 
-    // ✅ Create social user id
-    const createUserIdResponse = await fetch(`${API_GATEWAY}/social/createUserId`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Optional: If you want to send token manually via header as fallback
-        Authorization: `Bearer ${data.token}`,
-      },
-      body: JSON.stringify({ user_id: data.userId }),
-    });
+    const createUserIdResponse = await fetch(
+      `${API_GATEWAY}/social/createUserId`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_id: data.userId }),
+      }
+    );
 
     if (!createUserIdResponse.ok) {
       const err = await createUserIdResponse.json();
-      toast.error(`User created but failed to create social id: ${err.message}`);
+      toast.error(
+        `User created but failed to create social id: ${err.message}`
+      );
     } else {
-      toast.success("Registration successful! 🎉");
-      // Optional: redirect or do something else
+      toast.success("Registration successful!");
+      router.push("/login");
     }
   } catch (error) {
     console.error(error);
@@ -84,6 +91,7 @@ async function handleRegister(values, setLoading) {
 
 export default function SignUpForm() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -93,12 +101,15 @@ export default function SignUpForm() {
       rePassword: "",
     },
     validationSchema,
-    onSubmit: (values) => handleRegister(values, setLoading),
+    onSubmit: (values) => handleRegister(values, setLoading, router),
   });
 
   return (
     <div className="space-y-4">
-      <form className="grid gap-2 text-secondary mx-auto max-w-[22rem]" onSubmit={formik.handleSubmit}>
+      <form
+        className="grid gap-2 text-secondary mx-auto max-w-[22rem]"
+        onSubmit={formik.handleSubmit}
+      >
         <input
           type="text"
           placeholder="Name"
@@ -120,7 +131,9 @@ export default function SignUpForm() {
           className="bg-primary rounded-md border border-secondary/20 px-4 py-1 focus:outline-0 placeholder:text-sm w-full"
         />
         {formik.touched.companyName && formik.errors.companyName && (
-          <div className="text-red-500 text-xs">{formik.errors.companyName}</div>
+          <div className="text-red-500 text-xs">
+            {formik.errors.companyName}
+          </div>
         )}
 
         <input
@@ -163,8 +176,15 @@ export default function SignUpForm() {
           type="submit"
           className="bg-secondary text-primary py-1 rounded-md transition-all duration-500 hover:bg-secondary/95 w-full flex justify-center items-center h-8"
         >
-          
-          {loading ? <LoaderCircle className="text-primary/70 animate-spin" width={18} height={18} /> : "Sign Up"}
+          {loading ? (
+            <LoaderCircle
+              className="text-primary/70 animate-spin"
+              width={18}
+              height={18}
+            />
+          ) : (
+            "Sign Up"
+          )}
         </button>
       </form>
 
