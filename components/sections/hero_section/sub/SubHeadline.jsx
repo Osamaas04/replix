@@ -18,7 +18,7 @@ export default function SubHeadline() {
           </p>
 
           <Link
-            href="/sign-up"
+            href="/demo"
             className="inline-block w-fit text-primary bg-secondary border-2 border-secondary/70 
              shadow-[0_0_15px_theme(colors.secondary/60%)] rounded-3xl px-6 py-3 text-sm sm:text-base
              transition-all duration-500 ease-in-out 

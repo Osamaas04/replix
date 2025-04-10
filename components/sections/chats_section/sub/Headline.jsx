@@ -1,7 +1,7 @@
 export default function Headline() {
   return (
     <div className="font-raleway relative bg-primary h-screen overflow-hidden" >
-      <div className="absolute -left-1/2 top-1/2 aspect-[1/0.7] w-[200%] rounded-[50%] shadow-[0_-30px_40px_0_rgba(255,204,0,0.1)]">
+      <div className="absolute -left-1/2 top-1/2 aspect-[1/0.7] w-[200%] rounded-[50%] shadow-[0_-150px_300px_0_rgba(255,204,0,0.1)]">
         <div className="grid justify-center items-center gap-6 sm:gap-10 mt-24" >
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary text-center" >
           AI-Driven Responses,<br className="hideen sm:block"/> Human-Like Accuracy

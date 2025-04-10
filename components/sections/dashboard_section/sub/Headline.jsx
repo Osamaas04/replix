@@ -1,24 +1,42 @@
 import Image from "next/image";
 import HeroPic from "@/public/assets/hero-dark.png";
+import { BorderBeam } from "../ui/border-beam";
+import { motion } from "framer-motion";
 
 export default function Headline() {
   return (
-    <div className="relative w-full max-w-screen-lg aspect-video rounded-[2rem] overflow-hidden shadow-[0_-30px_40px_0_rgba(255,204,0,0.1)]">
-      <div className="absolute inset-0 bg-secondary/70" />
-
-      <div className="absolute inset-0 before:absolute before:left-[-25%] before:top-[-25%] before:h-[150%] before:w-[150%] before:animate-border-spin before:bg-[conic-gradient(rgba(255,182,193,1)_0deg,rgba(255,126,95,1)_0deg,transparent_80deg)] ">
-        
-        <div className="absolute inset-[1px]">
-          <Image
-            src={HeroPic}
-            alt="wv"
-            className="object-cover w-full !h-[107%] rounded-[2rem]"
-            layout="fill"
-          />
-        </div>
-
-        <div className="bg-gradient-to-bl from-transparent to-primary w-[100%] h-[100%] relative z-10" />
+    <motion.div
+      className="relative w-full max-w-screen-lg aspect-video rounded-md overflow-hidden"
+      initial={{
+        boxShadow: "0 -150px 300px 0 rgba(255, 204, 0, 0.1)",
+      }}
+      animate={{
+        boxShadow: [
+          "0 -150px 300px 0 rgba(255, 204, 0, 0.1)",
+          "0 -200px 400px 0 rgba(255, 204, 0, 0.2)", // Larger shadow with more opacity
+          "0 -150px 300px 0 rgba(255, 204, 0, 0.1)",
+        ],
+      }}
+      transition={{
+        duration: 3,
+        ease: "easeInOut",
+        delay: 5,
+      }}
+    >
+      <div className="flex flex-col-reverse">
+        <div className="bg-gradient-to-b from-transparent to-primary w-[100%] h-[100%] absolute z-10" />
+        <Image
+          src={HeroPic}
+          alt="wv"
+          className="object-cover w-full !h-[106%] rounded-md opacity-70"
+        />
       </div>
-    </div>
+
+      <BorderBeam
+        duration={6}
+        size={400}
+        className="from-transparent via-orange-500 to-transparent"
+      />
+    </motion.div>
   );
 }

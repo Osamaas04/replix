@@ -8,6 +8,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col gap-32 items-center justify-center bg-primary text-secondary p-4" id="dashboard">
       <Headline />
+      
       <div className="grid gap-8">
         
         <h1 className="text-sm text-secondary/70 text-center">

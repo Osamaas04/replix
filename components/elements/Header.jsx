@@ -25,8 +25,8 @@ export default function Header({ shouldAnimate }) {
         {...(shouldAnimate ? {} : { initial: {}, animate: {}, transition: {} })}
       >
         <Link href="/" className="flex space-x-3 items-center">
-          <Image src={Logo} alt="Replix logo" width={38} height={38} />
-          <p className="text-secondary text-2xl md:text-3xl font-semibold">Replix</p>
+          <Image src={Logo} alt="Replix logo" width={29} height={29} />
+          <p className="text-secondary text-xl md:text-2xl font-semibold">Replix</p>
         </Link>
       </motion.div>
 
@@ -39,7 +39,7 @@ export default function Header({ shouldAnimate }) {
       >
         <Link
           href="/sign-up"
-          className="text-secondary bg-transparent border-2 border-solid border-secondary/70 rounded-3xl px-4 py-2 transition-all duration-500 hover:bg-secondary hover:text-primary"
+          className="text-secondary bg-transparent border-2 border-solid border-secondary/70 rounded-3xl px-4 py-1 transition-all duration-500 hover:bg-secondary hover:text-primary"
           aria-label="Join the beta"
         >
           Get started
