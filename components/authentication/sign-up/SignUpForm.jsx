@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import Link from "next/link";
 import { toast } from "sonner";
 import { LoaderCircle } from "lucide-react";
-import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 
 const API_GATEWAY = "https://api-gateway-livid.vercel.app/api";
@@ -46,20 +45,12 @@ async function handleRegister(values, setLoading, router) {
       body: formData,
     });
 
-    const data = await response.json();
-
     if (!response.ok) {
       toast.error(
         `Failed to register. Error: ${data.message || "Please try again."}`
       );
       return;
     }
-
-    Cookies.set("token", data.token, {
-      expires: 1,
-      secure: true,
-      sameSite: "Strict",
-    });
 
     const createUserIdResponse = await fetch(
       `${API_GATEWAY}/social/createUserId`,
