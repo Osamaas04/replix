@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import Link from "next/link";
 import { toast } from "sonner";
 import { LoaderCircle } from "lucide-react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const API_GATEWAY = "https://api-gateway-livid.vercel.app/api";
 
