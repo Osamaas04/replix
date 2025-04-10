@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function Headline() {
   return (
     <motion.div
-      className="relative w-full max-w-screen-lg aspect-video rounded-md overflow-hidden"
+      className="relative w-full max-w-[78vw] aspect-video rounded-md overflow-hidden"
       initial={{
         boxShadow: "0 -150px 300px 0 rgba(255, 204, 0, 0.1)",
       }}

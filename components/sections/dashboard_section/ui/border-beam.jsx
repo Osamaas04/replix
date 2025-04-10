@@ -16,7 +16,7 @@ export const BorderBeam = ({
 }) => {
   return (
     <div
-      className="pointer-events-none absolute inset-0 rounded-[inherit] border border-zinc-200 border-transparent [mask-clip:padding-box,border-box] [mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)] dark:border-zinc-800">
+      className="pointer-events-none absolute inset-0 rounded-[inherit] border border-secondary/20 [mask-clip:padding-box,border-box] [mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)] dark:border-zinc-800">
       <motion.div
         className={cn(
           "absolute aspect-square",

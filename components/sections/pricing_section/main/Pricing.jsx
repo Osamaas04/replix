@@ -125,7 +125,7 @@ export default function Pricing() {
               features={plan.features}
               billing={plan.billing}
               href={plan.href}
-              className={plan.price === "$590" ? "border-[#FFA500]" : ""}
+              className={plan.price === "$590" ? "border-[#FFA500]/50" : ""}
             />
           ))
           : pricingPlansMo.map((plan, index) => (
@@ -144,7 +144,7 @@ export default function Pricing() {
               features={plan.features}
               billing={plan.billing}
               href={plan.href}
-              className={plan.price === "$59" ? "border-[#FFA500]" : ""}
+              className={plan.price === "$59" ? "border-[#FFA500]/50" : ""}
             />
           ))
         }
