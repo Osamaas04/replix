@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ChatsBackground } from "./ChatsBackground";
 import { Sparkles, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function ChatsAnimation() {
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -91,13 +92,13 @@ export default function ChatsAnimation() {
               placeholder="Ask anything"
               className="bg-secondary/10 text-secondary w-full h-10 rounded-2xl pl-4 focus:outline-0 placeholder:text-secondary/20 placeholder:font-raleway focus:placeholder-transparent"
             />
-            <button>
+            <Link href="/login">
               <ArrowRight
                 size={20}
                 color="white"
                 className="absolute right-4 top-1/2 -translate-y-1/2"
               />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
