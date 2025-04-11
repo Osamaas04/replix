@@ -16,7 +16,7 @@ const STORAGE_KEYS = {
   WHATSAPP_ID: "whatsappBusinessId",
 };
 
-const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
+const API_GATEWAY = "https://gateway.replix.space/api/social";
 
 const PLATFORM_NAMES = {
   messenger: "Messenger",

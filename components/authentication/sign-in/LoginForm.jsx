@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 
-const API_GATEWAY = "https://api-gateway-livid.vercel.app/api";
+const API_GATEWAY = "https://gateway.replix.space/api";
 
 const validationSchema = Yup.object({
   email: Yup.string()

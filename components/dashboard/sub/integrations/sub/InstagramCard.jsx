@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Switch } from "../ui/switch";
 import { toast } from "sonner";
 
-const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/social";
+const API_GATEWAY = "https://gateway.replix.space/api/social";
 const STORAGE_KEYS = {
   INSTAGRAM_ID: "instagramBusinessId",
   LAST_VALIDATED: "igLastValidated",
