@@ -41,7 +41,7 @@ async function handleLogin(values, setLoading, router) {
     Cookies.set("token", data.token, {
       expires: 1,
       secure: true,
-      sameSite: "Strict",
+      sameSite: "Lax",
     });
 
     toast.success("Login successful!");
