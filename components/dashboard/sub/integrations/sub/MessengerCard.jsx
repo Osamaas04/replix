@@ -128,7 +128,7 @@ export default function MessengerCard() {
           const response = await fetch(`${API_GATEWAY}/connectFacebook`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            credentials: "include",
+
             body: JSON.stringify({ code }),
           });
 
