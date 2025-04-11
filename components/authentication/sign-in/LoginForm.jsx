@@ -5,7 +5,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import Cookies from "js-cookie";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 
