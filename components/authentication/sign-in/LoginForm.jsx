@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { useFormik } from "formik";
@@ -38,14 +38,20 @@ async function handleLogin(values, setLoading, router) {
       return;
     }
 
-    Cookies.set("token", data.token, {
-      expires: 1,
-      secure: true,
-      sameSite: "none",
+    const token = data.token;
+
+    const authTokenResponse = await fetch(`${API_GATEWAY}/setAuthToken`, {
+      method: "POST",
+      body: JSON.stringify({ token }),
     });
 
+    if (!authTokenResponse.ok) {
+      toast.error(`Login failed: ${data.message || "Try again."}`);
+      return;
+    }
+
     toast.success("Login successful!");
-    router.push("/dashboard"); 
+    router.push("/dashboard");
   } catch (error) {
     console.error(error);
     toast.error("An error occurred during login.");
