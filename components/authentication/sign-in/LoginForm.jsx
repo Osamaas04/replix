@@ -42,6 +42,7 @@ async function handleLogin(values, setLoading, router) {
 
     const authTokenResponse = await fetch("/api/setAuthToken", {
       method: "POST",
+      credentials: "include",
       body: JSON.stringify({ token }),
     });
 
