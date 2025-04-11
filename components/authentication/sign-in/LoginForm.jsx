@@ -40,7 +40,7 @@ async function handleLogin(values, setLoading, router) {
 
     const token = data.token;
 
-    const authTokenResponse = await fetch(`${API_GATEWAY}/social/setAuthToken`, {
+    const authTokenResponse = await fetch("/api/setAuthToken", {
       method: "POST",
       body: JSON.stringify({ token }),
     });
