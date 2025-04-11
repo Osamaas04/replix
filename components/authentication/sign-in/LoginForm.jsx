@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 
-const API_GATEWAY = "https://api-gateway-livid.vercel.app/api/account";
+const API_GATEWAY = "https://api-gateway-livid.vercel.app/api";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -26,7 +26,7 @@ async function handleLogin(values, setLoading, router) {
   formData.append("password", values.password);
 
   try {
-    const response = await fetch(`${API_GATEWAY}/login`, {
+    const response = await fetch(`${API_GATEWAY}/account/login`, {
       method: "POST",
       body: formData,
     });
@@ -40,7 +40,7 @@ async function handleLogin(values, setLoading, router) {
 
     const token = data.token;
 
-    const authTokenResponse = await fetch(`${API_GATEWAY}/setAuthToken`, {
+    const authTokenResponse = await fetch(`${API_GATEWAY}/social/setAuthToken`, {
       method: "POST",
       body: JSON.stringify({ token }),
     });
