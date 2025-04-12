@@ -17,7 +17,7 @@ export const POST = async (request) => {
     // Set the cookie with domain, SameSite, Secure, and HttpOnly attributes
     response.headers.set(
       "Set-Cookie",
-      `token=${token}; HttpOnly; Secure; SameSite=None; Path=/; Domain=.replix.space;`  // Max-Age = 1 hour
+      `token=${token}; HttpOnly; Secure; SameSite=None; Path=/; Domain=.replix.space;` 
     );
 
     return response;
