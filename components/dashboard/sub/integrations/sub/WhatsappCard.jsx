@@ -77,6 +77,7 @@ export default function WhatsappCard() {
       const response = await fetch(`${API_GATEWAY}/connectWhatsapp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ page_id: facebookPageId }),
       });
 
