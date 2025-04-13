@@ -108,6 +108,7 @@ export default function WhatsappCard() {
       const response = await fetch(`${API_GATEWAY}/disconnectSocials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ platform: "whatsapp", id: whatsappId }),
       });
 
