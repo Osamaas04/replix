@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const API_GATEWAY = "https://gateway.replix.space/api";
+const API_GATEWAY = "https://gw.replix.space";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),

@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 
-const API_GATEWAY = "https://gateway.replix.space/api";
+const API_GATEWAY = "https://gw.replix.space/account";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -25,7 +25,7 @@ async function handleLogin(values, setLoading, router) {
   formData.append("password", values.password);
 
   try {
-    const response = await fetch(`${API_GATEWAY}/account/login`, {
+    const response = await fetch(`${API_GATEWAY}/login`, {
       method: "POST",
       
       body: formData,
