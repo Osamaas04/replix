@@ -11,20 +11,20 @@ export async function middleware(req) {
     return NextResponse.redirect(url)
   }
 
-  if (url.pathname.startsWith('/dashboard') && !isAuth) {
-    const loginUrl = new URL('/login', req.url)
-    return NextResponse.redirect(loginUrl)
-  }
+  // if (url.pathname.startsWith('/dashboard') && !isAuth) {
+  //   const loginUrl = new URL('/login', req.url)
+  //   return NextResponse.redirect(loginUrl)
+  // }
 
-  if ((url.pathname === '/' || url.pathname === '/index') && isAuth) {
-    const dashboardUrl = new URL('/dashboard', req.url)
-    return NextResponse.redirect(dashboardUrl)
-  }
+  // if ((url.pathname === '/' || url.pathname === '/index') && isAuth) {
+  //   const dashboardUrl = new URL('/dashboard', req.url)
+  //   return NextResponse.redirect(dashboardUrl)
+  // }
 
-  if (url.pathname === '/login' && isAuth) {
-    const dashboardUrl = new URL('/dashboard', req.url)
-    return NextResponse.redirect(dashboardUrl)
-  }
+  // if (url.pathname === '/login' && isAuth) {
+  //   const dashboardUrl = new URL('/dashboard', req.url)
+  //   return NextResponse.redirect(dashboardUrl)
+  // }
 
   return NextResponse.next()
 }
