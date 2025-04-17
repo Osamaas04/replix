@@ -21,9 +21,14 @@ export async function middleware(req) {
     return NextResponse.redirect(dashboardUrl)
   }
 
+  if (url.pathname === '/login' && isAuth) {
+    const dashboardUrl = new URL('/dashboard', req.url)
+    return NextResponse.redirect(dashboardUrl)
+  }
+
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/', '/index', '/dashboard'],
+  matcher: ['/', '/index', '/login', '/dashboard'],
 }
