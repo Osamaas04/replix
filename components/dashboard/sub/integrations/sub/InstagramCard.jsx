@@ -29,6 +29,7 @@ export default function InstagramCard() {
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           platform: "instagram",
           instagram_id: instagramId,
