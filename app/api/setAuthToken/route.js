@@ -16,7 +16,7 @@ export const POST = async (request) => {
 
     response.headers.set(
       "Set-Cookie",
-      `token=Bearer ${token}; HttpOnly; Secure; SameSite=None; Path=/; Domain=.replix.space; Max-Age=86400`
+      `Authorization=Bearer ${token}; HttpOnly; Secure; SameSite=None; Path=/; Domain=.replix.space; Max-Age=86400`
     );
 
     const decoded = jwt.decode(token);
