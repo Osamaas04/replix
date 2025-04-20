@@ -88,6 +88,7 @@ export default function MessengerCard() {
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ platform: "facebook", page_id: pageId }),
       });
 
@@ -128,6 +129,7 @@ export default function MessengerCard() {
           const response = await fetch(`${API_GATEWAY}/connectFacebook`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
             body: JSON.stringify({ code }),
           });
 
@@ -164,6 +166,7 @@ export default function MessengerCard() {
       const response = await fetch(`${API_GATEWAY}/disconnectSocials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ platform: "facebook",id: pageId }),
       });
 
