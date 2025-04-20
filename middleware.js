@@ -10,10 +10,10 @@ export async function middleware(req) {
 
   const response = NextResponse.next()
 
-  // Decode token and attach user ID as a header
+  console.log(token)
+
   if (token) {
     try {
-      // You can also use jwt.verify(token, JWT_SECRET) if you want to ensure it's valid
       const decoded = jwt.decode(token)
       if (decoded?.sub) {
         response.headers.set('x-user-id', decoded.sub)
