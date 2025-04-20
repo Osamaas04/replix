@@ -24,6 +24,7 @@ async function handleLogin(values, setLoading, router) {
   try {
     const response = await fetch(`${API_GATEWAY}/login`, {
       method: "POST",
+      credentials: "include",
       body: formData,
     });
 

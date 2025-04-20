@@ -78,6 +78,7 @@ export default function InstagramCard() {
       const response = await fetch(`${API_GATEWAY}/connectInstagram`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ page_id: facebookPageId }),
       });
 
@@ -111,6 +112,7 @@ export default function InstagramCard() {
       const response = await fetch(`${API_GATEWAY}/disconnectSocials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ platform: "instagram", id: instagramId }),
       });
 

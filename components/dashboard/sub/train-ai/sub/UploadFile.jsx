@@ -22,7 +22,7 @@ export default function UploadFile({ title, isValidation }) {
 
       const response = await fetch(`${API_GATEWAY}`, {
         method: "POST",
-
+        credentials: "include",
         body: formData,
       });
 
