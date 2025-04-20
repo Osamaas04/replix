@@ -129,7 +129,6 @@ export default function MessengerCard() {
           const response = await fetch("https://gw.replix.space/hello/connectFacebook", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            credentials: "include",
             body: JSON.stringify({ code }),
           });
 
