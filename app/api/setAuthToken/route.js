@@ -20,7 +20,8 @@ export const POST = async (request) => {
     );
 
     const decoded = jwt.decode(token);
-    request.headers.set('x-user-id', decoded.sub);
+    request.headers.set('x-user-id',
+       decoded.sub);
 
     return response;
   } catch (error) {
