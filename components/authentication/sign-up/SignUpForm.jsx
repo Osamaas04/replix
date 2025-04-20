@@ -63,6 +63,7 @@ async function handleRegister(values, setLoading, router) {
         headers: {
           "Content-Type": "application/json",
         },
+        
         body: JSON.stringify({ user_id: data.userId }),
       }
     );

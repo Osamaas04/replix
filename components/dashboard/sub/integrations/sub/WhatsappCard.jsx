@@ -29,7 +29,6 @@ export default function WhatsappCard() {
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({
           platform: "whatsapp",
           whatsapp_business_account_id: whatsappId,
@@ -78,7 +77,6 @@ export default function WhatsappCard() {
       const response = await fetch(`${API_GATEWAY}/connectWhatsapp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({ page_id: facebookPageId }),
       });
 
@@ -109,7 +107,7 @@ export default function WhatsappCard() {
       const response = await fetch(`${API_GATEWAY}/disconnectSocials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
+
         body: JSON.stringify({ platform: "whatsapp", id: whatsappId }),
       });
 

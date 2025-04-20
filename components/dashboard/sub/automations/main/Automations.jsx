@@ -90,7 +90,7 @@ export default function Automations() {
       const response = await fetch(`${API_GATEWAY}/isActive`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
+
         body: JSON.stringify(body),
       });
 
