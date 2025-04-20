@@ -9,13 +9,8 @@ export const POST = async (request) => {
       return NextResponse.json({ error: "Missing authorization token" }, { status: 400 });
     }
 
-    const decoded = jwt.decode(token);
-
     const response = NextResponse.json(
-      {
-        message: "User token has been set successfully",
-        userId: decoded?.sub || null // optional: send the user ID back
-      },
+      { message: "User token has been set successfully" },
       { status: 200 }
     );
 
@@ -24,8 +19,10 @@ export const POST = async (request) => {
       `token=${token}; HttpOnly; Secure; SameSite=None; Path=/; Domain=.replix.space; Max-Age=86400`
     );
 
-    return response;
+    const decoded = jwt.decode(token);
+    request.headers.set('x-user-id', decoded.sub);
 
+    return response;
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
