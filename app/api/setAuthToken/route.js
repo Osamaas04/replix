@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import jwt from 'jsonwebtoken';
 
 export const POST = async (request) => {
   try {
@@ -8,17 +9,19 @@ export const POST = async (request) => {
       return NextResponse.json({ error: "Missing authorization token" }, { status: 400 });
     }
 
-    // Create the response and set the cookie with the necessary attributes
     const response = NextResponse.json(
       { message: "User token has been set successfully" },
       { status: 200 }
     );
 
-    // Set the cookie with domain, SameSite, Secure, and HttpOnly attributes
     response.headers.set(
       "Set-Cookie",
-      `token=${token}; HttpOnly; Secure; SameSite=None; Path=/; Domain=.replix.space; Max-Age=86400` 
+      `token=${token}; HttpOnly; Secure; SameSite=None; Path=/; Domain=.replix.space; Max-Age=86400`
     );
+
+    const decoded = jwt.decode(token);
+    req.headers.set('x-user-id', decoded.sub);
+
 
     return response;
   } catch (error) {
