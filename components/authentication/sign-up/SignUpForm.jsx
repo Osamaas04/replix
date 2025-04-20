@@ -44,6 +44,7 @@ async function handleRegister(values, setLoading, router) {
   try {
     const response = await fetch(`${API_GATEWAY}/account/register`, {
       method: "POST",
+      credentials: "include",
       body: formData,
     });
     
