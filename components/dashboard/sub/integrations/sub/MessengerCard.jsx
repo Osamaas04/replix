@@ -126,7 +126,7 @@ export default function MessengerCard() {
     const handleOAuthCallback = async () => {
       if (code) {
         try {
-          const response = await fetch("https://gw.replix.space/hello/connectFacebook", {
+          const response = await fetch(`${API_GATEWAY}/connectFacebook`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
