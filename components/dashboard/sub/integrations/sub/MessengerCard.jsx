@@ -83,28 +83,35 @@ export default function MessengerCard() {
     []
   );
 
-  const checkConnection = useCallback(async (pageId) => {
+  const checkConnection = useCallback(async () => {
     try {
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ platform: "facebook", page_id: pageId }),
+        body: JSON.stringify({ platform: "facebook" }),
       });
-
+  
       const data = await response.json();
-
-      if (!data.isConnected) {
-        localStorage.removeItem(STORAGE_KEYS.PAGE_ID);
+  
+      if (data.isConnected) {
+        setConnection({ pageId: "true", isConnected: true });
+      } else {
         setConnection({ pageId: null, isConnected: false });
-        toast.warning("Connection expired - please reconnect");
       }
-
+  
+      // Optional: cache the state locally
       localStorage.setItem(STORAGE_KEYS.LAST_VALIDATED, Date.now());
+      if (data.isConnected) {
+        localStorage.setItem(STORAGE_KEYS.PAGE_ID, "true"); // or actual page_id if you return it
+      } else {
+        localStorage.removeItem(STORAGE_KEYS.PAGE_ID);
+      }
     } catch (error) {
       console.error("Validation error:", error);
     }
   }, []);
+  
 
   useEffect(() => {
     const validateConnection = async () => {

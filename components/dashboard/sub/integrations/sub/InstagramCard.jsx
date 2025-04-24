@@ -32,23 +32,29 @@ export default function InstagramCard() {
         credentials: "include",
         body: JSON.stringify({
           platform: "instagram",
-          instagram_id: instagramId,
         }),
       });
-
+  
       const data = await response.json();
-
-      if (!data.isConnected) {
-        localStorage.removeItem(STORAGE_KEYS.INSTAGRAM_ID);
+  
+      if (data.isConnected) {
+        setConnection({ instagramId: "true", isConnected: true });
+        
+      } else {
         setConnection({ instagramId: null, isConnected: false });
-        toast.warning("Instagram connection expired - please reconnect");
       }
-
+  
       localStorage.setItem(STORAGE_KEYS.LAST_VALIDATED, Date.now());
+      if (data.isConnected) {
+        localStorage.setItem(STORAGE_KEYS.INSTAGRAM_ID, "ture");
+      } else {
+        localStorage.removeItem(STORAGE_KEYS.INSTAGRAM_ID);
+      }
     } catch (error) {
       console.error("Validation error:", error);
     }
   }, []);
+  
 
   useEffect(() => {
     const validateConnection = async () => {

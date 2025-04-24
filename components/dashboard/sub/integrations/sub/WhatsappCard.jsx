@@ -32,19 +32,23 @@ export default function WhatsappCard() {
         credentials: "include",
         body: JSON.stringify({
           platform: "whatsapp",
-          whatsapp_business_account_id: whatsappId,
         }),
       });
 
       const data = await response.json();
 
-      if (!data.isConnected) {
-        localStorage.removeItem(STORAGE_KEYS.WHATSAPP_ID);
+      if (data.isConnected) {
+        setConnection({ whatsappId: "true", isConnected: true });
+      } else {
         setConnection({ whatsappId: null, isConnected: false });
-        toast.warning("WhatsApp connection expired - please reconnect");
       }
 
       localStorage.setItem(STORAGE_KEYS.LAST_VALIDATED, Date.now());
+      if (data.isConnected) {
+        localStorage.setItem(STORAGE_KEYS.WHATSAPP_ID, "ture");
+      } else {
+        localStorage.removeItem(STORAGE_KEYS.WHATSAPP_ID);
+      }
     } catch (error) {
       console.error("WhatsApp validation error:", error);
     }
