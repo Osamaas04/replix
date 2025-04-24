@@ -7,17 +7,13 @@ import { toast } from "sonner";
 const API_GATEWAY = "https://gw.replix.space/social";
 
 export default function WhatsappCard() {
-  // Track connection and loading state
   const [connection, setConnection] = useState({
     whatsappId: null,
     isConnected: false,
   });
-  const [isLoading, setIsLoading] = useState(true); // Loading state
 
   const checkConnection = useCallback(async () => {
     try {
-      setIsLoading(true);  // Start loading
-
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -36,8 +32,6 @@ export default function WhatsappCard() {
       }
     } catch (error) {
       console.error("WhatsApp validation error:", error);
-    } finally {
-      setIsLoading(false);  // Stop loading
     }
   }, []);
 
@@ -47,8 +41,6 @@ export default function WhatsappCard() {
 
   const connectWhatsApp = useCallback(async () => {
     try {
-      setIsLoading(true);  // Show loading state while connecting
-
       const response = await fetch(`${API_GATEWAY}/connectWhatsapp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -67,15 +59,11 @@ export default function WhatsappCard() {
     } catch (error) {
       setConnection((prev) => ({ ...prev, whatsappId: null }));
       toast.error(`Failed to integrate WhatsApp: ${error.message}`);
-    } finally {
-      setIsLoading(false);  // Stop loading
     }
   }, []);
 
   const handleDisconnect = useCallback(async () => {
     try {
-      setIsLoading(true);  // Show loading state while disconnecting
-
       const response = await fetch(`${API_GATEWAY}/disconnectSocials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -90,8 +78,6 @@ export default function WhatsappCard() {
     } catch (error) {
       toast.error("Failed to disconnect WhatsApp");
       setConnection((prev) => ({ ...prev, isConnected: true }));
-    } finally {
-      setIsLoading(false);  // Stop loading
     }
   }, [connection.whatsappId]);
 
@@ -125,14 +111,10 @@ export default function WhatsappCard() {
       </div>
 
       <div className="flex justify-end items-center">
-        {isLoading ? (
-          <div className="animate-spin border-4 border-t-4 border-secondary rounded-full w-8 h-8"></div> // Loading Spinner
-        ) : (
-          <Switch
-            checked={connection.isConnected}
-            onCheckedChange={handleToggle}
-          />
-        )}
+        <Switch
+          checked={connection.isConnected}
+          onCheckedChange={handleToggle}
+        />
       </div>
     </div>
   );
