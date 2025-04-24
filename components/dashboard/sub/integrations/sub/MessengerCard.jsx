@@ -6,27 +6,16 @@ import { Switch } from "../ui/switch";
 import { toast } from "sonner";
 
 const API_GATEWAY = "https://gw.replix.space/social";
-const STORAGE_KEYS = {
-  PAGE_ID: "facebookPageId",
-  LAST_VALIDATED: "fbLastValidated",
-};
-const VALIDATION_INTERVAL = 3600000;
 
 export default function MessengerCard() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
 
-  const [connection, setConnection] = useState(() => ({
-    pageId:
-      typeof window !== "undefined"
-        ? localStorage.getItem(STORAGE_KEYS.PAGE_ID)
-        : null,
-    isConnected:
-      typeof window !== "undefined"
-        ? Boolean(localStorage.getItem(STORAGE_KEYS.PAGE_ID))
-        : false,
-  }));
+  const [connection, setConnection] = useState({
+    pageId: null,
+    isConnected: false,
+  });  
 
   const authConfig = useMemo(
     () => ({
@@ -95,39 +84,23 @@ export default function MessengerCard() {
       const data = await response.json();
   
       if (data.isConnected) {
-        setConnection({ pageId: "true", isConnected: true });
+        setConnection({
+          pageId: data.page_id || "true", 
+          isConnected: true,
+        });
       } else {
         setConnection({ pageId: null, isConnected: false });
-      }
-  
-      // Optional: cache the state locally
-      localStorage.setItem(STORAGE_KEYS.LAST_VALIDATED, Date.now());
-      if (data.isConnected) {
-        localStorage.setItem(STORAGE_KEYS.PAGE_ID, "true"); // or actual page_id if you return it
-      } else {
-        localStorage.removeItem(STORAGE_KEYS.PAGE_ID);
       }
     } catch (error) {
       console.error("Validation error:", error);
     }
-  }, []);
+  }, []);  
   
 
   useEffect(() => {
-    const validateConnection = async () => {
-      const storedPageId = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
-      const lastValidated = localStorage.getItem(STORAGE_KEYS.LAST_VALIDATED);
-
-      if (
-        storedPageId &&
-        (!lastValidated || Date.now() - lastValidated > VALIDATION_INTERVAL)
-      ) {
-        await checkConnection(storedPageId);
-      }
-    };
-
-    validateConnection();
+    checkConnection();
   }, [checkConnection]);
+  
 
   useEffect(() => {
     const handleOAuthCallback = async () => {
@@ -143,10 +116,10 @@ export default function MessengerCard() {
           const data = await response.json();
 
           if (data.page_id) {
-            localStorage.setItem(STORAGE_KEYS.PAGE_ID, data.page_id);
-            localStorage.setItem(STORAGE_KEYS.LAST_VALIDATED, Date.now());
+
             setConnection({ pageId: data.page_id, isConnected: true });
             toast.success("Facebook page connected successfully!");
+            checkConnection();
           }
 
           // Remove the 'code' query parameter
@@ -165,31 +138,25 @@ export default function MessengerCard() {
 
   const handleDisconnect = useCallback(async () => {
     try {
-      const pageId = localStorage.getItem(STORAGE_KEYS.PAGE_ID);
-      if (!pageId) {
-        throw new Error("Page ID not found");
-      }
-
       const response = await fetch(`${API_GATEWAY}/disconnectSocials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ platform: "facebook",id: pageId }),
+        body: JSON.stringify({ platform: "facebook" }),
       });
-
+  
       if (!response.ok) {
         throw new Error("Disconnection failed - please try again");
       }
-
-      localStorage.removeItem(STORAGE_KEYS.PAGE_ID);
-      localStorage.removeItem(STORAGE_KEYS.LAST_VALIDATED);
+  
       setConnection({ pageId: null, isConnected: false });
       toast.success("Successfully disconnected Facebook page");
+      checkConnection();
     } catch (error) {
       toast.error("Disconnection failed - please try again");
       setConnection((prev) => ({ ...prev, isConnected: true }));
     }
-  }, []);
+  }, [checkConnection]);  
 
   const handleToggle = useCallback(() => {
     if (connection.isConnected) {

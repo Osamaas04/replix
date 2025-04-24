@@ -5,26 +5,14 @@ import { Switch } from "../ui/switch";
 import { toast } from "sonner";
 
 const API_GATEWAY = "https://gw.replix.space/social";
-const STORAGE_KEYS = {
-  WHATSAPP_ID: "whatsappBusinessId",
-  LAST_VALIDATED: "waLastValidated",
-  FACEBOOK_PAGE_ID: "facebookPageId",
-};
-const VALIDATION_INTERVAL = 3600000;
 
 export default function WhatsappCard() {
-  const [connection, setConnection] = useState(() => ({
-    whatsappId:
-      typeof window !== "undefined"
-        ? localStorage.getItem(STORAGE_KEYS.WHATSAPP_ID)
-        : null,
-    isConnected:
-      typeof window !== "undefined"
-        ? Boolean(localStorage.getItem(STORAGE_KEYS.WHATSAPP_ID))
-        : false,
-  }));
+  const [connection, setConnection] = useState({
+    whatsappId: null,
+    isConnected: false,
+  });
 
-  const checkConnection = useCallback(async (whatsappId) => {
+  const checkConnection = useCallback(async () => {
     try {
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
@@ -42,48 +30,22 @@ export default function WhatsappCard() {
       } else {
         setConnection({ whatsappId: null, isConnected: false });
       }
-
-      localStorage.setItem(STORAGE_KEYS.LAST_VALIDATED, Date.now());
-      if (data.isConnected) {
-        localStorage.setItem(STORAGE_KEYS.WHATSAPP_ID, "ture");
-      } else {
-        localStorage.removeItem(STORAGE_KEYS.WHATSAPP_ID);
-      }
     } catch (error) {
       console.error("WhatsApp validation error:", error);
     }
   }, []);
 
   useEffect(() => {
-    const validateConnection = async () => {
-      const storedWhatsappId = localStorage.getItem(STORAGE_KEYS.WHATSAPP_ID);
-      const lastValidated = localStorage.getItem(STORAGE_KEYS.LAST_VALIDATED);
-
-      if (
-        storedWhatsappId &&
-        (!lastValidated || Date.now() - lastValidated > VALIDATION_INTERVAL)
-      ) {
-        await checkConnection(storedWhatsappId);
-      }
-    };
-
-    validateConnection();
+    checkConnection();
   }, [checkConnection]);
 
   const connectWhatsApp = useCallback(async () => {
     try {
-      const facebookPageId = localStorage.getItem(
-        STORAGE_KEYS.FACEBOOK_PAGE_ID
-      );
-      if (!facebookPageId) {
-        throw new Error("Facebook Page ID not found");
-      }
-
       const response = await fetch(`${API_GATEWAY}/connectWhatsapp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ page_id: facebookPageId }),
+        body: JSON.stringify({}),
       });
 
       const data = await response.json();
@@ -92,42 +54,32 @@ export default function WhatsappCard() {
         throw new Error("WhatsApp connection failed");
       }
 
-      localStorage.setItem(STORAGE_KEYS.WHATSAPP_ID, data.whatsappId);
       setConnection({ whatsappId: data.whatsappId, isConnected: true });
       toast.success("Successfully connected WhatsApp");
     } catch (error) {
       setConnection((prev) => ({ ...prev, whatsappId: null }));
-      if (error.message === "Facebook Page ID not found") {
-        toast.error(`Kindly Integrate Messenger First`);
-      } else {
-        toast.error(`Failed to integrate WhatsApp: ${error.message}`);
-      }
+      toast.error(`Failed to integrate WhatsApp: ${error.message}`);
     }
   }, []);
 
   const handleDisconnect = useCallback(async () => {
     try {
-      const whatsappId = localStorage.getItem(STORAGE_KEYS.WHATSAPP_ID);
-      if (!whatsappId) throw new Error("WhatsApp ID not found");
-
       const response = await fetch(`${API_GATEWAY}/disconnectSocials`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ platform: "whatsapp", id: whatsappId }),
+        body: JSON.stringify({ platform: "whatsapp", id: connection.whatsappId }),
       });
 
       if (!response.ok) throw new Error("Disconnection failed");
 
-      localStorage.removeItem(STORAGE_KEYS.WHATSAPP_ID);
-      localStorage.removeItem(STORAGE_KEYS.LAST_VALIDATED);
       setConnection({ whatsappId: null, isConnected: false });
       toast.success("Successfully disconnected WhatsApp");
     } catch (error) {
       toast.error("Failed to disconnect WhatsApp");
       setConnection((prev) => ({ ...prev, isConnected: true }));
     }
-  }, []);
+  }, [connection.whatsappId]);
 
   const handleToggle = useCallback(() => {
     if (connection.isConnected) {
@@ -138,7 +90,7 @@ export default function WhatsappCard() {
   }, [connection.isConnected, handleDisconnect, connectWhatsApp]);
 
   return (
-    <div className="bg-primary text-secondary border border-secondary/70 rounded-md p-8 grid gap-8  ">
+    <div className="bg-primary text-secondary border border-secondary/70 rounded-md p-8 grid gap-8">
       <div className="grid gap-2">
         <div className="flex items-center gap-4">
           <svg
