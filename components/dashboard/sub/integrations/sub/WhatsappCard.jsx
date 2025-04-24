@@ -126,7 +126,7 @@ export default function WhatsappCard() {
 
       <div className="flex justify-end items-center">
         {isLoading ? (
-          <div className="animate-spin border-4 border-t-4 border-primary rounded-full w-8 h-8"></div> // Loading Spinner
+          <div className="animate-spin border-4 border-t-4 border-secondary rounded-full w-8 h-8"></div> // Loading Spinner
         ) : (
           <Switch
             checked={connection.isConnected}
