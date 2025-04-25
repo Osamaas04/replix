@@ -180,7 +180,7 @@ export default function MessengerCard() {
   if (loading) {
     return (
       <div className="p-8">
-        <Skeleton className="h-40 w-full rounded-md" />
+        <Skeleton className="h-[9.6rem] w-full rounded-md" />
       </div>
     );
   }
