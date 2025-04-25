@@ -32,7 +32,7 @@ export default function UploadFineTune() {
 
       const formData = new FormData();
       formData.append("dataset", selectedFile);
-      formData.append("purpose", "validation");
+      formData.append("purpose", "fine-tune");
 
       const response = await fetch(`${API_GATEWAY}`, {
         method: "POST",
