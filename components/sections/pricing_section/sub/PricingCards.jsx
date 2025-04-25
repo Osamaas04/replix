@@ -1,14 +1,48 @@
 import Feature from "./Feature";
 import { cn } from "@/lib/utils";
 
-export default function PricingCards({ title, price, description, features, billing, href, className }) {
+export default function PricingCards({
+  title,
+  price,
+  description,
+  features,
+  billing,
+  priceId,
+  className,
+}) {
+  const handlePurchase = async () => {
+    try {
+      const response = await fetch("https://subscription.replix.space/api/checkout", {
+        method: "POST",
+        headers: {"Content-Type": "application/json",},
+        body: JSON.stringify({ priceId, user_id: "4c3fd949-6af2-422e-aa3a-93a21f4517eb" }),
+      });
+
+      const data = await response.json();
+
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        console.error("Stripe URL not returned");
+      }
+    } catch (error) {
+      console.error("Purchase failed:", error);
+    }
+  };
+
   return (
-    <div className={cn("bg-primary/30 backdrop-blur-md rounded-md border border-secondary/70 w-[20rem] p-8 shadow-[inset_-30px_30px_40px_0_rgba(255,204,0,0.1)]", className)}>
+    <div
+      className={cn(
+        "bg-primary/30 backdrop-blur-md rounded-md border border-secondary/70 w-[20rem] p-8 shadow-[inset_-30px_30px_40px_0_rgba(255,204,0,0.1)]",
+        className
+      )}
+    >
       <div className="text-secondary font-raleway grid gap-8">
         <div className="grid gap-8 justify-start">
           <h1 className="text-2xl">{title}</h1>
           <h2 className="text-3xl flex gap-3 items-end">
-            {price}<span className="text-base text-secondary/70">/{billing}</span>
+            {price}
+            <span className="text-base text-secondary/70">/{billing}</span>
           </h2>
           <p className="text-sm">{description}</p>
         </div>
@@ -19,9 +53,12 @@ export default function PricingCards({ title, price, description, features, bill
           ))}
         </div>
         <div className="grid justify-center">
-          <a href={href} className="bg-secondary text-primary border hover:bg-primary hover:text-secondary hover:border-secondary rounded-md px-12 py-2 transition-all duration-500">
+          <button
+            onClick={handlePurchase}
+            className="bg-secondary text-primary border hover:bg-primary hover:text-secondary hover:border-secondary rounded-md px-12 py-2 transition-all duration-500"
+          >
             Purchase
-          </a>
+          </button>
         </div>
       </div>
     </div>

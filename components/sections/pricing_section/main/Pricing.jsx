@@ -20,7 +20,7 @@ export default function Pricing() {
         "AI-generated insights",
       ],
       billing: "mo",
-      href: "#",
+      priceId: "price_1RFvvlFkqathCLJmjPaoRSCb",
     },
     {
       title: "Pro AI",
@@ -33,7 +33,7 @@ export default function Pricing() {
         "AI-powered automation",
       ],
       billing: "mo",
-      href: "#"
+      priceId: "price_1RFvwRFkqathCLJmal7eJ6z5",
     },
     {
       title: "Enterprise AI",
@@ -46,7 +46,7 @@ export default function Pricing() {
         "AI-powered workflow automation",
       ],
       billing: "mo",
-      href: "#"
+      priceId: "price_1RFvwzFkqathCLJmGNdYcGO9",
     },
   ];
 
@@ -62,7 +62,7 @@ export default function Pricing() {
         "AI-generated insights",
       ],
       billing: "ann",
-      href: "#",
+      priceId: "price_1RFvyAFkqathCLJm7au2D00K",
     },
     {
       title: "Pro AI",
@@ -75,7 +75,7 @@ export default function Pricing() {
         "AI-powered automation",
       ],
       billing: "ann",
-      href: "#"
+      priceId: "price_1RFvyjFkqathCLJmERiWYgVA",
     },
     {
       title: "Enterprise AI",
@@ -88,7 +88,7 @@ export default function Pricing() {
         "AI-powered workflow automation",
       ],
       billing: "ann",
-      href: "#"
+      priceId: "price_1RFvyxFkqathCLJmZMjK5Wsx",
     },
   ];
 
@@ -124,7 +124,7 @@ export default function Pricing() {
               description={plan.description}
               features={plan.features}
               billing={plan.billing}
-              href={plan.href}
+              priceId={plan.priceId}
               className={plan.price === "$590" ? "border-[#FFA500]/50" : ""}
             />
           ))
@@ -143,7 +143,7 @@ export default function Pricing() {
               description={plan.description}
               features={plan.features}
               billing={plan.billing}
-              href={plan.href}
+              priceId={plan.priceId}
               className={plan.price === "$59" ? "border-[#FFA500]/50" : ""}
             />
           ))
