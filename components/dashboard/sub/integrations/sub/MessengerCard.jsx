@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Switch } from "../ui/switch";
 import { toast } from "sonner";
+import { Skeleton } from "../ui/skeleton";
 
 const API_GATEWAY = "https://gw.replix.space/social";
 
@@ -12,10 +13,12 @@ export default function MessengerCard() {
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
 
+  const [loading, setLoading] = useState(true);
+
   const [connection, setConnection] = useState({
     pageId: null,
     isConnected: false,
-  });  
+  });
 
   const authConfig = useMemo(
     () => ({
@@ -74,18 +77,19 @@ export default function MessengerCard() {
 
   const checkConnection = useCallback(async () => {
     try {
+      setLoading(true);
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ platform: "facebook" }),
       });
-  
+
       const data = await response.json();
-  
+
       if (data.isConnected) {
         setConnection({
-          pageId: data.page_id || "true", 
+          pageId: data.page_id || "true",
           isConnected: true,
         });
       } else {
@@ -93,14 +97,14 @@ export default function MessengerCard() {
       }
     } catch (error) {
       console.error("Validation error:", error);
+    } finally {
+      setLoading(false);
     }
-  }, []);  
-  
+  }, []);
 
   useEffect(() => {
     checkConnection();
   }, [checkConnection]);
-  
 
   useEffect(() => {
     const handleOAuthCallback = async () => {
@@ -116,7 +120,6 @@ export default function MessengerCard() {
           const data = await response.json();
 
           if (data.page_id) {
-
             setConnection({ pageId: data.page_id, isConnected: true });
             toast.success("Facebook page connected successfully!");
             checkConnection();
@@ -144,11 +147,11 @@ export default function MessengerCard() {
         credentials: "include",
         body: JSON.stringify({ platform: "facebook" }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Disconnection failed - please try again");
       }
-  
+
       setConnection({ pageId: null, isConnected: false });
       toast.success("Successfully disconnected Facebook page");
       checkConnection();
@@ -156,7 +159,7 @@ export default function MessengerCard() {
       toast.error("Disconnection failed - please try again");
       setConnection((prev) => ({ ...prev, isConnected: true }));
     }
-  }, [checkConnection]);  
+  }, [checkConnection]);
 
   const handleToggle = useCallback(() => {
     if (connection.isConnected) {
@@ -173,6 +176,14 @@ export default function MessengerCard() {
       );
     }
   }, [connection.isConnected, handleDisconnect, authConfig, router]);
+
+  if (loading) {
+    return (
+      <div className="p-8">
+        <Skeleton className="h-40 w-full rounded-md" />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-primary text-secondary border border-secondary/70 rounded-md p-8 grid gap-8 ">
