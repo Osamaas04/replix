@@ -177,13 +177,13 @@ export default function MessengerCard() {
     }
   }, [connection.isConnected, handleDisconnect, authConfig, router]);
 
-  if (loading) {
-    return (
-      <div className="p-8">
-        <Skeleton className="h-[9.6rem] w-full rounded-md" />
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="p-8">
+  //       <Skeleton className="h-[9.6rem] w-full rounded-md" />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="bg-primary text-secondary border border-secondary/70 rounded-md p-8 grid gap-8 ">
