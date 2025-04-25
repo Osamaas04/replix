@@ -1,6 +1,8 @@
 import Feature from "./Feature";
 import { cn } from "@/lib/utils";
 
+const API_GATEWAY = "https://gw.replix.space/subscription";
+
 export default function PricingCards({
   title,
   price,
@@ -12,10 +14,11 @@ export default function PricingCards({
 }) {
   const handlePurchase = async () => {
     try {
-      const response = await fetch("https://subscription.replix.space/api/checkout", {
+      const response = await fetch(`${API_GATEWAY}/checkout`, {
         method: "POST",
-        headers: {"Content-Type": "application/json",},
-        body: JSON.stringify({ priceId, user_id: "4c3fd949-6af2-422e-aa3a-93a21f4517eb" }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ priceId }),
       });
 
       const data = await response.json();
