@@ -19,7 +19,11 @@ const PLATFORM_NAMES = {
 };
 
 export default function Automations() {
-  const [isActivated, setIsActivated] = useState(false);
+  const [isActivated, setIsActivated] = useState(() => {
+    const stored = localStorage.getItem("isActivated");
+    return stored === null ? false : stored === "true";
+  });
+  
   const [automations, setAutomations] = useState({
     messenger: false,
     instagram: false,
@@ -27,6 +31,10 @@ export default function Automations() {
     x: false,
   });
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    localStorage.setItem("isActivated", isActivated);
+  }, [isActivated]);  
 
   useEffect(() => {
     async function fetchStatuses() {
