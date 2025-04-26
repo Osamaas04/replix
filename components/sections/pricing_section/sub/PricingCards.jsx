@@ -14,14 +14,19 @@ export default function PricingCards({
 }) {
   const handlePurchase = async () => {
     try {
-      const response = await fetch(`${API_GATEWAY}/checkout`, {
+      const response = await fetch(`${API_GATEWAY}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ priceId }),
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const text = await response.text();
+      const data = text ? JSON.parse(text) : null;
 
       if (data?.url) {
         window.location.href = data.url;
