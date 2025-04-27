@@ -34,7 +34,7 @@ async function handleLogin(values, setLoading, router) {
     const data = await response.json();
 
     if (!response.ok) {
-      toast.error(`Login failed: ${data.message || "Try again."}`);
+      toast.error("Incorrect Email or Password");
       return;
     }
 
