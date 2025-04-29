@@ -1,4 +1,4 @@
-import { Upload, FileJson } from "lucide-react";
+import { Upload, FileJson, CheckCircle } from "lucide-react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 
@@ -7,6 +7,7 @@ const API_GATEWAY = "https://gw.replix.space/files";
 export default function UploadFineTune() {
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isUploaded, setIsUploaded] = useState(false);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -45,7 +46,7 @@ export default function UploadFineTune() {
       }
 
       toast.success("File has been uploaded successfully");
-      setSelectedFile(null);
+      setIsUploaded(true);
     } catch (error) {
       toast.error("Failed to upload the file - please try again");
     }
@@ -90,22 +91,26 @@ export default function UploadFineTune() {
               </p>
             </div>
           </div>
-          <div className="flex gap-4">
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="bg-primary border border-secondary text-secondary rounded-md px-2 py-1"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              onClick={handleFileSubmit}
-              className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1"
-            >
-              Upload
-            </button>
-          </div>
+          {isUploaded ? (
+            <CheckCircle size={32} className="text-green-500" />
+          ) : (
+            <div className="flex gap-4">
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="bg-primary border border-secondary text-secondary rounded-md px-2 py-1"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleFileSubmit}
+                className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1"
+              >
+                Upload
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
