@@ -13,7 +13,7 @@ export default function UploadHandler() {
         </div>
 
         <div className="grid gap-4 w-full h-full">
-          <div className="bg-primary w-full h-full flex flex-col items-center gap-8 border border-secondary/70 rounded-md ">
+          <div className="bg-primary w-full h-[13rem] flex gap-8 border border-secondary/70 rounded-md ">
             <UploadFineTune />
           </div>
           <div className="bg-primary w-full h-full flex flex-col items-center gap-8 border border-secondary/70 rounded-md ">
