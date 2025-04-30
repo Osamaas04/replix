@@ -101,6 +101,7 @@ export default function UploadFineTune() {
         className="hidden"
         ref={fileInputRef}
         onChange={handleFileChange}
+        accept=".jsonl"
       />
       {!selectedFile ? (
         <div className="flex flex-col gap-4 justify-center items-center rounded-md my-auto">
@@ -139,14 +140,14 @@ export default function UploadFineTune() {
               <button
                 type="button"
                 onClick={handleCancel}
-                className="bg-primary border border-secondary text-secondary rounded-md px-2 py-1"
+                className="bg-primary border border-secondary text-secondary rounded-md px-2 py-1 w-20"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleFileSubmit}
-                className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1"
+                className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1 w-20"
               >
                 Upload
               </button>
