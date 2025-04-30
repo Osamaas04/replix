@@ -21,7 +21,7 @@ export default function Context() {
         Context
       </h1>
       <textarea
-        className="w-full h-full p-4 rounded-md bg-background text-secondary resize-none focus:outline-none placeholder:text-secondary/70"
+        className="w-full md:h-full h-56 p-4 rounded-md bg-background text-secondary resize-none focus:outline-none placeholder:text-secondary/70"
         placeholder="Enter context here to help guide the AI model..."
         value={context}
         onChange={(e) => setContext(e.target.value)}
