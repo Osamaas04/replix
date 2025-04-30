@@ -10,6 +10,7 @@ const API_GATEWAY = "https://gw.replix.space/files";
 export default function UploadFineTune() {
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -22,12 +23,15 @@ export default function UploadFineTune() {
     if (file) {
       setSelectedFile(file);
       setIsUploaded(false);
+      setIsUploading(false);
       setUploadProgress(0);
     }
   };
 
   const handleCancel = () => {
     setSelectedFile(null);
+    setIsUploaded(false);
+    setIsUploading(false);
     setUploadProgress(0);
     if (fileInputRef.current) {
       fileInputRef.current.value = null;
@@ -38,6 +42,10 @@ export default function UploadFineTune() {
     try {
       if (!selectedFile) return;
 
+      setIsUploading(true);
+      setUploadProgress(0);
+      setIsUploaded(false);
+
       const formData = new FormData();
       formData.append("dataset", selectedFile);
       formData.append("purpose", "fine-tune");
@@ -46,12 +54,15 @@ export default function UploadFineTune() {
 
       xhr.upload.onprogress = (event) => {
         if (event.lengthComputable) {
-          const percentComplete = Math.round((event.loaded / event.total) * 100);
+          const percentComplete = Math.round(
+            (event.loaded / event.total) * 100
+          );
           setUploadProgress(percentComplete);
         }
       };
 
       xhr.onload = () => {
+        setIsUploading(false);
         if (xhr.status >= 200 && xhr.status < 300) {
           toast.success("File has been uploaded successfully");
           setIsUploaded(true);
@@ -63,6 +74,7 @@ export default function UploadFineTune() {
       };
 
       xhr.onerror = () => {
+        setIsUploading(false);
         toast.error("Failed to upload the file - please try again");
         setUploadProgress(0);
       };
@@ -71,6 +83,7 @@ export default function UploadFineTune() {
       xhr.withCredentials = true;
       xhr.send(formData);
     } catch (error) {
+      setIsUploading(false);
       toast.error("Failed to upload the file - please try again");
       setUploadProgress(0);
     }
@@ -115,7 +128,7 @@ export default function UploadFineTune() {
               </p>
             </div>
           </div>
-          {uploadProgress > 0 && uploadProgress < 100 ? (
+          {isUploading ? (
             <div className="w-32">
               <Progress value={uploadProgress} />
             </div>
