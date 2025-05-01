@@ -33,7 +33,7 @@ export default function UploadHandler() {
               </button> */}
               <button
                 type="button"
-                className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1 w-20"
+                className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1 w-28"
               >
                 Start Train
               </button>
