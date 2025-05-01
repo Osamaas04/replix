@@ -3,7 +3,7 @@
 import { Upload, FileJson, CheckCircle } from "lucide-react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
-import { Progress } from "../ui/progress";
+import { Progress } from "../../home/ui/progress";
 
 const API_GATEWAY = "https://gw.replix.space/files";
 
