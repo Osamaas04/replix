@@ -1,47 +1,47 @@
+import Link from "next/link";
+import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
+
 export default function AccountDetails() {
   return (
-    <div className="text-secondary w-auto lg:w-[68vw]">
-      <form action="" className="grid grid-cols-2 gap-y-4">
-        {/* Name */}
-        <div className="col-span-2 flex items-center gap-4">
-          <label htmlFor="Name" className="w-40">Name</label>
-          <input
-            type="text"
-            name="Name"
-            className="bg-primary rounded-md border border-secondary/20 px-4 py-1 focus:outline-0 placeholder:text-sm w-full"
-          />
+    <div className="text-secondary w-[20rem]">
+      <div className="grid gap-4">
+        <div className="grid gap-4">
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+
+          <h1 className="font-semibold text-xl">Osama Alasmar</h1>
+          <hr />
         </div>
 
-        {/* Company Name */}
-        <div className="col-span-2 flex items-center gap-4">
-          <label htmlFor="Company Name" className="w-40">Company Name</label>
-          <input
-            type="text"
-            name="Company Name"
-            className="bg-primary rounded-md border border-secondary/20 px-4 py-1 focus:outline-0 placeholder:text-sm w-full"
-          />
+        <div className="grid gap-4">
+          <div>
+            <h3>osamaas_@gmail.com</h3>
+            <Link href="#" className="underline underline-offset-2 text-sm">
+              Change email
+            </Link>
+          </div>
+
+          <hr />
         </div>
 
-        {/* Email */}
-        <div className="col-span-2 flex items-center gap-4">
-          <label htmlFor="Email" className="w-40">Email</label>
-          <input
-            type="text"
-            name="Email"
-            className="bg-primary rounded-md border border-secondary/20 px-4 py-1 focus:outline-0 placeholder:text-sm w-full"
-          />
+        <div className="grid gap-4">
+          <div>
+            <h3>Password</h3>
+            <Link href="#" className="underline underline-offset-2 text-sm">
+              Change password
+            </Link>
+          </div>
+          <hr />
         </div>
 
-        {/* Role */}
-        <div className="col-span-2 flex items-center gap-4">
-          <label htmlFor="Role" className="w-40">Role</label>
-          <input
-            type="text"
-            name="Role"
-            className="bg-primary rounded-md border border-secondary/20 px-4 py-1 focus:outline-0 placeholder:text-sm w-full"
-          />
+        <div>
+          <button className="bg-red-700 border border-secondary text-secondary rounded-md px-2 py-1 w-20">
+            Logout
+          </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

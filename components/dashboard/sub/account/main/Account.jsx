@@ -1,4 +1,5 @@
 import AccountDetails from "../sub/AccountDetails";
+import PlanDetails from "../sub/PlanDetails";
 
 export default function Account() {
   return (
@@ -11,7 +12,10 @@ export default function Account() {
           </h3>
         </div>
 
-        <AccountDetails />
+        <div className="flex gap-4 w-auto lg:w-[68vw]">
+          <PlanDetails />
+          <AccountDetails />
+        </div>
       </div>
     </div>
   );

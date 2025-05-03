@@ -2,99 +2,98 @@ import { useState, useEffect } from "react";
 import Headline from "../sub/Headline";
 import PricingCards from "../sub/PricingCards";
 import { Switch } from "@/components/dashboard/sub/integrations/ui/switch";
-import { motion } from "framer-motion"; // Import framer-motion
+import { motion } from "framer-motion";
+
+export const pricingPlansMo = [
+  {
+    title: "Starter AI",
+    price: "$29",
+    description: "Getting started with AI-driven support.",
+    features: [
+      "2 social media account integrations",
+      "Basic analytics dashboard",
+      "Email support",
+      "AI-generated insights",
+    ],
+    billing: "mo",
+    priceId: "price_1RFvvlFkqathCLJmjPaoRSCb",
+  },
+  {
+    title: "Pro AI",
+    price: "$59",
+    description: "Advanced AI features for professionals.",
+    features: [
+      "4 social media account integrations",
+      "Advanced analytics dashboard",
+      "Priority email support",
+      "AI-powered automation",
+    ],
+    billing: "mo",
+    priceId: "price_1RFvwRFkqathCLJmal7eJ6z5",
+  },
+  {
+    title: "Enterprise AI",
+    price: "$99",
+    description: "Enterprise-level AI tools.",
+    features: [
+      "Unlimited social media account",
+      "Custom analytics & reporting",
+      "24/7 dedicated support",
+      "AI-powered workflow automation",
+    ],
+    billing: "mo",
+    priceId: "price_1RFvwzFkqathCLJmGNdYcGO9",
+  },
+];
+
+export const pricingPlansAnn = [
+  {
+    title: "Starter AI",
+    price: "$290",
+    description: "Getting started with AI-driven support.",
+    features: [
+      "2 social media account integrations",
+      "Basic analytics dashboard",
+      "Email support",
+      "AI-generated insights",
+    ],
+    billing: "ann",
+    priceId: "price_1RFvyAFkqathCLJm7au2D00K",
+  },
+  {
+    title: "Pro AI",
+    price: "$590",
+    description: "Advanced AI features for professionals.",
+    features: [
+      "4 social media account integrations",
+      "Advanced analytics dashboard",
+      "Priority email support",
+      "AI-powered automation",
+    ],
+    billing: "ann",
+    priceId: "price_1RFvyjFkqathCLJmERiWYgVA",
+  },
+  {
+    title: "Enterprise AI",
+    price: "$990",
+    description: "Enterprise-level AI tools.",
+    features: [
+      "Unlimited social media account",
+      "Custom analytics & reporting",
+      "24/7 dedicated support",
+      "AI-powered workflow automation",
+    ],
+    billing: "ann",
+    priceId: "price_1RFvyxFkqathCLJmZMjK5Wsx",
+  },
+];
 
 export default function Pricing() {
   const [isActivated, setIsActivated] = useState(false);
-  const [animationKey, setAnimationKey] = useState(0); // Add state to trigger re-render
+  const [animationKey, setAnimationKey] = useState(0); 
 
-  const pricingPlansMo = [
-    {
-      title: "Starter AI",
-      price: "$29",
-      description: "Getting started with AI-driven support.",
-      features: [
-        "2 social media account integrations",
-        "Basic analytics dashboard",
-        "Email support",
-        "AI-generated insights",
-      ],
-      billing: "mo",
-      priceId: "price_1RFvvlFkqathCLJmjPaoRSCb",
-    },
-    {
-      title: "Pro AI",
-      price: "$59",
-      description: "Advanced AI features for professionals.",
-      features: [
-        "4 social media account integrations",
-        "Advanced analytics dashboard",
-        "Priority email support",
-        "AI-powered automation",
-      ],
-      billing: "mo",
-      priceId: "price_1RFvwRFkqathCLJmal7eJ6z5",
-    },
-    {
-      title: "Enterprise AI",
-      price: "$99",
-      description: "Enterprise-level AI tools.",
-      features: [
-        "Unlimited social media account",
-        "Custom analytics & reporting",
-        "24/7 dedicated support",
-        "AI-powered workflow automation",
-      ],
-      billing: "mo",
-      priceId: "price_1RFvwzFkqathCLJmGNdYcGO9",
-    },
-  ];
-
-  const pricingPlansAnn = [
-    {
-      title: "Starter AI",
-      price: "$290",
-      description: "Getting started with AI-driven support.",
-      features: [
-        "2 social media account integrations",
-        "Basic analytics dashboard",
-        "Email support",
-        "AI-generated insights",
-      ],
-      billing: "ann",
-      priceId: "price_1RFvyAFkqathCLJm7au2D00K",
-    },
-    {
-      title: "Pro AI",
-      price: "$590",
-      description: "Advanced AI features for professionals.",
-      features: [
-        "4 social media account integrations",
-        "Advanced analytics dashboard",
-        "Priority email support",
-        "AI-powered automation",
-      ],
-      billing: "ann",
-      priceId: "price_1RFvyjFkqathCLJmERiWYgVA",
-    },
-    {
-      title: "Enterprise AI",
-      price: "$990",
-      description: "Enterprise-level AI tools.",
-      features: [
-        "Unlimited social media account",
-        "Custom analytics & reporting",
-        "24/7 dedicated support",
-        "AI-powered workflow automation",
-      ],
-      billing: "ann",
-      priceId: "price_1RFvyxFkqathCLJmZMjK5Wsx",
-    },
-  ];
-
-  // Trigger animation reset when switching plans
   useEffect(() => {
-    setAnimationKey(prevKey => prevKey + 1); // Increment the key to trigger animation
+    setAnimationKey(prevKey => prevKey + 1);
   }, [isActivated]);
 
   return (
