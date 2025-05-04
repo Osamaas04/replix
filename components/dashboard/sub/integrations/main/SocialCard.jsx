@@ -4,7 +4,7 @@ import InstagramCard from "../sub/InstagramCard";
 import MessengerCard from "../sub/MessengerCard";
 import WhatsappCard from "../sub/WhatsappCard";
 import XCard from "../sub/XCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SocialCards() {
   const [loading, setLoading] = useState(true);
@@ -12,9 +12,11 @@ export default function SocialCards() {
   const [instagramLoading, setInstagramLoading] = useState(true);
   const [whatsappLoading, setWhatsappLoading] = useState(true);
 
-  if(!messengerLoading && !instagramLoading && !whatsappLoading) {
-    setLoading(false)
-  }
+  useEffect(() => {
+    if (!messengerLoading && !instagramLoading && !whatsappLoading) {
+      setLoading(false);
+    }
+  }, [messengerLoading, instagramLoading, whatsappLoading]);
 
   return (
     <div>
