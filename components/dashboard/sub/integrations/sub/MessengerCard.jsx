@@ -214,10 +214,16 @@ export default function MessengerCard() {
       </div>
 
       <div className="flex justify-end items-center">
-        <Switch
-          checked={connection.isConnected}
-          onCheckedChange={handleToggle}
-        />
+        {loading ? (
+          <div className="inline-flex h-5 w-9 rounded-full bg-secondary/10 animate-pulse">
+            <div className="h-4 w-4 rounded-full bg-secondary/15 translate-x-1" />
+          </div>
+        ) : (
+          <Switch
+            checked={connection.isConnected}
+            onCheckedChange={handleToggle}
+          />
+        )}
       </div>
     </div>
   );
