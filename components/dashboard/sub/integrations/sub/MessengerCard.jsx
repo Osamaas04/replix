@@ -8,12 +8,10 @@ import { Skeleton } from "../ui/skeleton";
 
 const API_GATEWAY = "https://gw.replix.space/social";
 
-export default function MessengerCard() {
+export default function MessengerCard({loading, setLoading}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
-
-  const [loading, setLoading] = useState(true);
 
   const [connection, setConnection] = useState({
     pageId: null,

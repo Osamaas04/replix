@@ -1,9 +1,13 @@
+"use client"
+
 import InstagramCard from "../sub/InstagramCard";
 import MessengerCard from "../sub/MessengerCard";
 import WhatsappCard from "../sub/WhatsappCard";
 import XCard from "../sub/XCard";
+import { useState } from "react";
 
 export default function SocialCards() {
+  const [loading, setLoading] = useState(true);
   return (
     <div>
       <div className="grid gap-4 px-4 py-12 lg:py-14 lg:pr-14 lg:pl-[19.5rem] w-auto">
@@ -14,9 +18,9 @@ export default function SocialCards() {
           </h3>
         </div>
         <div className="grid lg:grid-cols-2 gap-4 w-auto lg:w-[68vw]">
-          <MessengerCard />
-          <InstagramCard />
-          <WhatsappCard />
+          <MessengerCard loading={loading} setLoading={setLoading}/>
+          <InstagramCard loading={loading} setLoading={setLoading}/>
+          <WhatsappCard loading={loading} setLoading={setLoading}/>
           <XCard />
         </div>
       </div>

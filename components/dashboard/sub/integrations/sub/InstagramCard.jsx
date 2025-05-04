@@ -6,13 +6,11 @@ import { toast } from "sonner";
 
 const API_GATEWAY = "https://gw.replix.space/social";
 
-export default function InstagramCard() {
+export default function InstagramCard({loading, setLoading}) {
   const [connection, setConnection] = useState({
     instagramId: null,
     isConnected: false,
   });
-
-  const [loading, setLoading] = useState(true);
 
   const checkConnection = useCallback(async () => {
     try {

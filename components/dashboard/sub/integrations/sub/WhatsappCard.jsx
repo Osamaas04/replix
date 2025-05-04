@@ -6,13 +6,11 @@ import { toast } from "sonner";
 
 const API_GATEWAY = "https://gw.replix.space/social";
 
-export default function WhatsappCard() {
+export default function WhatsappCard({loading, setLoading}) {
   const [connection, setConnection] = useState({
     whatsappId: null,
     isConnected: false,
   });
-
-  const [loading, setLoading] = useState(true);
 
   const checkConnection = useCallback(async () => {
     try {
