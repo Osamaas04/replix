@@ -59,7 +59,7 @@ export function ResolvedCases() {
                           {totalVisitors.toLocaleString()}
                         </tspan>
                         <tspan x={viewBox.cx} y={(viewBox.cy || 0) + 24} className="fill-secondary">
-                          Visitors
+                          Cases
                         </tspan>
                       </text>
                     );

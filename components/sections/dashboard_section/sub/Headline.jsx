@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HeroPic from "@/public/assets/hero-dark.png";
+import HeroPic from "@/public/assets/hero.png";
 import { BorderBeam } from "../ui/border-beam";
 import { motion } from "framer-motion";
 
@@ -24,7 +24,7 @@ export default function Headline() {
       }}
     >
       <div className="flex flex-col-reverse">
-        <div className="bg-gradient-to-b from-transparent to-primary w-[100%] h-[100%] absolute z-10" />
+        <div className="bg-gradient-to-b from-transparent to-primary w-[100%] h-[50%] absolute z-10" />
         <Image
           src={HeroPic}
           alt="wv"
