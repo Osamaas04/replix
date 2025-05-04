@@ -56,7 +56,10 @@ function DashboardContent() {
 
         <div>
           <aside
-            className={`fixed bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4 ${isDisplayed ? "inline-grid z-10" : "hidden"}`}>
+            className={`fixed bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4 ${
+              isDisplayed ? "inline-grid z-10" : "hidden"
+            }`}
+          >
             <div className="grid items-baseline">
               <div className="flex items-center justify-between px-3">
                 <Link href="/dashboard" className="flex space-x-3 items-center">
@@ -120,15 +123,13 @@ function DashboardContent() {
             </div>
           </aside>
 
-          <div className={`${isDisplayed && "mt-[56px]"} `} >
-
-          {menuItem === "Home" && <Home />}
-          {menuItem === "Analytics" && <Analytics />}
-          {menuItem === "Automations" && <Automations />}
-          {menuItem === "Integrations" && <SocialCards />}
-          {menuItem=== "Train AI" && <TrainAi />}
-          {menuItem=== "Account" && <Account />}
-          
+          <div className={`${isDisplayed && "mt-[56px]"} `}>
+            {menuItem === "Home" && <Home />}
+            {menuItem === "Analytics" && <Analytics />}
+            {menuItem === "Automations" && <Automations />}
+            {menuItem === "Integrations" && <SocialCards />}
+            {menuItem === "Train AI" && <TrainAi />}
+            {menuItem === "Account" && <Account />}
           </div>
         </div>
       </div>
@@ -137,9 +138,5 @@ function DashboardContent() {
 }
 
 export default function MainDashboard() {
-  return (
-    <Suspense fallback={<div>Loading Dashboard...</div>}>
-      <DashboardContent />
-    </Suspense>
-  );
+  return <DashboardContent />;
 }
