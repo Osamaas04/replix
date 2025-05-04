@@ -12,8 +12,11 @@ export default function InstagramCard() {
     isConnected: false,
   });
 
+  const [loading, setLoading] = useState(true);
+
   const checkConnection = useCallback(async () => {
     try {
+      setLoading(true);
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -33,6 +36,8 @@ export default function InstagramCard() {
       }
     } catch (error) {
       console.error("Instagram validation error:", error);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -77,7 +82,10 @@ export default function InstagramCard() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ platform: "instagram", id: connection.instagramId }),
+        body: JSON.stringify({
+          platform: "instagram",
+          id: connection.instagramId,
+        }),
       });
 
       if (!response.ok) {
@@ -121,10 +129,14 @@ export default function InstagramCard() {
         </h3>
       </div>
       <div className="flex justify-end items-center">
-        <Switch
-          checked={connection.isConnected}
-          onCheckedChange={handleToggle}
-        />
+        {loading ? (
+          <div className="inline-flex h-5 w-9 rounded-full bg-secondary/10 animate-pulse" />
+        ) : (
+          <Switch
+            checked={connection.isConnected}
+            onCheckedChange={handleToggle}
+          />
+        )}
       </div>
     </div>
   );

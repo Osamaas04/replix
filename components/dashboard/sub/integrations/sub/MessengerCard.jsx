@@ -215,9 +215,7 @@ export default function MessengerCard() {
 
       <div className="flex justify-end items-center">
         {loading ? (
-          <div className="inline-flex h-5 w-9 rounded-full bg-secondary/10 animate-pulse">
-            
-          </div>
+          <div className="inline-flex h-5 w-9 rounded-full bg-secondary/10 animate-pulse" />
         ) : (
           <Switch
             checked={connection.isConnected}

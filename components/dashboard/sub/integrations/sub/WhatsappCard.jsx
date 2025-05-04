@@ -12,8 +12,11 @@ export default function WhatsappCard() {
     isConnected: false,
   });
 
+  const [loading, setLoading] = useState(true);
+
   const checkConnection = useCallback(async () => {
     try {
+      setLoading(true);
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -32,6 +35,8 @@ export default function WhatsappCard() {
       }
     } catch (error) {
       console.error("WhatsApp validation error:", error);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -111,10 +116,14 @@ export default function WhatsappCard() {
       </div>
 
       <div className="flex justify-end items-center">
-        <Switch
-          checked={connection.isConnected}
-          onCheckedChange={handleToggle}
-        />
+      {loading ? (
+          <div className="inline-flex h-5 w-9 rounded-full bg-secondary/10 animate-pulse" />
+        ) : (
+          <Switch
+            checked={connection.isConnected}
+            onCheckedChange={handleToggle}
+          />
+        )}
       </div>
     </div>
   );
