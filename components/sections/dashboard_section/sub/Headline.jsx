@@ -13,7 +13,7 @@ export default function Headline() {
       animate={{
         boxShadow: [
           "0 -150px 300px 0 rgba(255, 204, 0, 0.1)",
-          "0 -200px 400px 0 rgba(255, 204, 0, 0.2)", // Larger shadow with more opacity
+          "0 -200px 400px 0 rgba(255, 204, 0, 0.2)",
           "0 -150px 300px 0 rgba(255, 204, 0, 0.1)",
         ],
       }}

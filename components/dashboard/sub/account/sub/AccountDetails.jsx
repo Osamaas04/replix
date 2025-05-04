@@ -11,7 +11,11 @@ export default function AccountDetails() {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
 
-          <h1 className="font-semibold text-xl">Osama Alasmar</h1>
+          <div>
+            <h1 className="font-semibold text-xl">Osama Alasmar</h1>
+            <h3 className="text-xs italic">Company Name: Replix</h3>
+            <h3 className="text-xs italic">Role: Admin</h3>
+          </div>
           <hr />
         </div>
 
