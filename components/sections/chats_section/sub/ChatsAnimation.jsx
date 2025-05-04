@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { ChatsBackground } from "./ChatsBackground";
 import { Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -10,6 +11,7 @@ export default function ChatsAnimation() {
   const [milestonesReached, setMilestonesReached] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -18,7 +20,7 @@ export default function ChatsAnimation() {
           setIsVisible(true);
         }
       },
-      { threshold: 0.5 } 
+      { threshold: 0.5 }
     );
 
     if (sectionRef.current) {
@@ -32,23 +34,24 @@ export default function ChatsAnimation() {
     };
   }, []);
 
-  
   useEffect(() => {
     if (!isVisible) return;
 
     const intervalId = setInterval(() => {
-      {setElapsedTime((prevTime) => prevTime + 2)};
+      setElapsedTime((prevTime) => prevTime + 2);
 
-      if (elapsedTime + 3 === 3 && !milestonesReached.includes(2)) {
+      const nextTime = elapsedTime + 3;
+
+      if (nextTime === 3 && !milestonesReached.includes(2)) {
         setMilestonesReached((prev) => [...prev, 2]);
       }
-      if (elapsedTime + 3 === 5 && !milestonesReached.includes(4)) {
+      if (nextTime === 5 && !milestonesReached.includes(4)) {
         setMilestonesReached((prev) => [...prev, 4]);
       }
-      if (elapsedTime + 3 === 8 && !milestonesReached.includes(6)) {
+      if (nextTime === 8 && !milestonesReached.includes(6)) {
         setMilestonesReached((prev) => [...prev, 6]);
       }
-      if (elapsedTime + 3 === 11 && !milestonesReached.includes(8)) {
+      if (nextTime === 11 && !milestonesReached.includes(8)) {
         setMilestonesReached((prev) => [...prev, 8]);
       }
     }, 3000);
@@ -56,8 +59,14 @@ export default function ChatsAnimation() {
     return () => clearInterval(intervalId);
   }, [isVisible, elapsedTime, milestonesReached]);
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      router.push("/login");
+    }
+  };
+
   return (
-    <div ref={sectionRef} className="font-raleway" >
+    <div ref={sectionRef} className="font-raleway">
       <div className="flex justify-center items-center">
         <ChatsBackground />
         <div className="flex flex-col bg-primary/30 backdrop-blur-md w-full max-w-[30rem] h-full max-h-[30rem] py-8 absolute z-10 rounded-md border border-secondary/70 shadow-[inset_-30px_30px_40px_0_rgba(255,204,0,0.1)] space-y-4 px-8">
@@ -91,6 +100,7 @@ export default function ChatsAnimation() {
               type="text"
               placeholder="Ask anything"
               className="bg-secondary/10 text-secondary w-full h-10 rounded-2xl pl-4 focus:outline-0 placeholder:text-secondary/20 placeholder:font-raleway focus:placeholder-transparent"
+              onKeyDown={handleKeyDown}
             />
             <Link href="/login">
               <ArrowRight
