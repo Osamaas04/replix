@@ -23,7 +23,7 @@ export default function Automations() {
     const stored = localStorage.getItem("isActivated");
     return stored === null ? false : stored === "true";
   });
-  
+
   const [automations, setAutomations] = useState({
     messenger: false,
     instagram: false,
@@ -34,7 +34,7 @@ export default function Automations() {
 
   useEffect(() => {
     localStorage.setItem("isActivated", isActivated);
-  }, [isActivated]);  
+  }, [isActivated]);
 
   useEffect(() => {
     async function fetchStatuses() {
@@ -51,7 +51,9 @@ export default function Automations() {
         const data = await response.json();
         setAutomations(data);
       } catch (error) {
-        toast.error(error.message || "Something went wrong while loading statuses.");
+        toast.error(
+          error.message || "Something went wrong while loading statuses."
+        );
       } finally {
         setLoading(false);
       }
@@ -156,7 +158,21 @@ export default function Automations() {
 
         <div className="bg-primary flex flex-col items-center gap-8 border border-secondary/70 rounded-md w-auto lg:w-[68vw] min-h-[20.125rem]">
           {loading ? (
-            <p className="text-secondary/70 mt-8">Loading workflows...</p>
+            <div className="text-secondary flex border-b border-secondary/70 px-4 [@media(min-width:390px)]:px-8 py-4 mx-auto justify-between w-[inherit] animate-pulse">
+              <div className="flex items-center gap-4">
+                {/* Circle for SVG icon */}
+                <div className="w-7 h-7 bg-secondary/30 rounded-full" />
+
+                {/* Rectangle for title */}
+                <div className="w-24 h-4 bg-secondary/30 rounded-md" />
+              </div>
+
+              {/* Button placeholder */}
+              <div className="flex items-center gap-2 px-2 py-1 border border-secondary/70 rounded-md">
+                <div className="w-4 h-4 bg-secondary/30 rounded-sm" />
+                <div className="w-16 h-3 bg-secondary/30 rounded-md" />
+              </div>
+            </div>
           ) : filteredAutomations.length === 0 ? (
             <EmptyWorkflow
               icon={isActivated ? Play : Pause}
