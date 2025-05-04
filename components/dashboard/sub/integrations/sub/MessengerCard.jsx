@@ -8,7 +8,7 @@ import { Skeleton } from "../ui/skeleton";
 
 const API_GATEWAY = "https://gw.replix.space/social";
 
-export default function MessengerCard({loading, setLoading}) {
+export default function MessengerCard({loading, setMessengerLoading}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
@@ -75,7 +75,7 @@ export default function MessengerCard({loading, setLoading}) {
 
   const checkConnection = useCallback(async () => {
     try {
-      setLoading(true);
+      setMessengerLoading(true);
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -96,7 +96,7 @@ export default function MessengerCard({loading, setLoading}) {
     } catch (error) {
       console.error("Validation error:", error);
     } finally {
-      setLoading(false);
+      setMessengerLoading(false);
     }
   }, []);
 

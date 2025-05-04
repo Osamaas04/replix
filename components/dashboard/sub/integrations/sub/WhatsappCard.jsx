@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 const API_GATEWAY = "https://gw.replix.space/social";
 
-export default function WhatsappCard({loading, setLoading}) {
+export default function WhatsappCard({loading, setWhatsappLoading}) {
   const [connection, setConnection] = useState({
     whatsappId: null,
     isConnected: false,
@@ -14,7 +14,7 @@ export default function WhatsappCard({loading, setLoading}) {
 
   const checkConnection = useCallback(async () => {
     try {
-      setLoading(true);
+      setWhatsappLoading(true);
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -34,7 +34,7 @@ export default function WhatsappCard({loading, setLoading}) {
     } catch (error) {
       console.error("WhatsApp validation error:", error);
     } finally {
-      setLoading(false);
+      setWhatsappLoading(false);
     }
   }, []);
 

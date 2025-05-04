@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 const API_GATEWAY = "https://gw.replix.space/social";
 
-export default function InstagramCard({loading, setLoading}) {
+export default function InstagramCard({loading, setInstagramLoading}) {
   const [connection, setConnection] = useState({
     instagramId: null,
     isConnected: false,
@@ -14,7 +14,7 @@ export default function InstagramCard({loading, setLoading}) {
 
   const checkConnection = useCallback(async () => {
     try {
-      setLoading(true);
+      setInstagramLoading(true);
       const response = await fetch(`${API_GATEWAY}/checkToken`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -35,7 +35,7 @@ export default function InstagramCard({loading, setLoading}) {
     } catch (error) {
       console.error("Instagram validation error:", error);
     } finally {
-      setLoading(false);
+      setInstagramLoading(false);
     }
   }, []);
 
