@@ -158,21 +158,28 @@ export default function Automations() {
 
         <div className="bg-primary flex flex-col items-center gap-8 border border-secondary/70 rounded-md w-auto lg:w-[68vw] min-h-[20.125rem]">
           {loading ? (
-            <div className="text-secondary flex border-b border-secondary/70 px-4 [@media(min-width:390px)]:px-8 py-4 mx-auto justify-between w-[inherit] animate-pulse">
-              <div className="flex items-center gap-4">
-                {/* Circle for SVG icon */}
-                <div className="w-7 h-7 bg-secondary/30 rounded-full" />
-
-                {/* Rectangle for title */}
-                <div className="w-24 h-4 bg-secondary/30 rounded-md" />
+            <>
+              <div className="text-secondary flex border-b border-secondary/70 px-4 [@media(min-width:390px)]:px-8 py-4 mx-auto justify-between w-[inherit] animate-pulse">
+                <div className="flex items-center gap-4">
+                  <div className="w-7 h-7 bg-secondary/30 rounded-full" />
+                  <div className="w-24 h-4 bg-secondary/30 rounded-md" />
+                </div>
+                <div className="flex items-center gap-2 px-2 py-1 border border-secondary/70 rounded-md">
+                  <div className="w-4 h-4 bg-secondary/30 rounded-sm" />
+                  <div className="w-16 h-3 bg-secondary/30 rounded-md" />
+                </div>
               </div>
-
-              {/* Button placeholder */}
-              <div className="flex items-center gap-2 px-2 py-1 border border-secondary/70 rounded-md">
-                <div className="w-4 h-4 bg-secondary/30 rounded-sm" />
-                <div className="w-16 h-3 bg-secondary/30 rounded-md" />
+              <div className="text-secondary flex border-b border-secondary/70 px-4 [@media(min-width:390px)]:px-8 py-4 mx-auto justify-between w-[inherit] animate-pulse">
+                <div className="flex items-center gap-4">
+                  <div className="w-7 h-7 bg-secondary/30 rounded-full" />
+                  <div className="w-24 h-4 bg-secondary/30 rounded-md" />
+                </div>
+                <div className="flex items-center gap-2 px-2 py-1 border border-secondary/70 rounded-md">
+                  <div className="w-4 h-4 bg-secondary/30 rounded-sm" />
+                  <div className="w-16 h-3 bg-secondary/30 rounded-md" />
+                </div>
               </div>
-            </div>
+            </>
           ) : filteredAutomations.length === 0 ? (
             <EmptyWorkflow
               icon={isActivated ? Play : Pause}
