@@ -1,7 +1,3 @@
-import {
-  pricingPlansMo,
-  pricingPlansAnn,
-} from "@/components/sections/pricing_section/main/Pricing";
 import { useEffect, useState } from "react";
 import { CreditCard, CalendarFold } from "lucide-react";
 import Link from "next/link";
@@ -81,9 +77,7 @@ export default function PlanDetails() {
                 <div className="flex items-center gap-2 mt-4">
                   <CalendarFold size={22} />
                   <p>
-                    {`${
-                      planData.billingCycle === "monthly" ? "29$/mo" : "290$/yr"
-                    }`}
+                    {`${planData.amount}$/${planData.billingCycle === "monthly" ? "mo" :"ann"}`}
                   </p>
                 </div>
 
