@@ -15,7 +15,7 @@ import {
       async function handleBilling() {
         try {
           const response = await fetch(API_GATEWAY, {
-            method: "POST",
+            method: "GET",
             headers: {
               "Content-Type": "application/json",
             },
