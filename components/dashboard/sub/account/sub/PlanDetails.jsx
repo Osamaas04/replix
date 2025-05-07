@@ -41,10 +41,13 @@ export default function PlanDetails() {
     handleBilling();
   }, []);
 
-  const selectedPlan =
-    planData?.billingCycle === "monthly"
-      ? pricingPlansMo.find((plan) => plan.priceId === planData.priceId)
-      : pricingPlansAnn.find((plan) => plan.priceId === planData.priceId);
+  // Safe lookup for the selected plan
+  const selectedPlan = (() => {
+    if (!planData) return null;
+
+    const source = planData.billingCycle === "monthly" ? pricingPlansMo : pricingPlansAnn;
+    return source.find((plan) => plan.priceId === planData.priceId) || null;
+  })();
 
   return (
     <div className="bg-secondary/10 text-secondary px-20 py-8 rounded-md w-[50rem]">
