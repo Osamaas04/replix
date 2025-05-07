@@ -94,16 +94,16 @@ export default function PlanDetails() {
                 </p>
               </>
             ) : (
-              <div>
+              <div className="grid gap-4">
                 {/* Payment Method */}
                 <div className="flex items-center gap-2 mt-2 animate-pulse">
                   <div className="bg-secondary/30 rounded-full w-[22px] h-[22px]" />
-                  <div className="h-4 bg-secondary/30 rounded w-48" />
+                  <div className="h-4 bg-secondary/30 rounded w-32" />
                 </div>
 
                 {/* Edit Billing Button */}
                 <div className="mt-2 animate-pulse">
-                  <div className="bg-secondary/30 border border-secondary/30 text-transparent rounded-md px-2 py-1 w-40 h-8" />
+                  <div className="bg-secondary/30 border border-secondary/30 text-transparent rounded-md px-2 py-1 w-[12.5rem] h-8" />
                 </div>
 
                 {/* Billing Cycle */}
