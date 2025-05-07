@@ -7,6 +7,11 @@ import {
   import Link from "next/link";
   
   const API_GATEWAY = "https://gw.replix.space/plan";
+
+  function capitalizeFirstLetter(word) {
+    if (!word) return "";
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
   
   export default function PlanDetails() {
     const [planData, setPlanData] = useState(null);
@@ -27,7 +32,7 @@ import {
           }
   
           const data = await response.json();
-          setPlanData(data); // store in state
+          setPlanData(data); 
         } catch (error) {
           console.error("Error fetching billing info:", error);
         }
@@ -59,7 +64,7 @@ import {
                   <div className="flex items-center gap-2 mt-2">
                     <CreditCard size={22} />
                     <p>
-                      {planData.paymentMethod.brand} ending ****
+                      {capitalizeFirstLetter(planData.paymentMethod.brand)} ending <span className="font-sans">****</span>
                       {planData.paymentMethod.last4}
                     </p>
                   </div>
