@@ -34,7 +34,6 @@ export default function PlanDetails() {
 
         const data = await response.json();
         setPlanData(data);
-        toast.success("Plan details loaded");
       } catch (error) {
         console.error("Error fetching billing info:", error);
         toast.error("Failed to load plan details");
@@ -61,7 +60,6 @@ export default function PlanDetails() {
       const data = await response.json();
 
       if (data?.url) {
-        toast.success("Redirecting to billing portal...");
         Router.push(data.url);
       } else {
         throw new Error("Billing portal URL missing");
