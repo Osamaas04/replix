@@ -91,7 +91,7 @@ export default function UploadContext() {
         className="hidden"
         ref={fileInputRef}
         onChange={handleFileChange}
-        accept=".txt,.json,.md"
+        accept=".txt,.json"
       />
 
       {!selectedFile ? (
