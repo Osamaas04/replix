@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import { CreditCard, CalendarFold } from "lucide-react";
+import { CreditCard, CalendarFold, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import {
+  pricingPlansMo,
+  pricingPlansAnn,
+} from "@/components/sections/pricing_section/main/Pricing";
 
 const API_GATEWAY = "https://gw.replix.space/plan";
 
@@ -37,18 +41,45 @@ export default function PlanDetails() {
     handleBilling();
   }, []);
 
+  const selectedPlan =
+    planData?.billingCycle === "monthly"
+      ? pricingPlansMo.find((plan) => plan.priceId === planData.priceId)
+      : pricingPlansAnn.find((plan) => plan.priceId === planData.priceId);
+
   return (
     <div className="bg-secondary/10 text-secondary px-20 py-8 rounded-md w-[50rem]">
       <div className="grid gap-8">
         <div>
           <h1 className="font-semibold text-xl">Your Plan</h1>
+          {planData && selectedPlan && (
+            <p className="mt-1 text-lg font-medium text-primary">{selectedPlan.title}</p>
+          )}
         </div>
 
         <div className="flex flex-row justify-between">
+          {/* Included in your plan */}
           <div>
             <h3 className="font-semibold">Included in your plan</h3>
+            {planData ? (
+              <ul className="mt-2 space-y-2">
+                {selectedPlan?.features.map((feature, index) => (
+                  <li key={index} className="flex items-center gap-2 text-sm">
+                    <CheckCircle size={16} className="text-green-600" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="grid gap-2 mt-2 animate-pulse">
+                <div className="h-4 bg-secondary/30 rounded w-64" />
+                <div className="h-4 bg-secondary/30 rounded w-56" />
+                <div className="h-4 bg-secondary/30 rounded w-60" />
+                <div className="h-4 bg-secondary/30 rounded w-48" />
+              </div>
+            )}
           </div>
 
+          {/* Billing and payment section */}
           <div className="grid gap-4">
             <div>
               <h3 className="font-semibold">Billing and payment</h3>
@@ -68,7 +99,7 @@ export default function PlanDetails() {
                 <div className="mt-2">
                   <Link
                     href="#"
-                    className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1 w-20"
+                    className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1 w-52 text-center inline-block"
                   >
                     Edit billing and payment
                   </Link>
@@ -77,7 +108,9 @@ export default function PlanDetails() {
                 <div className="flex items-center gap-2 mt-4">
                   <CalendarFold size={22} />
                   <p>
-                    {`${planData.amount}$/${planData.billingCycle === "monthly" ? "mo" :"ann"}`}
+                    {`${planData.amount}$/${
+                      planData.billingCycle === "monthly" ? "mo" : "ann"
+                    }`}
                   </p>
                 </div>
 
@@ -89,18 +122,15 @@ export default function PlanDetails() {
               </>
             ) : (
               <div className="grid gap-4">
-                {/* Payment Method */}
                 <div className="flex items-center gap-2 mt-2 animate-pulse">
                   <div className="bg-secondary/30 rounded-full w-[22px] h-[22px]" />
                   <div className="h-4 bg-secondary/30 rounded w-32" />
                 </div>
 
-                {/* Edit Billing Button */}
                 <div className="mt-2 animate-pulse">
                   <div className="bg-secondary/30 border border-secondary/30 text-transparent rounded-md px-2 py-1 w-[12.5rem] h-8" />
                 </div>
 
-                {/* Billing Cycle */}
                 <div className="flex items-center gap-2 mt-4 animate-pulse">
                   <div className="bg-secondary/30 rounded-full w-[22px] h-[22px]" />
                   <div className="h-4 bg-secondary/30 rounded w-24" />
