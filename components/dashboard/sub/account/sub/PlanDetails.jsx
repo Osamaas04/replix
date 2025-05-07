@@ -136,7 +136,7 @@ export default function PlanDetails() {
                 </div>
 
                 <div className="mt-2 animate-pulse">
-                  <div className="bg-secondary/30 border border-secondary/30 text-transparent rounded-md px-2 py-1 w-[12.5rem] h-8" />
+                  <div className="bg-secondary/30 border border-secondary/30 text-transparent rounded-md px-2 py-1 w-52 h-8" />
                 </div>
 
                 <div className="flex items-center gap-2 mt-4 animate-pulse">
