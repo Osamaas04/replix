@@ -6,7 +6,7 @@ import {
   import { CreditCard, CalendarFold } from "lucide-react";
   import Link from "next/link";
   
-  const API_GATEWAY = "https://subscription.replix.space/api/retrievePlan";
+  const API_GATEWAY = "https://gw.replix.space/plan";
   
   export default function PlanDetails() {
     const [planData, setPlanData] = useState(null);
