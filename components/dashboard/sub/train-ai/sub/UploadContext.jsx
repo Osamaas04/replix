@@ -98,10 +98,10 @@ export default function UploadContext() {
         <div className="flex flex-col gap-4 justify-center items-center rounded-md my-auto">
           <button
             type="button"
-            className="grid justify-self-center border border-secondary/70 border-dashed rounded-full p-6 w-fit h-fit"
+            className="grid justify-self-center border border-secondary/70 border-dashed rounded-full p-8 w-fit h-fit"
             onClick={handleButtonClick}
           >
-            <Upload color="white" size={22} />
+            <Upload color="white" size={28} />
           </button>
           <div className="grid justify-center">
             <h1 className="text-center text-sm text-secondary/70">
