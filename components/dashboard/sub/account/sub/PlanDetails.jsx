@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import Router from "next/router";
 import { CreditCard, CalendarFold, CheckCircle } from "lucide-react";
-import Link from "next/link";
 import {
   pricingPlansMo,
   pricingPlansAnn,
 } from "@/components/sections/pricing_section/main/Pricing";
+import { toast } from "sonner";
 
-const API_GATEWAY = "https://gw.replix.space/plan";
+const API_GATEWAY = "https://gw.replix.space";
 
 function capitalizeFirstLetter(word) {
   if (!word) return "";
@@ -19,7 +20,7 @@ export default function PlanDetails() {
   useEffect(() => {
     async function handleBilling() {
       try {
-        const response = await fetch(API_GATEWAY, {
+        const response = await fetch(`${API_GATEWAY}/plan`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -33,15 +34,44 @@ export default function PlanDetails() {
 
         const data = await response.json();
         setPlanData(data);
+        toast.success("Plan details loaded");
       } catch (error) {
         console.error("Error fetching billing info:", error);
+        toast.error("Failed to load plan details");
       }
     }
 
     handleBilling();
   }, []);
 
-  // Safe lookup for the selected plan
+  async function handlePayment() {
+    try {
+      const response = await fetch(`${API_GATEWAY}/billing`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to load billing portal");
+      }
+
+      const data = await response.json();
+
+      if (data?.url) {
+        toast.success("Redirecting to billing portal...");
+        Router.push(data.url);
+      } else {
+        throw new Error("Billing portal URL missing");
+      }
+    } catch (error) {
+      console.error("Error fetching billing portal:", error);
+      toast.error("Could not open billing portal");
+    }
+  }
+
   const selectedPlan = (() => {
     if (!planData) return null;
 
@@ -105,12 +135,12 @@ export default function PlanDetails() {
                 </div>
 
                 <div className="mt-2">
-                  <Link
-                    href="#"
+                  <button
+                    onClick={handlePayment}
                     className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1 w-52 text-center inline-block"
                   >
                     Edit billing and payment
-                  </Link>
+                  </button>
                 </div>
 
                 <div className="flex items-center gap-2 mt-4">
