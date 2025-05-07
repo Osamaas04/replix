@@ -45,19 +45,24 @@ export default function PlanDetails() {
   const selectedPlan = (() => {
     if (!planData) return null;
 
-    const source = planData.billingCycle === "monthly" ? pricingPlansMo : pricingPlansAnn;
+    const source =
+      planData.billingCycle === "monthly" ? pricingPlansMo : pricingPlansAnn;
     return source.find((plan) => plan.priceId === planData.priceId) || null;
   })();
 
   return (
     <div className="bg-secondary/10 text-secondary px-20 py-8 rounded-md w-[50rem]">
       <div className="grid gap-8">
-        {/* <div>
+        <div>
           <h1 className="font-semibold text-xl">Your Plan</h1>
-          {planData && selectedPlan && (
-            <p className="mt-1 text-lg text-secondary font-semibold">{selectedPlan.title}</p>
+          {planData && selectedPlan ? (
+            <p className="mt-1 text-lg text-secondary font-semibold">
+              {selectedPlan.title}
+            </p>
+          ) : (
+            <div className="mt-2 h-6 w-40 bg-secondary/30 rounded animate-pulse" />
           )}
-        </div> */}
+        </div>
 
         <div className="flex flex-row justify-between">
           {/* Included in your plan */}
