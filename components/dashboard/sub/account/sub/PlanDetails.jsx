@@ -61,7 +61,7 @@ export default function PlanDetails() {
 
         <div className="flex flex-row justify-between">
           {/* Included in your plan */}
-          <div>
+          <div className="flex flex-col gap-4">
             <h3 className="font-semibold">Included in your plan</h3>
             {planData ? (
               <ul className="mt-2 space-y-2">
@@ -73,7 +73,7 @@ export default function PlanDetails() {
                 ))}
               </ul>
             ) : (
-              <div className="grid gap-2 mt-2 animate-pulse">
+              <div className="grid gap-4 mt-2 animate-pulse">
                 <div className="h-4 bg-secondary/30 rounded w-64" />
                 <div className="h-4 bg-secondary/30 rounded w-56" />
                 <div className="h-4 bg-secondary/30 rounded w-60" />
