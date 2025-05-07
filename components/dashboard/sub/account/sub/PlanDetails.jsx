@@ -52,12 +52,12 @@ export default function PlanDetails() {
   return (
     <div className="bg-secondary/10 text-secondary px-20 py-8 rounded-md w-[50rem]">
       <div className="grid gap-8">
-        <div>
+        {/* <div>
           <h1 className="font-semibold text-xl">Your Plan</h1>
           {planData && selectedPlan && (
-            <p className="mt-1 text-lg font-medium text-primary">{selectedPlan.title}</p>
+            <p className="mt-1 text-lg text-secondary font-semibold">{selectedPlan.title}</p>
           )}
-        </div>
+        </div> */}
 
         <div className="flex flex-row justify-between">
           {/* Included in your plan */}
