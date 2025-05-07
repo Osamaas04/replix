@@ -1,4 +1,4 @@
-import Context from "./Context";
+import UploadContext from "./UploadContext";
 import UploadFineTune from "./UploadFineTune";
 import UploadValidation from "./UploadValidation";
 
@@ -8,7 +8,7 @@ export default function UploadHandler() {
       <div className="flex flex-col md:flex-row gap-4 w-auto lg:w-[68vw]">
         <div className="w-full h-full">
           <div className="bg-primary w-full h-full flex flex-col items-center gap-8 border border-secondary/70 rounded-md ">
-            <Context />
+            <UploadContext />
           </div>
           
         </div>
