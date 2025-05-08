@@ -43,15 +43,15 @@ export default function AccountDetails() {
           </Avatar>
 
           <div>
-            <h1 className="font-semibold text-xl">{userData.name}</h1>
-            <h3 className="text-xs italic">Company Name: {userData.company_name}</h3>
+            <h1 className="font-semibold text-xl">{userData.name || "Osama Alsmar"}</h1>
+            <h3 className="text-xs italic">Company Name: {userData.company_name || "Replix"}</h3>
           </div>
           <hr />
         </div>
 
         <div className="grid gap-4">
           <div>
-            <h3>{userData.email}</h3>
+            <h3>{userData.email || "gradduo@gmail.com"}</h3>
             <Link href="#" className="underline underline-offset-2 text-sm">
               Change email
             </Link>
