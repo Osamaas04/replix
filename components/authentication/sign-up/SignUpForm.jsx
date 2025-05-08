@@ -65,7 +65,7 @@ async function handleRegister(values, setLoading, router) {
           "Content-Type": "application/json",
         },
         
-        body: JSON.stringify({ user_id: data.userId, name: data.name, company_name: data.companyName }),
+        body: JSON.stringify({ user_id: data.userId, name: data.name, company_name: data.companyName, email:data.email }),
       }
     );
 
