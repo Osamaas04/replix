@@ -82,16 +82,16 @@ export default function PlanDetails() {
     <div className="bg-secondary/10 text-secondary px-20 py-8 rounded-md">
       <div className="grid gap-8">
         <div className="grid gap-2">
-          <h1 className="font-semibold text-xl">Your Plan</h1>
+          <h1 className="font-semibold text-2xl">Your Plan</h1>
           
         </div>
 
         <div className="flex flex-row justify-between">
           {/* Included in your plan */}
           <div className="flex flex-col gap-4">
-            <h3 className="font-semibold">Included in your plan</h3>
+            <h1 className="font-semibold text-lg">Included in your plan</h1>
             {planData && selectedPlan ? (
-            <p className="mt-1 text-lg text-secondary font-semibold">
+            <p className="mt-1 text-base text-secondary font-semibold">
               {selectedPlan.title}
             </p>
           ) : (
@@ -119,7 +119,7 @@ export default function PlanDetails() {
           {/* Billing and payment section */}
           <div className="grid gap-4">
             <div>
-              <h3 className="font-semibold">Billing and payment</h3>
+              <h1 className="font-semibold text-lg">Billing and payment</h1>
             </div>
 
             {planData ? (
