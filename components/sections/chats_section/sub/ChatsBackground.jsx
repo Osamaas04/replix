@@ -3,70 +3,70 @@ import { Marquee } from "../ui/marquee";
 const reviews = [
   {
     body: "I've never seen anything like this before",
-    img: "https://avatar.vercel.sh/jack",
+    img: "https://api.dicebear.com/9.x/glass/svg?seed=1",
     margin: "ml-20",
     blur: "blur-sm",
 
   },
   {
     body: "I don't know what to say.",
-    img: "https://avatar.vercel.sh/jill",
+    img: "https://api.dicebear.com/9.x/glass/svg?seed=2",
     margin: "ml-36",
     blur: "blur-sm",
 
   },
   {
     body: "I'm at a loss for words.",
-    img: "https://avatar.vercel.sh/john",
+    img: "https://api.dicebear.com/9.x/glass/svg?seed=3",
     margin: "ml-6",
     blur: "blur-sm",
 
   },
   {
     body: "This is absolutely incredible!",
-    img: "https://avatar.vercel.sh/alex",
+    img: "https://api.dicebear.com/9.x/glass/svg?seed=4",
     margin: "ml-24",
     blur: "blur-sm",
 
   },
   {
     body: "A truly amazing experience.",
-    img: "https://avatar.vercel.sh/sam",
+    img: "https://api.dicebear.com/9.x/glass/svg?seed=5",
     margin: "ml-4",
     blur: "blur-sm",
 
   },
   {
     body: "I can't stop thinking about this.",
-    img: "https://avatar.vercel.sh/mia",
+    img: "https://api.dicebear.com/9.x/glass/svg?seed=6",
     margin: "ml-40",
     blur: "blur-sm",
 
   },
   {
     body: "I'm inspired beyond words.",
-    img: "https://avatar.vercel.sh/ryan",
+    img: "https://api.dicebear.com/9.x/glass/svg?seed=7",
     margin: "ml-28",
     blur: "blur-sm",
 
   },
   {
     body: "This made my day!",
-    img: "https://avatar.vercel.sh/lisa",
+    img: "https://api.dicebear.com/9.x/glass/svg?seed=8",
     margin: "ml-8",
     blur: "blur-sm",
 
   },
   {
     body: "Never experienced something like this before.",
-    img: "https://avatar.vercel.sh/leo",
+    img: "https://api.dicebear.com/9.x/glass/svg?seed=9",
     margin: "ml-32",
     blur: "blur-sm",
 
   },
   {
     body: "Absolutely breathtaking!",
-    img: "https://avatar.vercel.sh/emma",
+    img: "https://api.dicebear.com/9.x/glass/svg?seed=10",
     margin: "ml-10",
     blur: "blur-sm",
 
