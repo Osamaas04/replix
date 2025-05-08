@@ -39,20 +39,24 @@ export default function AccountDetails() {
         <div className="grid gap-4">
           <Avatar>
             <AvatarImage
-              src={`https://api.dicebear.com/7.x/glass/svg?seed=${
-                userData?.email || "default"
-              }`}
-              alt={userData?.name || "User"}
+              src={`https://api.dicebear.com/9.x/glass/svg?seed=osama`}
+              alt="User"
             />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
 
           <div>
-            <h1 className="font-semibold text-xl">
+            {/* <h1 className="font-semibold text-xl">
               {userData.name || "Osama Alsmar"}
+            </h1> */}
+            <h1 className="font-semibold text-xl">
+              Osama Alsmar
             </h1>
-            <h3 className="text-xs italic">
+            {/* <h3 className="text-xs italic">
               Company Name: {userData.company_name || "Replix"}
+            </h3> */}
+            <h3 className="text-xs italic">
+              Company Name: Replix
             </h3>
           </div>
           <hr />
@@ -60,7 +64,8 @@ export default function AccountDetails() {
 
         <div className="grid gap-4">
           <div>
-            <h3>{userData.email || "gradduo@gmail.com"}</h3>
+            {/* <h3>{userData.email || "gradduo@gmail.com"}</h3> */}
+            <h3>gradduo@gmail.com</h3>
             <Link href="#" className="underline underline-offset-2 text-sm">
               Change email
             </Link>
