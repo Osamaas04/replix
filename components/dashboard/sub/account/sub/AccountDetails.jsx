@@ -38,13 +38,22 @@ export default function AccountDetails() {
       <div className="grid gap-4">
         <div className="grid gap-4">
           <Avatar>
-          src={`https://api.dicebear.com/7.x/glass/svg?seed=${userData?.email || "default"}`}
-          alt={userData?.name || "User"}
+            <AvatarImage
+              src={`https://api.dicebear.com/7.x/glass/svg?seed=${
+                userData?.email || "default"
+              }`}
+              alt={userData?.name || "User"}
+            />
+            <AvatarFallback>CN</AvatarFallback>
           </Avatar>
 
           <div>
-            <h1 className="font-semibold text-xl">{userData.name || "Osama Alsmar"}</h1>
-            <h3 className="text-xs italic">Company Name: {userData.company_name || "Replix"}</h3>
+            <h1 className="font-semibold text-xl">
+              {userData.name || "Osama Alsmar"}
+            </h1>
+            <h3 className="text-xs italic">
+              Company Name: {userData.company_name || "Replix"}
+            </h3>
           </div>
           <hr />
         </div>
