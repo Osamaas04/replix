@@ -79,7 +79,7 @@ export default function PlanDetails() {
   })();
 
   return (
-    <div className="bg-secondary/10 text-secondary px-20 py-8 rounded-md w-[50rem]">
+    <div className="bg-secondary/10 text-secondary px-20 py-8 rounded-md">
       <div className="grid gap-8">
         <div className="grid gap-2">
           <h1 className="font-semibold text-xl">Your Plan</h1>

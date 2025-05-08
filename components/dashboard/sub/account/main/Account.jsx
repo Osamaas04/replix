@@ -12,9 +12,9 @@ export default function Account() {
           </h3>
         </div>
 
-        <div className="flex gap-4 w-auto lg:w-[68vw]">
-          <PlanDetails />
+        <div className="flex flex-col gap-4 w-auto lg:w-[68vw]">
           <AccountDetails />
+          <PlanDetails />
         </div>
       </div>
     </div>
