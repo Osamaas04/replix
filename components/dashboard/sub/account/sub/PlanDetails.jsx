@@ -83,19 +83,20 @@ export default function PlanDetails() {
       <div className="grid gap-8">
         <div className="grid gap-2">
           <h1 className="font-semibold text-xl">Your Plan</h1>
-          {planData && selectedPlan ? (
-            <p className="mt-1 text-lg text-secondary font-semibold">
-              {selectedPlan.title}
-            </p>
-          ) : (
-            <div className="mt-2 h-6 w-40 bg-secondary/30 rounded animate-pulse" />
-          )}
+          
         </div>
 
         <div className="flex flex-row justify-between">
           {/* Included in your plan */}
           <div className="flex flex-col gap-4">
             <h3 className="font-semibold">Included in your plan</h3>
+            {planData && selectedPlan ? (
+            <p className="mt-1 text-lg text-secondary font-semibold">
+              {selectedPlan.title}
+            </p>
+          ) : (
+            <div className="mt-2 h-6 w-40 bg-secondary/30 rounded animate-pulse" />
+          )}
             {planData ? (
               <ul className="mt-2 space-y-2">
                 {selectedPlan?.features.map((feature, index) => (
