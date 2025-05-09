@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { CreditCard, CalendarFold, CheckCircle } from "lucide-react";
 import {
   pricingPlansMo,
@@ -16,7 +15,6 @@ function capitalizeFirstLetter(word) {
 
 export default function PlanDetails() {
   const [planData, setPlanData] = useState(null);
-  const router = useRouter();
 
   useEffect(() => {
     async function handleBilling() {
@@ -61,7 +59,7 @@ export default function PlanDetails() {
       const data = await response.json();
 
       if (data?.url) {
-        router.push(data.url);
+        window.location.href = data.url
       } else {
         throw new Error("Billing portal URL missing");
       }
