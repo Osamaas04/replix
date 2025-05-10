@@ -100,7 +100,7 @@ export default function PlanDetails() {
               <ul className="mt-2 space-y-2">
                 {selectedPlan?.features.map((feature, index) => (
                   <li key={index} className="flex items-center gap-2 text-sm">
-                    <CheckCircle size={16} className="text-green-600" />
+                    <CheckCircle size={16} />
                     {feature}
                   </li>
                 ))}
