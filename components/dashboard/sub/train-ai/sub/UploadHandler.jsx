@@ -24,12 +24,12 @@ export default function UploadHandler() {
       </div>
 
       <div className="flex justify-end items-center gap-4">
-        {/* <button
-                type="button"
-                className="bg-primary border border-secondary text-secondary rounded-md px-2 py-1 w-20"
-              >
-                Cancel
-              </button> */}
+        <button
+          type="button"
+          className="bg-primary border border-secondary text-secondary rounded-md px-2 py-1 w-28"
+        >
+          Cancel
+        </button>
         <button
           type="button"
           className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1 w-28"

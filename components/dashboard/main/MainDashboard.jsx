@@ -15,6 +15,7 @@ import {
   Settings,
   ChartPie,
   X,
+  Lock,
 } from "lucide-react";
 import SocialCards from "@/components/dashboard/sub/integrations/main/SocialCard";
 import Automations from "../sub/automations/main/Automations";
@@ -56,7 +57,10 @@ function DashboardContent() {
 
         <div>
           <aside
-            className={`fixed bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4 ${isDisplayed ? "inline-grid z-10" : "hidden"}`}>
+            className={`fixed bg-primary lg:flex lg:flex-col w-[16rem] h-screen border-r border-secondary/70 px-4 py-4 ${
+              isDisplayed ? "inline-grid z-10" : "hidden"
+            }`}
+          >
             <div className="grid items-baseline">
               <div className="flex items-center justify-between px-3">
                 <Link href="/dashboard" className="flex space-x-3 items-center">
@@ -86,7 +90,11 @@ function DashboardContent() {
                     icon: <Newspaper size={18} />,
                     link: "/docs",
                   },
-                  { name: "Human Agent", icon: <UserRoundCog size={18} /> },
+                  {
+                    name: "Human Agent",
+                    icon: <UserRoundCog size={18} />,
+                    locked: true,
+                  },
                   { name: "Account", icon: <Settings size={18} /> },
                 ].map((item, index) =>
                   item.hr ? (
@@ -96,12 +104,20 @@ function DashboardContent() {
                       key={item.name}
                       href={item.link}
                       target="_blank"
-                      className={`hover:bg-secondary/10 rounded-md px-3 py-1`}
+                      className="hover:bg-secondary/10 rounded-md px-3 py-1"
                     >
                       <li className="flex gap-4 items-center">
                         {item.icon} <span>{item.name}</span>
                       </li>
                     </Link>
+                  ) : item.locked ? (
+                    <li
+                      key={item.name}
+                      className="flex gap-4 items-center px-3 py-1 rounded-md text-secondary/50 cursor-not-allowed"
+                      title="Locked feature"
+                    >
+                      {item.icon} <span>{item.name}</span> <Lock size={15}/>
+                    </li>
                   ) : (
                     <button
                       key={item.name}
@@ -120,15 +136,13 @@ function DashboardContent() {
             </div>
           </aside>
 
-          <div className={`${isDisplayed && "mt-[56px]"} `} >
-
-          {menuItem === "Home" && <Home />}
-          {menuItem === "Analytics" && <Analytics />}
-          {menuItem === "Automations" && <Automations />}
-          {menuItem === "Integrations" && <SocialCards />}
-          {menuItem=== "Train AI" && <TrainAi />}
-          {menuItem=== "Account" && <Account />}
-          
+          <div className={`${isDisplayed && "mt-[56px]"} `}>
+            {menuItem === "Home" && <Home />}
+            {menuItem === "Analytics" && <Analytics />}
+            {menuItem === "Automations" && <Automations />}
+            {menuItem === "Integrations" && <SocialCards />}
+            {menuItem === "Train AI" && <TrainAi />}
+            {menuItem === "Account" && <Account />}
           </div>
         </div>
       </div>
