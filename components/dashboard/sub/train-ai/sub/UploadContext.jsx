@@ -46,7 +46,8 @@ export default function UploadContext() {
     setIsUploaded(false);
 
     const formData = new FormData();
-    formData.append("context", selectedFile);
+    formData.append("dataset", selectedFile);
+    formData.append("purpose", "context");
 
     const xhr = new XMLHttpRequest();
 
