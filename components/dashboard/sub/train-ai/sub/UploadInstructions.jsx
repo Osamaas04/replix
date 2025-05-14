@@ -16,7 +16,7 @@ export default function UploadInstructions() {
     }
 
     const formData = new FormData();
-    formData.append("instructions", instructions);
+    formData.append("instruction", instructions);
 
     try {
       const response = await fetch(API_GATEWAY, {
