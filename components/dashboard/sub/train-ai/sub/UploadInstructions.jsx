@@ -3,19 +3,37 @@
 import { useState } from "react";
 import { toast } from "sonner";
 
+const API_GATEWAY = "https://gw.replix.space/train/instruction";
+
 export default function UploadInstructions() {
   const [instructions, setInstructions] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!instructions.trim()) {
       toast.error("Instructions cannot be empty");
       return;
     }
 
-    // Handle instructions submission here (e.g., API call)
-    toast.success("Instructions submitted successfully");
-    setInstructions("");
+    const formData = new FormData();
+    formData.append("instructions", instructions);
+
+    try {
+      const response = await fetch(API_GATEWAY, {
+        method: "POST",
+        body: formData,
+        credentials: "include"
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit instructions");
+      }
+
+      toast.success("Instructions submitted successfully");
+      setInstructions("");
+    } catch (error) {
+      toast.error(error.message || "Something went wrong");
+    }
   };
 
   return (
@@ -26,21 +44,21 @@ export default function UploadInstructions() {
             Instructions
           </h1>
         </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 ">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <textarea
-            className="w-full h-52 p-4 rounded-md  bg-background text-secondary resize-none focus:outline-none"
+            className="w-full h-52 p-4 rounded-md bg-background text-secondary resize-none focus:outline-none"
             placeholder="Enter instructions here..."
             value={instructions}
             onChange={(e) => setInstructions(e.target.value)}
           />
+          <button
+            type="submit"
+            className="bg-secondary grid border border-secondary text-primary rounded-md px-2 py-1 w-28 justify-self-end"
+          >
+            Submit
+          </button>
         </form>
       </div>
-      <button
-        type="submit"
-        className="bg-secondary grid border border-secondary text-primary rounded-md px-2 py-1 w-28 justify-self-end"
-      >
-        Submit
-      </button>
     </div>
   );
 }
