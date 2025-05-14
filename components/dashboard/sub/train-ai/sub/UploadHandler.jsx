@@ -48,6 +48,7 @@ export default function UploadHandler() {
         toast.error("Failed to train AI");
         return;
       }
+      toast.success("ai has been trained")
     } catch (error) {
       toast.error("Error training AI");
     }
@@ -89,6 +90,7 @@ export default function UploadHandler() {
         </button>
         <button
           type="button"
+          onClick={handleTrain}
           className="bg-secondary border border-secondary text-primary rounded-md px-2 py-1 w-28"
         >
           Start Train
