@@ -100,7 +100,7 @@ export default function AccountDetails() {
                 </div>
                 <hr />
                 <div className="grid gap-2">
-                  <h3>{userData?.email || "gradduo@gmail.com"}</h3>
+                  <h3>{userData?.email}</h3>
                   <Link
                     href="#"
                     className="underline underline-offset-2 text-sm"
