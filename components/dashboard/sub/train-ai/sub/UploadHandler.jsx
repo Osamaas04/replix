@@ -28,6 +28,7 @@ export default function UploadHandler() {
 
         const data = await response.json();
         setUploadedFiles(data);
+        console.log(data)
       } catch (error) {
         toast.error("Error fetching files");
       }
