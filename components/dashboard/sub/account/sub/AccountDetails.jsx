@@ -65,10 +65,10 @@ export default function AccountDetails() {
             ) : (
               <div className="w-full">
                 <h1 className="font-semibold text-2xl">
-                  {userData?.name || "Osama Alsmar"}
+                  {userData?.name}
                 </h1>
                 <h3 className="text-sm italic">
-                  Company Name: {userData?.company_name || "Replix"}
+                  Company Name: {userData?.company_name}
                 </h3>
               </div>
             )}
