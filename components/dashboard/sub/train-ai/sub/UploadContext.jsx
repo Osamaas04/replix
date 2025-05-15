@@ -24,6 +24,7 @@ export default function UploadContext({ contextFile }) {
     setIsUploaded(true);
     setUploadProgress(100);
   }
+  console.log(selectedFile)
 }, [contextFile]);
 
 
