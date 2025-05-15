@@ -59,6 +59,7 @@ export default function UploadHandler() {
   }
 
   const contextFile = uploadedFiles.find((file) => file.purpose === "context");
+  console.log(contextFile)
   const fineTuneFile = uploadedFiles.filter(
     (file) => file.purpose === "fine-tune"
   );
