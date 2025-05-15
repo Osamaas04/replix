@@ -31,6 +31,7 @@ export default function UploadHandler() {
         }
         
         const data = await response.json();
+        console.log(data)
         setUploadedFiles(data);
       } catch (error) {
         toast.error("Error fetching files");
@@ -60,6 +61,7 @@ export default function UploadHandler() {
 
   const contextFile = uploadedFiles.find((file) => file.purpose === "context");
   console.log(contextFile)
+  console.log(uploadedFiles)
   const fineTuneFile = uploadedFiles.filter(
     (file) => file.purpose === "fine-tune"
   );
