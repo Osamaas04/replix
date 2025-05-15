@@ -19,6 +19,7 @@ export default function UploadContext({ contextFile }) {
     if (contextFile) {
       setLoading(true);
       setSelectedFile(contextFile)
+      console.log(contextFile)
     }
   }, [contextFile]);
 
@@ -89,17 +90,6 @@ export default function UploadContext({ contextFile }) {
     xhr.send(formData);
   };
 
-  if (loading) {
-    return (
-      <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
-        <h1 className="text-secondary font-semibold text-xl text-center mb-4">
-          Context
-        </h1>
-        <div className="bg-secondary/30 w-full h-full rounded-md animate-pulse" />
-      </div>
-    );
-  }
-
   return (
     <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
       <h1 className="text-secondary font-semibold text-xl text-center mb-4">
@@ -139,9 +129,6 @@ export default function UploadContext({ contextFile }) {
               <FileText size={32} />
               <div>
                 <p className="font-semibold">{selectedFile.name}</p>
-                {/* <p className="text-sm text-secondary/70">
-                  {(selectedFile.size / 1024).toFixed(2)} KB
-                </p> */}
               </div>
             </div>
 
