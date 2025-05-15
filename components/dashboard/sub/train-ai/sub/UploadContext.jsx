@@ -21,7 +21,7 @@ export default function UploadContext({ contextFile }) {
       setSelectedFile(contextFile)
       console.log(contextFile)
     }
-  }, [contextFile]);
+  }, []);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
