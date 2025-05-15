@@ -18,6 +18,7 @@ export default function UploadContext({ contextFile }) {
   useEffect(() => {
     if (contextFile) {
       setLoading(true);
+      setSelectedFile(contextFile)
     }
   }, [contextFile]);
 
