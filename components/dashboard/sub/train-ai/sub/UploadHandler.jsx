@@ -21,11 +21,15 @@ export default function UploadHandler() {
           credentials: "include",
         });
 
-        if (!response.ok && response.status !== 404) {
-          toast.error("Failed to fetch uploaded files");
+        if(response.status === 404) {
           return;
         }
 
+        if (!response.ok) {
+          toast.error("Failed to fetch uploaded files");
+          return;
+        }
+        
         const data = await response.json();
         setUploadedFiles(data);
         console.log(data)
