@@ -89,8 +89,19 @@ export default function UploadFineTune() {
     }
   };
 
+  // return (
+  //   <div className="w-full grid gap-4 p-4">
+  //     <div>
+  //       <h1 className="text-secondary font-semibold text-xl text-center">
+  //         Fine Tune
+  //       </h1>
+  //     </div>
+  //     <div className="bg-secondary/30 w-full h-[107.6px] rounded-md animate-pulse" />
+  //   </div>
+  // );
+
   return (
-    <div className="w-full grid gap-4 py-4">
+    <div className="w-full grid gap-4 p-4">
       <div>
         <h1 className="text-secondary font-semibold text-xl text-center">
           Fine Tune
@@ -110,7 +121,7 @@ export default function UploadFineTune() {
             className="grid justify-self-center border border-secondary/70 border-dashed rounded-full p-6 w-fit h-fit"
             onClick={handleButtonClick}
           >
-            <Upload color="white" size={22}/>
+            <Upload color="white" size={22} />
           </button>
           <div className="grid justify-center">
             <h1 className="text-center text-sm text-secondary/70">

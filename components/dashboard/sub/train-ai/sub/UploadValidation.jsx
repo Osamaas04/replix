@@ -89,8 +89,19 @@ export default function UploadValidation() {
     }
   };
 
+  // return (
+  //   <div className="w-full grid gap-4 p-4">
+  //     <div>
+  //       <h1 className="text-secondary font-semibold text-xl text-center">
+  //         Validation
+  //       </h1>
+  //     </div>
+  //     <div className="bg-secondary/30 w-full h-[107.6px] rounded-md animate-pulse" />
+  //   </div>
+  // );
+
   return (
-    <div className="w-full grid gap-4 py-4">
+    <div className="w-full grid gap-4 p-4">
       <div>
         <h1 className="text-secondary font-semibold text-xl text-center">
           Validation
@@ -114,7 +125,7 @@ export default function UploadValidation() {
           </button>
           <div className="grid justify-center">
             <h1 className="text-center text-sm text-secondary/70">
-            Evaluate the accuracy of your AI model
+              Evaluate the accuracy of your AI model
             </h1>
           </div>
         </div>

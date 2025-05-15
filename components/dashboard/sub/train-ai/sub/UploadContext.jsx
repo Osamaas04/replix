@@ -13,11 +13,11 @@ export default function UploadContext({ contextFile }) {
   const [isUploading, setIsUploading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (contextFile) {
-      setSelectedFile(contextFile);
-      setIsUploaded(true);
+      setLoading(true);
     }
   }, [contextFile]);
 
@@ -88,6 +88,15 @@ export default function UploadContext({ contextFile }) {
     xhr.send(formData);
   };
 
+  // return (
+  //   <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
+  //     <h1 className="text-secondary font-semibold text-xl text-center mb-4">
+  //       Context
+  //     </h1>
+  //     <div className="bg-secondary/30 w-full h-full rounded-md animate-pulse"/>
+  //   </div>
+  // );
+
   return (
     <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
       <h1 className="text-secondary font-semibold text-xl text-center mb-4">
@@ -107,10 +116,10 @@ export default function UploadContext({ contextFile }) {
           <div className="flex flex-col gap-4 justify-center items-center rounded-md">
             <button
               type="button"
-              className="grid justify-self-center border border-secondary/70 border-dashed rounded-full p-8 w-fit h-fit"
+              className="grid justify-self-center border border-secondary/70 border-dashed rounded-full p-6 md:p-8 w-fit h-fit"
               onClick={handleButtonClick}
             >
-              <Upload color="white" size={28} />
+              <Upload color="white" className="w-[22px] h-[22px] md:w-7 md:h-7" />
             </button>
             <div className="grid justify-center">
               <h1 className="text-center text-sm text-secondary/70">
