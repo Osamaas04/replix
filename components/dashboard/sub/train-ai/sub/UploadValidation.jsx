@@ -1,7 +1,7 @@
 "use client";
 
 import { Upload, FileJson, CheckCircle } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Progress } from "../../home/ui/progress";
 
