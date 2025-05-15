@@ -1,18 +1,25 @@
 "use client";
 
 import { Upload, FileJson, CheckCircle } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Progress } from "../../home/ui/progress";
 
 const API_GATEWAY = "https://gw.replix.space/files";
 
-export default function UploadFineTune() {
+export default function UploadFineTune({fineTuneFile}) {
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (fineTuneFile) {
+      setLoading(true);
+    }
+  }, [fineTuneFile]);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -89,16 +96,18 @@ export default function UploadFineTune() {
     }
   };
 
-  // return (
-  //   <div className="w-full grid gap-4 p-4">
-  //     <div>
-  //       <h1 className="text-secondary font-semibold text-xl text-center">
-  //         Fine Tune
-  //       </h1>
-  //     </div>
-  //     <div className="bg-secondary/30 w-full h-[107.6px] rounded-md animate-pulse" />
-  //   </div>
-  // );
+  if (loading) {
+    return (
+      <div className="w-full grid gap-4 p-4">
+        <div>
+          <h1 className="text-secondary font-semibold text-xl text-center">
+            Fine Tune
+          </h1>
+        </div>
+        <div className="bg-secondary/30 w-full h-[107.6px] rounded-md animate-pulse" />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full grid gap-4 p-4">

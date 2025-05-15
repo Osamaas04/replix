@@ -88,14 +88,16 @@ export default function UploadContext({ contextFile }) {
     xhr.send(formData);
   };
 
-  // return (
-  //   <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
-  //     <h1 className="text-secondary font-semibold text-xl text-center mb-4">
-  //       Context
-  //     </h1>
-  //     <div className="bg-secondary/30 w-full h-full rounded-md animate-pulse"/>
-  //   </div>
-  // );
+  if (loading) {
+    return (
+      <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
+        <h1 className="text-secondary font-semibold text-xl text-center mb-4">
+          Context
+        </h1>
+        <div className="bg-secondary/30 w-full h-full rounded-md animate-pulse" />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
@@ -119,7 +121,10 @@ export default function UploadContext({ contextFile }) {
               className="grid justify-self-center border border-secondary/70 border-dashed rounded-full p-6 md:p-8 w-fit h-fit"
               onClick={handleButtonClick}
             >
-              <Upload color="white" className="w-[22px] h-[22px] md:w-7 md:h-7" />
+              <Upload
+                color="white"
+                className="w-[22px] h-[22px] md:w-7 md:h-7"
+              />
             </button>
             <div className="grid justify-center">
               <h1 className="text-center text-sm text-secondary/70">
