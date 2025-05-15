@@ -17,7 +17,7 @@ export default function UploadContext({ contextFile }) {
     
   useEffect(() => {
   if (contextFile) {
-    setSelectedFile(contextFile.name)
+    setSelectedFile(contextFile)
     setIsUploaded(true);
     setUploadProgress(100);
   }
