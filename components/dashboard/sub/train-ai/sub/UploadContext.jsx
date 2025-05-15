@@ -15,7 +15,7 @@ export default function UploadContext({ contextFile }) {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [loading, setLoading] = useState(false);
 
-  if (contextFile) {
+  if (!selectedFile) {
     setLoading(true);
     setSelectedFile(contextFile);
     console.log(contextFile);
