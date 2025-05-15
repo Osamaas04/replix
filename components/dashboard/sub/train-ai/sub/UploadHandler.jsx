@@ -21,7 +21,7 @@ export default function UploadHandler() {
           credentials: "include",
         });
 
-        if (!response.ok) {
+        if (!response.ok && response.status !== 404) {
           toast.error("Failed to fetch uploaded files");
           return;
         }
