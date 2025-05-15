@@ -21,7 +21,7 @@ export default function UploadHandler() {
           credentials: "include",
         });
 
-        if(response.status === 404) {
+        if (response.status === 404) {
           return;
         }
 
@@ -29,16 +29,17 @@ export default function UploadHandler() {
           toast.error("Failed to fetch uploaded files");
           return;
         }
-        
+
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         setUploadedFiles(data);
       } catch (error) {
         toast.error("Error fetching files");
       }
     };
 
-    fetchUploadedFiles();
+    const timeout = setTimeout(fetchUploadedFiles, 1000);
+    return () => clearTimeout(timeout);
   }, []);
 
   async function handleTrain() {
@@ -53,15 +54,15 @@ export default function UploadHandler() {
         toast.error("Failed to train AI");
         return;
       }
-      toast.success("ai has been trained")
+      toast.success("ai has been trained");
     } catch (error) {
       toast.error("Error training AI");
     }
   }
 
   const contextFile = uploadedFiles.find((file) => file.purpose === "context");
-  console.log(contextFile)
-  console.log(uploadedFiles)
+  console.log(contextFile);
+  console.log(uploadedFiles);
   const fineTuneFile = uploadedFiles.filter(
     (file) => file.purpose === "fine-tune"
   );

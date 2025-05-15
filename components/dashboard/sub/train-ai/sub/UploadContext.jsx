@@ -14,16 +14,14 @@ export default function UploadContext({ contextFile }) {
   const [isUploaded, setIsUploaded] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [loading, setLoading] = useState(false);
-    
-  useEffect(() => {
-  if (contextFile) {
-    setSelectedFile(contextFile)
-    setIsUploaded(true);
-    setUploadProgress(100);
-  }
-  console.log(selectedFile)
-}, [contextFile]);
 
+  useEffect(() => {
+    if (contextFile) {
+      setLoading(true);
+      setSelectedFile(contextFile)
+      console.log(contextFile)
+    }
+  }, []);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -107,7 +105,7 @@ export default function UploadContext({ contextFile }) {
       />
 
       <div className="flex-1 flex flex-col justify-center items-center">
-        {selectedFile && selectedFile.fake ? (
+        {!selectedFile ? (
           <div className="flex flex-col gap-4 justify-center items-center rounded-md">
             <button
               type="button"
