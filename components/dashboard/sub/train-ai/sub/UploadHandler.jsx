@@ -13,33 +13,31 @@ export default function UploadHandler() {
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   useEffect(() => {
-    const fetchUploadedFiles = async () => {
-      try {
-        const response = await fetch(`${API_GATEWAY}/files`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-        });
+  const timeout = setTimeout(async () => {
+    try {
+      const response = await fetch(`${API_GATEWAY}/files`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
 
-        if (response.status === 404) {
-          return;
-        }
+      if (response.status === 404) return;
 
-        if (!response.ok) {
-          toast.error("Failed to fetch uploaded files");
-          return;
-        }
-
-        const data = await response.json();
-        setUploadedFiles(data);
-      } catch (error) {
-        toast.error("Error fetching files");
+      if (!response.ok) {
+        toast.error("Failed to fetch uploaded files");
+        return;
       }
-    };
 
-    const timeout = setTimeout(fetchUploadedFiles, 1000);
-    return () => clearTimeout(timeout);
-  }, []);
+      const data = await response.json();
+      setUploadedFiles(data);
+    } catch (error) {
+      toast.error("Error fetching files");
+    }
+  }, 1000);
+
+  return () => clearTimeout(timeout);
+}, []);
+
 
   async function handleTrain() {
     try {
