@@ -16,12 +16,35 @@ export default function UploadContext({ contextFile }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (contextFile) {
-      setLoading(true);
-      setSelectedFile(contextFile)
-      console.log(contextFile)
-    }
-  }, [contextFile]);
+    const timeout = setTimeout(async () => {
+      try {
+        const response = await fetch(`${API_GATEWAY}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        });
+
+        if (response.status === 404) return;
+
+        if (!response.ok) {
+          toast.error("Failed to fetch uploaded files");
+          return;
+        }
+
+        const data = await response.json();
+        console.log(data);
+        const contextFile = data.find(
+          (file) => file.purpose === "context"
+        );
+        console.log(contextFile);
+        setSelectedFile(contextFile);
+      } catch (error) {
+        toast.error("Error fetching files");
+      }
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
