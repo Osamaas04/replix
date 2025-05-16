@@ -7,19 +7,44 @@ import { Progress } from "../../home/ui/progress";
 
 const API_GATEWAY = "https://gw.replix.space/files";
 
-export default function UploadValidation({ validationFile }) {
+export default function UploadValidation() {
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (validationFile) {
-      setLoading(true);
-    }
-  }, [validationFile]);
+    
+      useEffect(() => {
+        const fetchContextFile = async () => {
+          setLoading(true);
+          try {
+            const response = await fetch(`${API_GATEWAY}`, {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+            });
+    
+            if (response.status === 404) return;
+    
+            if (!response.ok) {
+              toast.error("Failed to fetch uploaded files");
+              return;
+            }
+    
+            const data = await response.json();
+            const validationFile = data.find((file) => file.purpose === "validation");
+            setSelectedFile(validationFile);
+            setIsUploaded(true);
+          } catch (error) {
+            toast.error("Error fetching files");
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchContextFile(); 
+      }, []);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();

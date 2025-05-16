@@ -7,7 +7,7 @@ import { Progress } from "../../home/ui/progress";
 
 const API_GATEWAY = "https://gw.replix.space/files";
 
-export default function UploadContext({ contextFile }) {
+export default function UploadContext() {
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);

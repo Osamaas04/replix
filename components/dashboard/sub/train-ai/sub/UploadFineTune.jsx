@@ -7,23 +7,44 @@ import { Progress } from "../../home/ui/progress";
 
 const API_GATEWAY = "https://gw.replix.space/files";
 
-export default function UploadFineTune({fineTuneFile}) {
+export default function UploadFineTune() {
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isUploaded, setIsUploaded] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (fineTuneFile) {
-      setLoading(true);
-    }
-  }, [fineTuneFile]);
-
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
+  
+    useEffect(() => {
+      const fetchContextFile = async () => {
+        setLoading(true);
+        try {
+          const response = await fetch(`${API_GATEWAY}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+          });
+  
+          if (response.status === 404) return;
+  
+          if (!response.ok) {
+            toast.error("Failed to fetch uploaded files");
+            return;
+          }
+  
+          const data = await response.json();
+          const fineTuneFile = data.find((file) => file.purpose === "fine-tune");
+          setSelectedFile(fineTuneFile);
+          setIsUploaded(true);
+        } catch (error) {
+          toast.error("Error fetching files");
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchContextFile(); 
+    }, []);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
