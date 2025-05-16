@@ -16,8 +16,8 @@ export default function UploadContext({ contextFile }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    const timeout = setTimeout(async () => {
+    const fetchContextFile = async () => {
+      setLoading(true);
       try {
         const response = await fetch(`${API_GATEWAY}`, {
           method: "GET",
@@ -41,9 +41,9 @@ export default function UploadContext({ contextFile }) {
       } finally {
         setLoading(false);
       }
-    }, 2000);
+    };
 
-    return () => clearTimeout(timeout);
+    fetchContextFile(); 
   }, []);
 
   const handleButtonClick = () => {
@@ -119,7 +119,7 @@ export default function UploadContext({ contextFile }) {
         <h1 className="text-secondary font-semibold text-xl text-center mb-4">
           Context
         </h1>
-        <div className="bg-secondary/30 w-full h-full animate-pulse rounded-md" />
+        <div className="bg-secondary/15 w-full h-full animate-pulse rounded-md" />
       </div>
     );
   }
