@@ -114,12 +114,14 @@ export default function UploadContext({ contextFile }) {
   };
 
   if (loading) {
-    <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
-      <h1 className="text-secondary font-semibold text-xl text-center mb-4">
-        Context
-      </h1>
-      <div className="bg-secondary/30 w-full h-full animate-pulse rounded-md"/>
-    </div>;
+    return (
+      <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
+        <h1 className="text-secondary font-semibold text-xl text-center mb-4">
+          Context
+        </h1>
+        <div className="bg-secondary/30 w-full h-full animate-pulse rounded-md" />
+      </div>
+    );
   }
 
   return (
