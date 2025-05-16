@@ -16,6 +16,7 @@ export default function UploadContext({ contextFile }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const timeout = setTimeout(async () => {
       try {
         const response = await fetch(`${API_GATEWAY}`, {
@@ -32,14 +33,13 @@ export default function UploadContext({ contextFile }) {
         }
 
         const data = await response.json();
-        console.log(data);
-        const contextFile = data.find(
-          (file) => file.purpose === "context"
-        );
-        console.log(contextFile);
+        const contextFile = data.find((file) => file.purpose === "context");
         setSelectedFile(contextFile);
+        setIsUploaded(true);
       } catch (error) {
         toast.error("Error fetching files");
+      } finally {
+        setLoading(false);
       }
     }, 2000);
 
@@ -112,6 +112,15 @@ export default function UploadContext({ contextFile }) {
     xhr.withCredentials = true;
     xhr.send(formData);
   };
+
+  if (loading) {
+    <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
+      <h1 className="text-secondary font-semibold text-xl text-center mb-4">
+        Context
+      </h1>
+      <div className="bg-secondary/30 w-full h-full animate-pulse rounded-md"/>
+    </div>;
+  }
 
   return (
     <div className="bg-primary w-full h-full border border-secondary/70 rounded-md p-4 flex flex-col">
