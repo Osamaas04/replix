@@ -161,42 +161,42 @@ export default function Automations() {
             <>
               <div className="text-secondary flex border-b border-secondary/70 px-4 [@media(min-width:390px)]:px-8 py-4 mx-auto justify-between w-[inherit] animate-pulse h-[66.4px]">
                 <div className="flex items-center gap-4">
-                  <div className="w-7 h-7 bg-secondary/30 rounded-full" />
-                  <div className="w-24 h-4 bg-secondary/30 rounded-md" />
+                  <div className="w-7 h-7 bg-secondary/15 rounded-full" />
+                  <div className="w-24 h-4 bg-secondary/15 rounded-md" />
                 </div>
                 <div className="flex items-center gap-2 px-2 py-1 border border-secondary/70 rounded-md">
-                  <div className="w-4 h-4 bg-secondary/30 rounded-sm" />
-                  <div className="w-16 h-3 bg-secondary/30 rounded-md" />
+                  <div className="w-4 h-4 bg-secondary/15 rounded-sm" />
+                  <div className="w-16 h-3 bg-secondary/15 rounded-md" />
                 </div>
               </div>
               <div className="text-secondary flex border-b border-secondary/70 px-4 [@media(min-width:390px)]:px-8 py-4 mx-auto justify-between w-[inherit] animate-pulse h-[66.4px]">
                 <div className="flex items-center gap-4">
-                  <div className="w-7 h-7 bg-secondary/30 rounded-full" />
-                  <div className="w-24 h-4 bg-secondary/30 rounded-md" />
+                  <div className="w-7 h-7 bg-secondary/15 rounded-full" />
+                  <div className="w-24 h-4 bg-secondary/15 rounded-md" />
                 </div>
                 <div className="flex items-center gap-2 px-2 py-1 border border-secondary/70 rounded-md">
-                  <div className="w-4 h-4 bg-secondary/30 rounded-sm" />
-                  <div className="w-16 h-3 bg-secondary/30 rounded-md" />
+                  <div className="w-4 h-4 bg-secondary/15 rounded-sm" />
+                  <div className="w-16 h-3 bg-secondary/15 rounded-md" />
                 </div>
               </div>
               <div className="text-secondary flex border-b border-secondary/70 px-4 [@media(min-width:390px)]:px-8 py-4 mx-auto justify-between w-[inherit] animate-pulse h-[66.4px]">
                 <div className="flex items-center gap-4">
-                  <div className="w-7 h-7 bg-secondary/30 rounded-full" />
-                  <div className="w-24 h-4 bg-secondary/30 rounded-md" />
+                  <div className="w-7 h-7 bg-secondary/15 rounded-full" />
+                  <div className="w-24 h-4 bg-secondary/15 rounded-md" />
                 </div>
                 <div className="flex items-center gap-2 px-2 py-1 border border-secondary/70 rounded-md">
-                  <div className="w-4 h-4 bg-secondary/30 rounded-sm" />
-                  <div className="w-16 h-3 bg-secondary/30 rounded-md" />
+                  <div className="w-4 h-4 bg-secondary/15 rounded-sm" />
+                  <div className="w-16 h-3 bg-secondary/15 rounded-md" />
                 </div>
               </div>
               <div className="text-secondary flex border-b border-secondary/70 px-4 [@media(min-width:390px)]:px-8 py-4 mx-auto justify-between w-[inherit] animate-pulse h-[66.4px]">
                 <div className="flex items-center gap-4">
-                  <div className="w-7 h-7 bg-secondary/30 rounded-full" />
-                  <div className="w-24 h-4 bg-secondary/30 rounded-md" />
+                  <div className="w-7 h-7 bg-secondary/15 rounded-full" />
+                  <div className="w-24 h-4 bg-secondary/15 rounded-md" />
                 </div>
                 <div className="flex items-center gap-2 px-2 py-1 border border-secondary/70 rounded-md">
-                  <div className="w-4 h-4 bg-secondary/30 rounded-sm" />
-                  <div className="w-16 h-3 bg-secondary/30 rounded-md" />
+                  <div className="w-4 h-4 bg-secondary/15 rounded-sm" />
+                  <div className="w-16 h-3 bg-secondary/15 rounded-md" />
                 </div>
               </div>
             </>

@@ -45,7 +45,7 @@ export default function UploadInstructions() {
   //         </h1>
   //       </div>
 
-  //       <div className="bg-secondary/30 w-full h-[208px] rounded-md animate-pulse"/>
+  //       <div className="bg-secondary/15 w-full h-[208px] rounded-md animate-pulse"/>
   //     </div>
   //   </div>
   // );

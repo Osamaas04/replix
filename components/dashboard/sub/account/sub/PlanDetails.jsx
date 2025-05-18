@@ -93,7 +93,7 @@ export default function PlanDetails() {
             {selectedPlan.title}
           </p>
         ) : (
-          <div className="mt-2 h-6 w-40 bg-secondary/30 rounded animate-pulse" />
+          <div className="mt-2 h-6 w-40 bg-secondary/15 rounded animate-pulse" />
         )}
 
         {planData ? (
@@ -107,10 +107,10 @@ export default function PlanDetails() {
           </ul>
         ) : (
           <div className="grid gap-4 mt-2 animate-pulse">
-            <div className="h-4 bg-secondary/30 rounded w-64" />
-            <div className="h-4 bg-secondary/30 rounded w-56" />
-            <div className="h-4 bg-secondary/30 rounded w-60" />
-            <div className="h-4 bg-secondary/30 rounded w-48" />
+            <div className="h-4 bg-secondary/15 rounded w-64" />
+            <div className="h-4 bg-secondary/15 rounded w-56" />
+            <div className="h-4 bg-secondary/15 rounded w-60" />
+            <div className="h-4 bg-secondary/15 rounded w-48" />
           </div>
         )}
       </div>
@@ -151,19 +151,19 @@ export default function PlanDetails() {
         ) : (
           <div className="grid gap-4 animate-pulse">
             <div className="flex items-center gap-2 mt-2">
-              <div className="bg-secondary/30 rounded-full w-[22px] h-[22px]" />
-              <div className="h-4 bg-secondary/30 rounded w-32" />
+              <div className="bg-secondary/15 rounded-full w-[22px] h-[22px]" />
+              <div className="h-4 bg-secondary/15 rounded w-32" />
             </div>
 
-            <div className="bg-secondary/30 border border-secondary/30 text-transparent rounded-md px-2 py-1 w-52 h-8" />
+            <div className="bg-secondary/15 border border-secondary/30 text-transparent rounded-md px-2 py-1 w-52 h-8" />
 
             <div className="flex items-center gap-2 mt-4">
-              <div className="bg-secondary/30 rounded-full w-[22px] h-[22px]" />
-              <div className="h-4 bg-secondary/30 rounded w-24" />
+              <div className="bg-secondary/15 rounded-full w-[22px] h-[22px]" />
+              <div className="h-4 bg-secondary/15 rounded w-24" />
             </div>
 
             <div className="mt-1">
-              <div className="h-4 bg-secondary/30 rounded w-40" />
+              <div className="h-4 bg-secondary/15 rounded w-40" />
             </div>
           </div>
         )}

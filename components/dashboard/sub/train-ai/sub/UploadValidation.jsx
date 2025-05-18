@@ -131,7 +131,7 @@ export default function UploadValidation() {
             Validation
           </h1>
         </div>
-        <div className="bg-secondary/30 w-full h-[107.6px] rounded-md animate-pulse" />
+        <div className="bg-secondary/15 w-full h-[107.6px] rounded-md animate-pulse" />
       </div>
     );
   }
