@@ -14,37 +14,39 @@ export default function UploadValidation() {
   const [isUploaded, setIsUploaded] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [loading, setLoading] = useState(false);
-    
-      useEffect(() => {
-        const fetchContextFile = async () => {
-          setLoading(true);
-          try {
-            const response = await fetch(`${API_GATEWAY}`, {
-              method: "GET",
-              headers: { "Content-Type": "application/json" },
-              credentials: "include",
-            });
-    
-            if (response.status === 404) return;
-    
-            if (!response.ok) {
-              toast.error("Failed to fetch uploaded files");
-              return;
-            }
-    
-            const data = await response.json();
-            const validationFile = data.find((file) => file.purpose === "validation");
-            setSelectedFile(validationFile);
-            setIsUploaded(true);
-          } catch (error) {
-            toast.error("Error fetching files");
-          } finally {
-            setLoading(false);
-          }
-        };
-    
-        fetchContextFile(); 
-      }, []);
+
+  useEffect(() => {
+    const fetchContextFile = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${API_GATEWAY}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        });
+
+        if (response.status === 404) return;
+
+        if (!response.ok) {
+          toast.error("Failed to fetch uploaded files");
+          return;
+        }
+
+        const data = await response.json();
+        const validationFile = data.find(
+          (file) => file.purpose === "validation"
+        );
+        setSelectedFile(validationFile);
+        setIsUploaded(true);
+      } catch (error) {
+        toast.error("Error fetching files");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchContextFile();
+  }, []);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();

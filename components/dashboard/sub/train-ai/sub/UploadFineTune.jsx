@@ -46,6 +46,10 @@ export default function UploadFineTune() {
       fetchContextFile(); 
     }, []);
 
+    const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
