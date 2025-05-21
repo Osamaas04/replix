@@ -63,13 +63,13 @@ async function handleLogin(values, setLoading, router) {
       return;
     }
 
-    if (subscriptionResponseData.response === "no_subscription") {
+    if (subscriptionResponseData.status === "no_subscription") {
       router.push("/#pricing");
       toast.info("Kindly subscribe to one of our plans");
-    } else if(subscriptionResponseData.response === "inactive") {
+    } else if(subscriptionResponseData.status === "inactive") {
       router.push("/#pricing");
       toast.info("Your subscription has been ended kindly resubscribe");
-    } else if(subscriptionResponseData.response === "active") {
+    } else if(subscriptionResponseData.status === "active") {
       router.push("/dashboard");
       toast.success("Login sucessful")
     }
