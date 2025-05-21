@@ -51,7 +51,6 @@ async function handleLogin(values, setLoading, router) {
 
     const subscriptionResponse = await fetch(`${API_GATEWAY}/checkSubscription`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: formData,
     });
 
