@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
 
-const API_GATEWAY = "https://gw.replix.space/account";
+const API_GATEWAY = "https://gw.replix.space";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -25,7 +25,7 @@ async function handleLogin(values, setLoading, router) {
   formData.append("password", values.password);
 
   try {
-    const response = await fetch(`${API_GATEWAY}/login`, {
+    const response = await fetch(`${API_GATEWAY}/account/login`, {
       method: "POST",
       credentials: "include",
       body: formData,
@@ -50,9 +50,31 @@ async function handleLogin(values, setLoading, router) {
       return;
     }
 
-    toast.success("Login successful!");
-    router.push("/#pricing");
-    toast.info("Kindly subscribe to one of our plans")
+    const subscriptionResponse = await fetch(`${API_GATEWAY}/checkSubscription`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: formData,
+    });
+
+    const subscriptionResponseData = await subscriptionResponse.json();
+
+    if (!subscriptionResponse.ok) {
+      toast.error(
+        `Login failed: ${subscriptionResponseData.message || "Try again."}`
+      );
+      return;
+    }
+
+    if (subscriptionResponseData.response === "no_subscription") {
+      router.push("/#pricing");
+      toast.info("Kindly subscribe to one of our plans");
+    } else if(subscriptionResponseData.response === "inactive") {
+      router.push("/#pricing");
+      toast.info("Your subscription has been ended kindly resubscribe");
+    } else if(subscriptionResponseData.response === "active") {
+      router.push("/dashboard");
+      toast.success("Login sucessful")
+    }
   } catch (error) {
     console.error(error);
     toast.error("An error occurred during login.");
