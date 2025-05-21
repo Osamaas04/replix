@@ -13,3 +13,10 @@ body {
   }
 }
 
+.scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #fcfcfc;
+  border-radius: 8px;
+}

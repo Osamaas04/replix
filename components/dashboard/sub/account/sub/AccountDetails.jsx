@@ -44,10 +44,11 @@ export default function AccountDetails() {
       {loading ? (
         <div className="w-32 h-32 rounded-full bg-secondary/15 animate-pulse" />
       ) : (
-        <Avatar>
+        <Avatar className= "h-32 w-32">
           <AvatarImage
             src={`https://api.dicebear.com/9.x/glass/svg?seed=${userData?.email || "default"}`}
             alt="User"
+            
           />
           <AvatarFallback>
             {userData?.name?.[0]?.toUpperCase() || "U"}

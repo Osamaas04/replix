@@ -51,7 +51,8 @@ async function handleLogin(values, setLoading, router) {
     }
 
     toast.success("Login successful!");
-    router.push("/dashboard");
+    router.push("/#pricing");
+    toast.info("Kindly subscribe to one of our plans")
   } catch (error) {
     console.error(error);
     toast.error("An error occurred during login.");

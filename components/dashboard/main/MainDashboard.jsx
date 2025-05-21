@@ -24,6 +24,7 @@ import Analytics from "../sub/analytics/main/Analytics";
 import TrainAi from "../sub/train-ai/main/TrainAi";
 import Home from "../sub/home/main/Home";
 import Account from "../sub/account/main/Account";
+import Agents from "../sub/human-agent/main/Agents";
 
 function DashboardContent() {
   const [isDisplayed, setIsDisplayed] = useState(false);
@@ -93,7 +94,6 @@ function DashboardContent() {
                   {
                     name: "Human Agent",
                     icon: <UserRoundCog size={18} />,
-                    locked: true,
                   },
                   { name: "Account", icon: <Settings size={18} /> },
                 ].map((item, index) =>
@@ -110,14 +110,6 @@ function DashboardContent() {
                         {item.icon} <span>{item.name}</span>
                       </li>
                     </Link>
-                  ) : item.locked ? (
-                    <li
-                      key={item.name}
-                      className="flex gap-4 items-center px-3 py-1 rounded-md text-secondary/50 cursor-not-allowed"
-                      title="Locked feature"
-                    >
-                      {item.icon} <span>{item.name}</span> <Lock size={15}/>
-                    </li>
                   ) : (
                     <button
                       key={item.name}
@@ -142,6 +134,7 @@ function DashboardContent() {
             {menuItem === "Automations" && <Automations />}
             {menuItem === "Integrations" && <SocialCards />}
             {menuItem === "Train AI" && <TrainAi />}
+            {menuItem === "Human Agent" && <Agents />}
             {menuItem === "Account" && <Account />}
           </div>
         </div>
