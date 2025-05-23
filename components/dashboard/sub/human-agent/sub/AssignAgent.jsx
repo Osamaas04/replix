@@ -37,7 +37,7 @@ export default function AssignAgent() {
           throw new Error("Failed to fetch agents");
         }
         const data = await response.json();
-        if (data?.agent) {
+        if (data?.agents) {
           setAgentInfo(data.agents);
         } else {
           setAgentInfo(null);
