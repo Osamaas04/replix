@@ -77,7 +77,8 @@ export default function AssignAgent() {
       }
 
       toast.success("Agent assigned successfully!");
-      setAgentInfo(data.agent);
+      // Append the new agent to existing list
+      setAgentInfo((prev) => (prev ? [...prev, data.agent] : [data.agent]));
       setCompanyName("");
       setName("");
     } catch (error) {
@@ -89,7 +90,7 @@ export default function AssignAgent() {
   }
 
   return (
-    <div className="bg-primary flex flex-col border border-secondary/70 rounded-md p-8 w-auto lg:w-[68vw] min-h-[19.72rem]">
+    <div className="bg-primary flex flex-col border border-secondary/70 rounded-md p-8 w-auto lg:w-[68vw] min-h-[19.72rem] overflow-y-auto scrollbar">
       {/* Loading skeleton */}
       {loading && (
         <div className="w-full h-full bg-secondary/10 rounded-md animate-pulse" />
@@ -104,8 +105,8 @@ export default function AssignAgent() {
             </h1>
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <button className="bg-secondary text-white rounded-md px-3 py-1 text-sm hover:bg-secondary/80">
-                  + Add new agent
+                <button className="bg-secondary text-primary rounded-md px-3 py-1 text-sm hover:bg-secondary/80">
+                  Add new agent
                 </button>
               </AlertDialogTrigger>
 
