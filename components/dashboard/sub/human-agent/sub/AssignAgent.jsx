@@ -102,12 +102,61 @@ export default function AssignAgent() {
             <h1 className="text-secondary font-semibold text-left text-xl">
               Assigned Agents
             </h1>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <button className="bg-secondary text-primary rounded-md px-3 py-1 text-sm hover:bg-secondary/80">
+                  Add new agent
+                </button>
+              </AlertDialogTrigger>
+
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Assign Another Agent</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Enter the new team member’s info to assign:
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+
+                <input
+                  type="text"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  placeholder="Company name"
+                  className="w-full mt-2 p-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-500 dark:bg-zinc-900 dark:border-zinc-700 dark:text-white"
+                />
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Team member full name"
+                  className="w-full mt-2 p-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-zinc-500 dark:bg-zinc-900 dark:border-zinc-700 dark:text-white"
+                />
+
+                <AlertDialogFooter>
+                  <AlertDialogCancel disabled={loading}>
+                    Cancel
+                  </AlertDialogCancel>
+                  <AlertDialogAction onClick={handleConfirm} disabled={loading}>
+                    Assign
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
+
           <div className="border border-secondary/50 p-4 rounded-md text-white">
-            <p><strong>Name:</strong> {agentInfo.name}</p>
-            <p><strong>Email:</strong> {agentInfo.email}</p>
-            <p><strong>Password:</strong> {agentInfo.password}</p>
-            <p><strong>Status:</strong> Offline</p>
+            <p>
+              <strong>Name:</strong> {agentInfo.name}
+            </p>
+            <p>
+              <strong>Email:</strong> {agentInfo.email}
+            </p>
+            <p>
+              <strong>Password:</strong> {agentInfo.password}
+            </p>
+            <p>
+              <strong>Status:</strong> Offline
+            </p>
           </div>
         </>
       )}
@@ -153,7 +202,9 @@ export default function AssignAgent() {
                 />
 
                 <AlertDialogFooter>
-                  <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
+                  <AlertDialogCancel disabled={loading}>
+                    Cancel
+                  </AlertDialogCancel>
                   <AlertDialogAction onClick={handleConfirm} disabled={loading}>
                     Assign
                   </AlertDialogAction>
