@@ -38,7 +38,7 @@ export default function AssignAgent() {
         }
         const data = await response.json();
         if (data?.agent) {
-          setAgentInfo(data.agent);
+          setAgentInfo(data.agents);
         } else {
           setAgentInfo(null);
         }
@@ -95,17 +95,17 @@ export default function AssignAgent() {
         <div className="w-full h-full bg-secondary/10 rounded-md animate-pulse" />
       )}
 
-      {!loading && agentInfo && (
+      {!loading && agentInfo?.length > 0 && (
         <>
-          {/* Option 2: User has agent(s) */}
+          {/* Option 2: User has one or more agents */}
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-secondary font-semibold text-left text-xl">
               Assigned Agents
             </h1>
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <button className="bg-secondary text-primary rounded-md px-3 py-1 text-sm hover:bg-secondary/80">
-                  Add new agent
+                <button className="bg-secondary text-white rounded-md px-3 py-1 text-sm hover:bg-secondary/80">
+                  + Add new agent
                 </button>
               </AlertDialogTrigger>
 
@@ -144,19 +144,26 @@ export default function AssignAgent() {
             </AlertDialog>
           </div>
 
-          <div className="border border-secondary/50 p-4 rounded-md text-white">
-            <p>
-              <strong>Name:</strong> {agentInfo.name}
-            </p>
-            <p>
-              <strong>Email:</strong> {agentInfo.email}
-            </p>
-            <p>
-              <strong>Password:</strong> {agentInfo.password}
-            </p>
-            <p>
-              <strong>Status:</strong> Offline
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {agentInfo.map((agent) => (
+              <div
+                key={agent._id}
+                className="border border-secondary/50 p-4 rounded-md text-white"
+              >
+                <p>
+                  <strong>Name:</strong> {agent.name}
+                </p>
+                <p>
+                  <strong>Email:</strong> {agent.email}
+                </p>
+                <p>
+                  <strong>Password:</strong> {agent.password}
+                </p>
+                <p>
+                  <strong>Status:</strong> {agent.status}
+                </p>
+              </div>
+            ))}
           </div>
         </>
       )}
