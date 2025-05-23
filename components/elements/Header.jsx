@@ -13,7 +13,6 @@ const API_GATEWAY = "https://gw.replix.space";
 export default function Header({ shouldAnimate }) {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("unauthenticated");
-  const router = useRouter();
 
   useEffect(() => {
     async function checkToken() {
@@ -50,7 +49,7 @@ export default function Header({ shouldAnimate }) {
         throw new Error("Logout failed");
       }
 
-      router.push("/");
+      window.location.reload();
     } catch (error) {
       toast.error("Failed to logout, try again later");
     } finally {

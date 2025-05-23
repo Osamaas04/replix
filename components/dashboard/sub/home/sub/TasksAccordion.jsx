@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client"
+
+import { useRouter } from "next/navigation";
 import {
   Accordion,
   AccordionContent,
@@ -13,7 +15,20 @@ import {
 } from "../ui/tooltip";
 import { CircleAlert } from "lucide-react";
 
+
 export function TasksAccordion() {
+  const router = useRouter()
+
+  function handleTrain() {
+    router.push("/dashboard?menu=Train%20AI");
+  }
+  function handleSocial() {
+    router.push("/dashboard?menu=Integrations");
+  }
+  function handleAutomation() {
+    router.push("/dashboard?menu=Automations");
+  }
+
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">
@@ -77,12 +92,13 @@ export function TasksAccordion() {
               </li>
             </ol>
 
-            <Link
-              href="#"
+            <button
+
+              onClick={handleTrain}
               className="bg-secondary text-primary rounded-md px-2 py-1 mx-auto text-center w-[30vw] "
             >
               Start AI Training
-            </Link>
+            </button>
           </div>
         </AccordionContent>
       </AccordionItem>
@@ -150,12 +166,12 @@ export function TasksAccordion() {
               </li>
             </ol>
 
-            <Link
-              href="#"
+            <button
+              onClick={handleSocial}
               className="bg-secondary text-primary rounded-md px-2 py-1 mx-auto text-center w-[30vw] "
             >
               Connect Social Media
-            </Link>
+            </button>
           </div>
         </AccordionContent>
       </AccordionItem>
@@ -221,12 +237,12 @@ export function TasksAccordion() {
               </li>
             </ol>
 
-            <Link
-              href="#"
+            <button
+              onClick={handleAutomation}
               className="bg-secondary text-primary rounded-md px-2 py-1 mx-auto text-center w-[30vw] "
             >
               Activate Workflows
-            </Link>
+            </button>
           </div>
         </AccordionContent>
       </AccordionItem>
