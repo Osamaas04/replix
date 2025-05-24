@@ -31,43 +31,7 @@ export default function AssignAgent() {
   const [companyName, setCompanyName] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [agentInfo, setAgentInfo] = useState([
-    {
-      _id: "6830e160a6e16a0d940a7ad1",
-      name: "osama as",
-      email: "osamaas@render.com",
-      password: "=RDY8v.q",
-      status: "idle",
-    },
-    {
-      _id: "6830e4b7a6e16a0d940a7adc",
-      name: "asmar as",
-      email: "asmaras@render.com",
-      password: "zJV9-]F:",
-      status: "busy",
-    },
-    {
-      _id: "6830e4d8a6e16a0d940a7ae1",
-      name: "mashagbeh",
-      email: "mashagbeh@render.com",
-      password: "cKh@4bmP",
-      status: "offline",
-    },
-    {
-      _id: "6830e63ca6e16a0d940a7ae6",
-      name: "test",
-      email: "test@render.com",
-      password: "3%o?AM<!",
-      status: "offline",
-    },
-    {
-      _id: "6830e657a6e16a0d940a7ae9",
-      name: "sde",
-      email: "sde@render.com",
-      password: "N:DtjP0!",
-      status: "offline",
-    },
-  ]);
+  const [agentInfo, setAgentInfo] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
@@ -87,11 +51,11 @@ export default function AssignAgent() {
         if (data?.agents) {
           setAgentInfo(data.agents);
         } else {
-          // setAgentInfo(null);
+          setAgentInfo(null);
         }
       } catch (error) {
         console.error("Error fetching agents:", error);
-        // setAgentInfo(null);
+        setAgentInfo(null);
       } finally {
         setLoading(false);
       }
@@ -124,7 +88,6 @@ export default function AssignAgent() {
       }
 
       toast.success("Agent assigned successfully!");
-      // Append the new agent to existing list
       setAgentInfo((prev) => (prev ? [...prev, data.agent] : [data.agent]));
       setCompanyName("");
       setName("");
@@ -208,7 +171,7 @@ export default function AssignAgent() {
             {agentInfo.map((agent) => (
               <div
                 key={agent._id}
-                className="flex justify-between border border-secondary/50 p-4 rounded-md text-white"
+                className="flex justify-between border-b border-secondary/70 p-4 text-secondary"
               >
                 <Sheet>
                   <SheetTrigger asChild>
