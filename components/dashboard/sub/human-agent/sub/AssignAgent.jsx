@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
+import { Eye, EyeOff, Dot, UserRound } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -13,6 +14,15 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
 } from "../ui/alert-dialog";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "../ui/sheet";
+
 import { toast } from "sonner";
 
 const API_GATEWAY = "https://gw.replix.space";
@@ -21,7 +31,44 @@ export default function AssignAgent() {
   const [companyName, setCompanyName] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [agentInfo, setAgentInfo] = useState(null);
+  const [agentInfo, setAgentInfo] = useState([
+    {
+      _id: "6830e160a6e16a0d940a7ad1",
+      name: "osama as",
+      email: "osamaas@render.com",
+      password: "=RDY8v.q",
+      status: "idle",
+    },
+    {
+      _id: "6830e4b7a6e16a0d940a7adc",
+      name: "asmar as",
+      email: "asmaras@render.com",
+      password: "zJV9-]F:",
+      status: "busy",
+    },
+    {
+      _id: "6830e4d8a6e16a0d940a7ae1",
+      name: "mashagbeh",
+      email: "mashagbeh@render.com",
+      password: "cKh@4bmP",
+      status: "offline",
+    },
+    {
+      _id: "6830e63ca6e16a0d940a7ae6",
+      name: "test",
+      email: "test@render.com",
+      password: "3%o?AM<!",
+      status: "offline",
+    },
+    {
+      _id: "6830e657a6e16a0d940a7ae9",
+      name: "sde",
+      email: "sde@render.com",
+      password: "N:DtjP0!",
+      status: "offline",
+    },
+  ]);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -40,11 +87,11 @@ export default function AssignAgent() {
         if (data?.agents) {
           setAgentInfo(data.agents);
         } else {
-          setAgentInfo(null);
+          // setAgentInfo(null);
         }
       } catch (error) {
         console.error("Error fetching agents:", error);
-        setAgentInfo(null);
+        // setAgentInfo(null);
       } finally {
         setLoading(false);
       }
@@ -89,8 +136,20 @@ export default function AssignAgent() {
     }
   }
 
+  function getStatusColor(status) {
+    switch (status) {
+      case "idle":
+        return "green";
+      case "busy":
+        return "orange";
+      case "offline":
+      default:
+        return "gray";
+    }
+  }
+
   return (
-    <div className="bg-primary flex flex-col border border-secondary/70 rounded-md p-8 w-auto lg:w-[68vw] min-h-[19.72rem] overflow-y-auto scrollbar">
+    <div className="bg-primary flex flex-col border border-secondary/70 rounded-md p-8 w-auto lg:w-[68vw] h-[19.72rem] overflow-y-auto scrollbar">
       {/* Loading skeleton */}
       {loading && (
         <div className="w-full h-full bg-secondary/10 rounded-md animate-pulse" />
@@ -145,23 +204,69 @@ export default function AssignAgent() {
             </AlertDialog>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid gap-4">
             {agentInfo.map((agent) => (
               <div
                 key={agent._id}
-                className="border border-secondary/50 p-4 rounded-md text-white"
+                className="flex justify-between border border-secondary/50 p-4 rounded-md text-white"
               >
-                <p>
-                  <strong>Name:</strong> {agent.name}
-                </p>
-                <p>
-                  <strong>Email:</strong> {agent.email}
-                </p>
-                <p>
-                  <strong>Password:</strong> {agent.password}
-                </p>
-                <p>
-                  <strong>Status:</strong> {agent.status}
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <button className="flex items-center gap-2 underline"><UserRound size={22}/>{agent.name}</button>
+                  </SheetTrigger>
+                  <SheetContent>
+                    <SheetHeader>
+                      <SheetTitle>Agent Credentials</SheetTitle>
+                      <SheetDescription>
+                        Access the email and password assigned to your agent
+                        account.
+                      </SheetDescription>
+                    </SheetHeader>
+                    <div className="grid gap-4 py-4">
+                      {/* Email Field */}
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <label htmlFor="email" className="text-right">
+                          Email
+                        </label>
+                        <input
+                          id="email"
+                          value={agent.email}
+                          readOnly
+                          className="col-span-3 bg-primary/5 rounded-md p-2 focus:outline-none"
+                        />
+                      </div>
+
+                      {/* Password Field */}
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <label htmlFor="password" className="text-right">
+                          Password
+                        </label>
+                        <div className="col-span-3 relative">
+                          <input
+                            id="password"
+                            type={showPassword ? "text" : "password"}
+                            value={agent.password}
+                            readOnly
+                            className="w-full bg-primary/5 rounded-md p-2 focus:outline-none"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword((prev) => !prev)}
+                            className="absolute inset-y-0 right-2 flex items-center text-gray-600 hover:text-gray-800"
+                          >
+                            {showPassword ? (
+                              <EyeOff size={18} />
+                            ) : (
+                              <Eye size={18} />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </SheetContent>
+                </Sheet>
+                <p className="flex items-center gap-1">
+                  <Dot color={getStatusColor(agent.status)} /> {agent.status}
                 </p>
               </div>
             ))}
