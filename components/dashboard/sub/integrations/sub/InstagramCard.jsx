@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 const API_GATEWAY = "https://gw.replix.space/social";
 
-export default function InstagramCard({loading, setInstagramLoading}) {
+export default function InstagramCard({ loading, setInstagramLoading }) {
   const [connection, setConnection] = useState({
     instagramId: null,
     isConnected: false,
@@ -23,6 +23,10 @@ export default function InstagramCard({loading, setInstagramLoading}) {
       });
 
       const data = await response.json();
+
+      if (response.ok && data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+      }
 
       if (data.isConnected) {
         setConnection({
