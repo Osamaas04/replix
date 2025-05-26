@@ -24,10 +24,6 @@ export default function InstagramCard({ loading, setInstagramLoading }) {
 
       const data = await response.json();
 
-      if (response.ok && data.redirectUrl) {
-        window.location.href = data.redirectUrl;
-      }
-
       if (data.isConnected) {
         setConnection({
           instagramId: data.page_id || "connected",
@@ -61,6 +57,7 @@ export default function InstagramCard({ loading, setInstagramLoading }) {
         throw new Error("Instagram connection failed - please try again");
       }
 
+      window.location.href = data.redirectUrl;
       setConnection({
         instagramId: data.instagramId,
         isConnected: true,
