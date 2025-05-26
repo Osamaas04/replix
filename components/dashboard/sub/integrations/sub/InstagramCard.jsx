@@ -57,7 +57,6 @@ export default function InstagramCard({ loading, setInstagramLoading }) {
         throw new Error("Instagram connection failed - please try again");
       }
 
-      window.location.href = data.redirectUrl;
       setConnection({
         instagramId: data.instagramId,
         isConnected: true,
