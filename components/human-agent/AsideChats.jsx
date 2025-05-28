@@ -5,7 +5,7 @@ import Image from "next/image";
 import Logo from "@/public/assets/chatlogo.webp";
 import { Search } from "lucide-react";
 import AssignedMessages from "@/components/human-agent/AssignedMessages";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Select,
   SelectTrigger,
@@ -21,35 +21,38 @@ const API_GATEWAY = "https://gw.replix.space";
 export default function AsideChats() {
   const [selectedCase, setSelectedCase] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [messages, setMessages] = useState([]);
 
-  const dummyChats = [
-    {
-      caseNumber: "#123456",
-      platform: "Instagram",
-      name: "Osama Alasmar",
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Loerm is one of the most used",
-    },
-    {
-      caseNumber: "#123457",
-      platform: "Facebook",
-      name: "Jane Doe",
-      text: "Another example of an escalated conversation.",
-    },
-    {
-      caseNumber: "#123458",
-      platform: "Twitter",
-      name: "John Smith",
-      text: "This message needs immediate attention.",
-    },
-    {
-      caseNumber: "#123459",
-      platform: "WhatsApp",
-      name: "Alex Johnson",
-      text: "Please review this chat. Kindly review it and respond ASAP. I am asking for a callback ASAP",
-    },
-  ];
+  useEffect(() => {
+    async function fetchMessages() {
+      try {
+        const res = await fetch(`${API_GATEWAY}/getAgentMessages`, {
+          method: "GET",
+          credentials: "include",
+        });
 
-  const filteredChats = dummyChats.filter((chat) => {
+        if (!res.ok) throw new Error("Failed to fetch messages");
+
+        const data = await res.json();
+        const withCaseNumbers = data.messages.map((msg, index) => ({
+          ...msg,
+          caseNumber: `#${(msg.messageId || index).toString().slice(-6)}`,
+          name: msg.senderId, 
+          text: msg.text || "",
+          platform: msg.platform,
+        }));
+
+        setMessages(withCaseNumbers);
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+        toast.error("Could not load messages");
+      }
+    }
+
+    fetchMessages();
+  }, []);
+
+  const filteredChats = messages.filter((chat) => {
     const query = searchQuery.toLowerCase();
     return (
       chat.caseNumber.toLowerCase().includes(query) ||
@@ -61,7 +64,7 @@ export default function AsideChats() {
     try {
       const response = await fetch(`${API_GATEWAY}/getOnline`, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ status: newStatus }),
       });

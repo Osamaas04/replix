@@ -10,7 +10,6 @@ import { toast } from "sonner";
 const API_GATEWAY = "https://gw.replix.space";
 
 export default function UploadHandler() {
-
   async function handleTrain() {
     try {
       const response = await fetch(`${API_GATEWAY}/train`, {
@@ -23,13 +22,30 @@ export default function UploadHandler() {
         toast.error("Failed to train AI");
         return;
       }
-      toast.success("ai has been trained");
+      toast.success("AI train started");
     } catch (error) {
       toast.error("Error training AI");
     }
   }
 
- 
+  async function handleCancel() {
+    try {
+      const response = await fetch(`${API_GATEWAY}/train/cancel`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        toast.error("Failed to cancel train AI");
+        return;
+      }
+      toast.success("AI train has been canceled");
+    } catch (error) {
+      toast.error("Error training AI");
+    }
+  }
+
   // const fineTuneFile = uploadedFiles.filter(
   //   (file) => file.purpose === "fine-tune"
   // );
@@ -39,19 +55,22 @@ export default function UploadHandler() {
 
   return (
     <div className="grid gap-8">
+      <button className="text-primary bg-secondary border border-secondary/70 px-2 py-1 w-28 rounded-md justify-self-end">
+        Reset Files
+      </button>
       <div className="flex flex-col md:flex-row gap-4 w-auto lg:w-[68vw]">
         <div className="w-full h-full">
           <div className="bg-primary w-full h-full flex flex-col items-center gap-8 border border-secondary/70 rounded-md ">
-            <UploadContext  />
+            <UploadContext />
           </div>
         </div>
 
         <div className="grid gap-4 w-full h-full">
           <div className="bg-primary w-full h-full flex gap-8 border border-secondary/70 rounded-md ">
-            <UploadFineTune  />
+            <UploadFineTune />
           </div>
           <div className="bg-primary w-full h-full flex flex-col items-center gap-8 border border-secondary/70 rounded-md ">
-            <UploadValidation  />
+            <UploadValidation />
           </div>
         </div>
       </div>
@@ -59,6 +78,7 @@ export default function UploadHandler() {
       <div className="flex justify-end items-center gap-4">
         <button
           type="button"
+          onClick={handleCancel}
           className="bg-primary border border-secondary text-secondary rounded-md px-2 py-1 w-28"
         >
           Cancel
