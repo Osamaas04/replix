@@ -43,8 +43,7 @@ export default function AssignedMessages({
             <Avatar className="w-8 h-8">
               <AvatarImage
                 src={
-                  profilePicture ||
-                  `https://api.dicebear.com/9.x/glass/svg?seed=${name}`
+                  "https://scontent-iad3-1.xx.fbcdn.net/v/t1.30497-1/84628273_176159830277856_972693363922829312_n.jpg?stp=dst-jpg_p720x720_tt6&_nc_cat=1&ccb=1-7&_nc_sid=7565cd&_nc_ohc=F6fzqlEWMIkQ7kNvwEVEKW1&_nc_oc=AdneT7XcJaBPje5GvX2TPvQfLqv1a6egtfQ6iu0mDERuTDAjYfskzXCRyywxRA3Y274&_nc_zt=24&_nc_ht=scontent-iad3-1.xx&edm=AP4hL3IEAAAA&oh=00_AfL710hphFdQ2FOFw7N_aPlp7B5zQNOE3INsviUMof9cmg&oe=685F0A59"
                 }
                 alt={name}
               />
