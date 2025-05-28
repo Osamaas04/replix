@@ -15,6 +15,7 @@ import {
 } from "./ui/select";
 import { Dot } from "lucide-react";
 import { toast } from "sonner";
+import ChatWindow from "./ChatWindow";
 
 const API_GATEWAY = "https://gw.replix.space";
 
@@ -37,7 +38,7 @@ export default function AsideChats() {
         const withCaseNumbers = data.messages.map((msg, index) => ({
           ...msg,
           caseNumber: `#${(msg.messageId || index).toString().slice(-6)}`,
-          name: msg.senderId, 
+          name: msg.senderId,
           text: msg.text || "",
           platform: msg.platform,
         }));
@@ -93,7 +94,7 @@ export default function AsideChats() {
               <h3 className="text-secondary font-semibold">Assigned to Me</h3>
               <Select onValueChange={(value) => changeStatus(value)}>
                 <SelectTrigger className="w-[100px] text-secondary border border-secondary px-3 py-1 rounded-md">
-                  <SelectValue placeholder="Offline" />
+                  <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="idle">
@@ -138,6 +139,10 @@ export default function AsideChats() {
           <p className="text-secondary/60 mt-4 text-center">No chats found</p>
         )}
       </aside>
+
+      <div className="ml-[23rem] flex-1 overflow-hidden">
+        <ChatWindow selectedCase={selectedCase} messages={messages} />
+      </div>
     </div>
   );
 }
