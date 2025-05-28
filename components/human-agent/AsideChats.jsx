@@ -6,6 +6,17 @@ import Logo from "@/public/assets/chatlogo.webp";
 import { Search } from "lucide-react";
 import AssignedMessages from "@/components/human-agent/AssignedMessages";
 import { useState } from "react";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "./ui/select";
+import { Dot } from "lucide-react";
+import { toast } from "sonner";
+
+const API_GATEWAY = "https://gw.replix.space";
 
 export default function AsideChats() {
   const [selectedCase, setSelectedCase] = useState(null);
@@ -46,6 +57,24 @@ export default function AsideChats() {
     );
   });
 
+  async function changeStatus(newStatus) {
+    try {
+      const response = await fetch(`${API_GATEWAY}/getOnline`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        credentials: "include",
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (!response.ok) throw new Error("Failed to update status");
+
+      toast.success(`Status updated to ${newStatus}`);
+    } catch (error) {
+      console.error(error);
+      toast.error("Could not update status");
+    }
+  }
+
   return (
     <div className="bg-primary h-screen">
       <aside className="fixed bg-primary flex flex-col gap-4 w-[23rem] h-screen border-r border-secondary/70 px-4 py-4 z-10 overflow-y-auto scrollbar">
@@ -57,8 +86,27 @@ export default function AsideChats() {
             </Link>
           </div>
           <div className="grid gap-4">
-            <div>
+            <div className="flex items-center justify-between">
               <h3 className="text-secondary font-semibold">Assigned to Me</h3>
+              <Select onValueChange={(value) => changeStatus(value)}>
+                <SelectTrigger className="w-[100px] text-secondary border border-secondary px-3 py-1 rounded-md">
+                  <SelectValue placeholder="Offline" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="idle">
+                    <div className="flex items-center gap-1">
+                      <Dot className="text-green-500 h-5 w-5" />
+                      <span>Idle</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="offline">
+                    <div className="flex items-center gap-1">
+                      <Dot className="text-zinc-400 h-5 w-5" />
+                      <span>Offline</span>
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <hr className="text-secondary/70" />
             <div className="relative">
