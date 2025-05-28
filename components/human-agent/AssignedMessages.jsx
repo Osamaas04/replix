@@ -9,6 +9,7 @@ export default function AssignedMessages({
   platform,
   name,
   text,
+  profilePicture,
   onClick,
   isSelected,
 }) {
@@ -41,10 +42,13 @@ export default function AssignedMessages({
           <div>
             <Avatar className="w-8 h-8">
               <AvatarImage
-                src={`https://api.dicebear.com/9.x/glass/svg?seed=${"default"}`}
-                alt="User"
+                src={
+                  profilePicture ||
+                  `https://api.dicebear.com/9.x/glass/svg?seed=${name}`
+                }
+                alt={name}
               />
-              <AvatarFallback>U</AvatarFallback>
+              <AvatarFallback>{name?.charAt(0) || "U"}</AvatarFallback>
             </Avatar>
           </div>
           <div>

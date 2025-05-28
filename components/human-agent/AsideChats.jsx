@@ -35,12 +35,14 @@ export default function AsideChats() {
         if (!res.ok) throw new Error("Failed to fetch messages");
 
         const data = await res.json();
-        const withCaseNumbers = data.messages.map((msg, index) => ({
-          ...msg,
-          caseNumber: `#${(msg.messageId || index).toString().slice(-6)}`,
-          name: msg.senderId,
+        const withCaseNumbers = data.messages.map((msg) => ({
+          caseNumber: msg.caseNumber,
+          name: msg.fullName,
           text: msg.text || "",
           platform: msg.platform,
+          profilePicture: msg.ProfilePicture,
+          senderId: msg.senderId,
+          messageId: msg.messageId,
         }));
 
         setMessages(withCaseNumbers);

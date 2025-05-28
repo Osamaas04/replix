@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { MessageSquareText } from "lucide-react";
 
 export default function ChatWindow({ selectedCase, messages }) {
   const [input, setInput] = useState("");
@@ -25,8 +26,9 @@ export default function ChatWindow({ selectedCase, messages }) {
 
   if (!chat) {
     return (
-      <div className="flex-1 flex items-center justify-center text-secondary/60">
-        Select a chat to view and reply
+      <div className="h-screen flex-1 flex flex-col items-center justify-center text-secondary/70 gap-4">
+        <MessageSquareText size={60}/>
+        <p className="text-xl">Select a chat to view and reply</p>
       </div>
     );
   }
